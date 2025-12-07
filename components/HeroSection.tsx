@@ -102,22 +102,22 @@ export function HeroSection({ cities }: HeroSectionProps) {
         {/* Stats Section at Bottom */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-16 pt-8 lg:pt-12 pb-6">
           <div className="text-center md:text-left">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span>1+ Years</span>
             </h3>
-            <p className="text-xs md:text-sm text-gray-600 leading-relaxed px-4 md:px-0">Serving Odisha with reliable and affordable vehicle rental services</p>
+            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Serving Odisha with reliable and affordable vehicle rental services</p>
           </div>
           <div className="text-center md:text-left">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span>25+ Vehicles</span>
             </h3>
-            <p className="text-xs md:text-sm text-gray-600 leading-relaxed px-4 md:px-0">Wide range of well-maintained cars and bikes for every journey</p>
+            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Wide range of well-maintained cars and bikes for every journey</p>
           </div>
           <div className="text-center md:text-left">
-            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span className="whitespace-nowrap">100+ Bookings</span>
             </h3>
-            <p className="text-xs md:text-sm text-gray-600 leading-relaxed px-4 md:px-0">Explore temples, beaches, and heritage sites across Odisha</p>
+            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Explore temples, beaches, and heritage sites across Odisha</p>
           </div>
         </div>
       </div>
