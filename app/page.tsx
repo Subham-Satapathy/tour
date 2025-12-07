@@ -12,6 +12,9 @@ import { Footer } from '@/components/Footer';
 import { getAllCities } from '@/server/db/queries/cities';
 import { db } from '@/server/db';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const cities = await getAllCities(db);
 

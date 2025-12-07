@@ -7,8 +7,9 @@ if (typeof window === 'undefined' && !process.env.NEXT_RUNTIME) {
   require('dotenv').config({ path: '.env.local' });
 }
 
-// Use a placeholder URL during build time if DATABASE_URL is not set
-const databaseUrl = process.env.DATABASE_URL || 'postgresql://placeholder:placeholder@localhost:5432/placeholder';
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL environment variable is not set');
+}
 
-const sql = neon(databaseUrl);
+const sql = neon(process.env.DATABASE_URL);
 export const db = drizzle(sql, { schema });
