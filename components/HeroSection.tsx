@@ -1,6 +1,7 @@
 'use client';
 
-import { SearchForm } from './SearchForm';
+import { Car, Truck, FileText, Bike, Home as HomeIcon, ArrowRight, ArrowUp, ArrowDown, Settings } from 'lucide-react';
+import Image from 'next/image';
 
 interface City {
   id: number;
@@ -14,34 +15,94 @@ interface HeroSectionProps {
 
 export function HeroSection({ cities }: HeroSectionProps) {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 overflow-hidden pt-20">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDE0YzAtMS4xMDQuODk2LTIgMi0yczIgLjg5NiAyIDItLjg5NiAyLTIgMi0yLS44OTYtMi0ybS0xMiAwYzAtMS4xMDQuODk2LTIgMi0yczIgLjg5NiAyIDItLjg5NiAyLTIgMi0yLS44OTYtMi0yIi8+PC9nPjwvZz48L3N2Zz4=')] opacity-30"></div>
-      
-      <div className="container mx-auto px-4 pt-32 pb-20 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          {/* Hero Content */}
-          <div className="text-center mb-16 space-y-6">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight">
-              Explore Odisha, Your Way
-            </h1>
-            <p className="text-xl md:text-2xl text-blue-200 max-w-3xl mx-auto">
-              Premium car and bike rentals across Odisha - From temples to beaches, discover it all
-            </p>
+    <section className="relative min-h-screen bg-white overflow-hidden pt-20 pb-8 flex flex-col">
+      <div className="max-w-[1800px] mx-auto px-6 lg:px-16 flex-1 flex flex-col justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center pt-8 lg:pt-12">
+          
+          {/* Left Column - Car Image */}
+          <div className="relative flex items-center justify-center lg:justify-start order-1 lg:order-1">
+            <div className="relative w-full max-w-[700px]">
+              {/* Car Image - Red SUV */}
+              <div className="relative w-full aspect-[4/3] bg-white flex items-center justify-center overflow-visible">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <Image 
+                    src="/heroCar.webp" 
+                    alt="Red SUV - Premium Vehicle Rental" 
+                    width={900}
+                    height={700}
+                    className="object-contain w-full h-full drop-shadow-2xl"
+                    priority
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Search Form */}
-          <div className="max-w-4xl mx-auto">
-            <SearchForm cities={cities} />
+          {/* Right Column - Headline & CTA */}
+          <div className="flex flex-col justify-center order-2 lg:order-2 space-y-6">
+            <div>
+              <div className="inline-block mb-4">
+                <div className="border-t-2 border-black w-16 mb-2"></div>
+                <p className="text-sm text-gray-600 font-medium tracking-wide">Explore Odisha Your Way!</p>
+              </div>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black leading-[0.9] tracking-tighter mb-6">
+                Rent Cars<br/>& Bikes<br/>In Odisha
+              </h1>
+            </div>
+
+            <div className="space-y-5 max-w-xl">
+              <div className="flex items-center gap-4">
+                <div className="w-7 h-7 rounded-full bg-black flex-shrink-0"></div>
+                <p className="text-gray-800 font-medium text-base lg:text-lg">Premium vehicles for your Odisha adventure</p>
+              </div>
+              
+              <p className="text-sm lg:text-base text-gray-700 leading-relaxed">
+                From temples to beaches, explore Odisha's stunning destinations at your own pace. Choose from our wide range of cars and bikes, available across all major cities in Odisha.
+              </p>
+
+              <div className="flex flex-wrap gap-4 pt-2">
+                <button className="px-7 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center gap-2 shadow-lg text-sm lg:text-base">
+                  Book Now <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
+                </button>
+                <button className="px-7 py-3 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center gap-2 shadow-md text-sm lg:text-base">
+                  View Vehicles <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Scroll Navigation - Right Side */}
+            <div className="hidden lg:flex flex-col gap-3 fixed right-8 bottom-32">
+              <button className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors shadow-lg">
+                <ArrowUp className="w-5 h-5 text-gray-700" />
+              </button>
+              <button className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg">
+                <ArrowDown className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 80C1200 80 1320 70 1380 65L1440 60V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
-        </svg>
+        {/* Stats Section at Bottom */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 lg:gap-16 pt-8 lg:pt-12 pb-6">
+          <div className="text-center md:text-left">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none">
+              <span>1+ Years</span>
+            </h3>
+            <p className="text-xs md:text-sm text-gray-600 leading-relaxed px-4 md:px-0">Serving Odisha with reliable and affordable vehicle rental services</p>
+          </div>
+          <div className="text-center md:text-left">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none">
+              <span>25+ Vehicles</span>
+            </h3>
+            <p className="text-xs md:text-sm text-gray-600 leading-relaxed px-4 md:px-0">Wide range of well-maintained cars and bikes for every journey</p>
+          </div>
+          <div className="text-center md:text-left">
+            <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none">
+              <span className="whitespace-nowrap">100+ Bookings</span>
+            </h3>
+            <p className="text-xs md:text-sm text-gray-600 leading-relaxed px-4 md:px-0">Explore temples, beaches, and heritage sites across Odisha</p>
+          </div>
+        </div>
       </div>
     </section>
   );

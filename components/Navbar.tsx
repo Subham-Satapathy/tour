@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { Search } from 'lucide-react';
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -31,60 +32,55 @@ export function Navbar() {
   }, [lastScrollY]);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-[9999] bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100 transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-[9999] bg-white/95 backdrop-blur-md transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-              <span className="text-2xl">🚗</span>
-            </div>
-            <div>
-              <h1 className="text-2xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                Tour Odisha
-              </h1>
-              <p className="text-xs text-gray-500 font-medium">Premium Vehicle Rentals</p>
-            </div>
+          {/* Logo - RENT */}
+          <Link href="/" className="flex items-center gap-1 group">
+            <span className="text-3xl font-black">R</span>
+            <span className="text-3xl font-black text-gray-300">E</span>
+            <span className="text-3xl font-black">N</span>
+            <span className="text-3xl font-black">T</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-12">
             <Link 
               href="/" 
-              className="text-gray-700 hover:text-blue-600 font-semibold transition-colors relative group"
+              className="text-gray-700 hover:text-black font-medium transition-colors relative group"
             >
               Home
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
             </Link>
             <a 
-              href="#how-it-works" 
-              className="text-gray-700 hover:text-blue-600 font-semibold transition-colors relative group cursor-pointer"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              href="#models" 
+              className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer flex items-center gap-2"
             >
-              How It Works
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              Model
+              <span className="text-gray-400">⊕</span>
             </a>
             <a 
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }} 
-              className="text-gray-700 hover:text-blue-600 font-semibold transition-colors relative group cursor-pointer"
+              href="#services"
+              className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
-              Contact
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              Services
             </a>
             <a 
-              href="tel:+919876543210" 
-              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center gap-2"
+              href="#gallery" 
+              className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
-              <span>📞</span>
-              Call Us Now
+              Gallery
             </a>
+          </div>
+
+          {/* Right Side - Search & Sign Up */}
+          <div className="hidden md:flex items-center gap-4">
+            <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
+              <Search className="w-5 h-5 text-gray-600" />
+            </button>
+            <button className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300">
+              Sign Up
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
