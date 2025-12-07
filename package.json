@@ -1,0 +1,49 @@
+{
+  "name": "tour",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx server/db/seed.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@neondatabase/serverless": "^1.0.2",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "drizzle-orm": "^0.45.0",
+    "next": "^16.0.7",
+    "next-auth": "^4.24.13",
+    "nodemailer": "^7.0.11",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
+    "react-hook-form": "^7.68.0",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^24.10.1",
+    "@types/nodemailer": "^7.0.4",
+    "@types/pg": "^8.15.6",
+    "@types/react": "^19.2.7",
+    "autoprefixer": "^10.4.22",
+    "drizzle-kit": "^0.31.8",
+    "pg": "^8.16.3",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.17",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
