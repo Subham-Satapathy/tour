@@ -56,9 +56,30 @@ export default async function EditVehiclePage({ params }: EditVehiclePageProps) 
               <VehicleForm
                 cities={cities}
                 initialData={{
-                  ...vehicle,
+                  name: vehicle.name,
+                  type: vehicle.type,
+                  brand: vehicle.brand || undefined,
+                  model: vehicle.model || undefined,
+                  year: vehicle.year || undefined,
+                  color: vehicle.color || undefined,
+                  licensePlate: vehicle.licensePlate || undefined,
+                  seatingCapacity: vehicle.seatingCapacity || undefined,
+                  mileage: vehicle.mileage || undefined,
+                  fuelType: vehicle.fuelType || undefined,
+                  transmissionType: vehicle.transmissionType || undefined,
+                  features: vehicle.features || undefined,
+                  fromCityId: vehicle.fromCityId,
+                  toCityId: vehicle.toCityId,
+                  ratePerHour: vehicle.ratePerHour,
+                  ratePerDay: vehicle.ratePerDay,
+                  extraKmCharge: vehicle.extraKmCharge || undefined,
+                  includedKmPerDay: vehicle.includedKmPerDay || undefined,
+                  securityDeposit: vehicle.securityDeposit || undefined,
                   description: vehicle.description || undefined,
                   imageUrl: vehicle.imageUrl || undefined,
+                  galleryImages: vehicle.galleryImages || undefined,
+                  isActive: vehicle.isActive,
+                  isFeatured: vehicle.isFeatured,
                   id: vehicle.id
                 }}
                 mode="edit"
