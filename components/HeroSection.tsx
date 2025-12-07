@@ -15,7 +15,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ cities }: HeroSectionProps) {
   return (
-    <section className="relative min-h-screen bg-white overflow-hidden pt-20 pb-8 flex flex-col">
+    <section className="relative min-h-screen bg-white overflow-hidden pt-20 pb-8 flex flex-col" style={{ colorScheme: 'light' }}>
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col justify-between">
         <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-8 lg:gap-12 items-center pt-4 sm:pt-8 lg:pt-12">
           
@@ -43,29 +43,29 @@ export function HeroSection({ cities }: HeroSectionProps) {
             <div>
               <div className="inline-block mb-2 sm:mb-3 md:mb-4">
                 <div className="border-t-2 border-black w-10 sm:w-14 md:w-20 mb-1.5 md:mb-2"></div>
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide text-gray-600">Explore Odisha Your Way!</p>
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide !text-gray-600">Explore Odisha Your Way!</p>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-black leading-[0.95] tracking-tighter mb-3 sm:mb-4 md:mb-6 text-black">
+              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-black leading-[0.95] tracking-tighter mb-3 sm:mb-4 md:mb-6 !text-black">
                 Rent Cars<br/>& Bikes<br/>In Odisha
               </h1>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
               <div className="w-3 h-3 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-black flex-shrink-0"></div>
-              <p className="font-medium text-sm sm:text-base md:text-lg lg:text-xl leading-tight text-gray-800">Premium vehicles for your Odisha adventure</p>
+              <p className="font-medium text-sm sm:text-base md:text-lg lg:text-xl leading-tight !text-gray-800">Premium vehicles for your Odisha adventure</p>
             </div>
 
             {/* Description and Buttons - Show in column on desktop */}
             <div className="hidden lg:block space-y-4 md:space-y-5">
-              <p className="text-sm lg:text-base leading-relaxed max-w-2xl text-gray-700">
+              <p className="text-sm lg:text-base leading-relaxed max-w-2xl !text-gray-700">
                 From temples to beaches, explore Odisha's stunning destinations at your own pace. Choose from our wide range of cars and bikes, available across all major cities in Odisha.
               </p>
 
               <div className="flex flex-wrap gap-3 md:gap-4">
-                <button className="px-8 py-4 md:px-10 md:py-5 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-base md:text-lg lg:text-xl text-white">
+                <button className="px-8 py-4 md:px-10 md:py-5 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-base md:text-lg lg:text-xl !text-white">
                   Book Now <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
-                <button className="px-8 py-4 md:px-10 md:py-5 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-base md:text-lg lg:text-xl text-black">
+                <button className="px-8 py-4 md:px-10 md:py-5 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-base md:text-lg lg:text-xl !text-black">
                   View Vehicles <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
               </div>
@@ -85,15 +85,15 @@ export function HeroSection({ cities }: HeroSectionProps) {
 
         {/* Description and Buttons Below - Mobile/Tablet Only */}
         <div className="lg:hidden space-y-3 sm:space-y-4 md:space-y-5 px-0 sm:px-4 md:px-8 mt-4">
-          <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed max-w-3xl text-gray-700">
+          <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed max-w-3xl !text-gray-700">
             From temples to beaches, explore Odisha's stunning destinations at your own pace. Choose from our wide range of cars and bikes, available across all major cities in Odisha.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg text-white">
+            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white">
               Book Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </button>
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg text-black">
+            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black">
               View Vehicles <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </button>
           </div>
