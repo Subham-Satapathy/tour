@@ -1,7 +1,9 @@
-import { pgTable, serial, varchar, text, integer, boolean, timestamp, pgEnum } from 'drizzle-orm/pg-core';
+import { pgTable, serial, varchar, text, integer, boolean, timestamp, pgEnum, decimal } from 'drizzle-orm/pg-core';
 
 // Enums
 export const vehicleTypeEnum = pgEnum('vehicle_type', ['CAR', 'BIKE']);
+export const fuelTypeEnum = pgEnum('fuel_type', ['PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID', 'CNG']);
+export const transmissionTypeEnum = pgEnum('transmission_type', ['MANUAL', 'AUTOMATIC']);
 export const bookingStatusEnum = pgEnum('booking_status', ['PENDING', 'PAID', 'CANCELLED']);
 
 // City table
@@ -16,13 +18,30 @@ export const vehicles = pgTable('vehicles', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 200 }).notNull(),
   type: vehicleTypeEnum('type').notNull(),
+  brand: varchar('brand', { length: 100 }),
+  model: varchar('model', { length: 100 }),
+  year: integer('year'),
+  color: varchar('color', { length: 50 }),
+  licensePlate: varchar('license_plate', { length: 50 }),
+  seatingCapacity: integer('seating_capacity'),
+  mileage: varchar('mileage', { length: 50 }), // e.g., "15 km/l" or "25,000 km"
+  fuelType: fuelTypeEnum('fuel_type'),
+  transmissionType: transmissionTypeEnum('transmission_type'),
+  features: text('features'), // JSON string of features like AC, GPS, Bluetooth, etc.
   fromCityId: integer('from_city_id').notNull().references(() => cities.id),
   toCityId: integer('to_city_id').notNull().references(() => cities.id),
   ratePerHour: integer('rate_per_hour').notNull(),
   ratePerDay: integer('rate_per_day').notNull(),
+  extraKmCharge: integer('extra_km_charge'), // Charge per km beyond included limit
+  includedKmPerDay: integer('included_km_per_day'), // Free km included per day
+  securityDeposit: integer('security_deposit'),
   description: text('description'),
   imageUrl: varchar('image_url', { length: 500 }),
+  galleryImages: text('gallery_images'), // JSON array of additional image URLs
   isActive: boolean('is_active').notNull().default(true),
+  isFeatured: boolean('is_featured').notNull().default(false),
+  totalBookings: integer('total_bookings').notNull().default(0),
+  averageRating: decimal('average_rating', { precision: 3, scale: 2 }),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });

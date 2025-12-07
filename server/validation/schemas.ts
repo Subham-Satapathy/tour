@@ -35,13 +35,28 @@ export type CreateBookingInput = z.infer<typeof createBookingSchema>;
 export const adminVehicleSchema = z.object({
   name: z.string().min(2).max(200),
   type: z.enum(['CAR', 'BIKE']),
+  brand: z.string().max(100).optional(),
+  model: z.string().max(100).optional(),
+  year: z.number().int().min(1900).max(new Date().getFullYear() + 1).optional(),
+  color: z.string().max(50).optional(),
+  licensePlate: z.string().max(50).optional(),
+  seatingCapacity: z.number().int().min(1).max(50).optional(),
+  mileage: z.string().max(50).optional(),
+  fuelType: z.enum(['PETROL', 'DIESEL', 'ELECTRIC', 'HYBRID', 'CNG']).optional(),
+  transmissionType: z.enum(['MANUAL', 'AUTOMATIC']).optional(),
+  features: z.string().optional(), // JSON string
   fromCityId: z.number().int().positive(),
   toCityId: z.number().int().positive(),
   ratePerHour: z.number().int().positive(),
   ratePerDay: z.number().int().positive(),
+  extraKmCharge: z.number().int().min(0).optional(),
+  includedKmPerDay: z.number().int().min(0).optional(),
+  securityDeposit: z.number().int().min(0).optional(),
   description: z.string().optional(),
   imageUrl: z.string().url().optional().or(z.literal('')),
+  galleryImages: z.string().optional(), // JSON string
   isActive: z.boolean().optional().default(true),
+  isFeatured: z.boolean().optional().default(false),
 });
 
 export type AdminVehicleInput = z.infer<typeof adminVehicleSchema>;

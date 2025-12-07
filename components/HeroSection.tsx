@@ -72,11 +72,17 @@ export function HeroSection({ cities }: HeroSectionProps) {
             </div>
 
             {/* Scroll Navigation - Right Side */}
-            <div className="hidden lg:flex flex-col gap-3 fixed right-8 bottom-32">
-              <button className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors shadow-lg">
+            <div className="hidden lg:flex flex-col gap-3 fixed right-8 bottom-32 z-50">
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors shadow-lg"
+              >
                 <ArrowUp className="w-5 h-5 text-gray-700" />
               </button>
-              <button className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg">
+              <button 
+                onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
+                className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg"
+              >
                 <ArrowDown className="w-5 h-5" />
               </button>
             </div>

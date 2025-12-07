@@ -17,6 +17,20 @@ export async function getAllVehicles(
 }
 
 /**
+ * Get popular vehicles (active vehicles, limited to 6)
+ */
+export async function getPopularVehicles(
+  db: NeonHttpDatabase<any>,
+  limit: number = 6
+): Promise<Vehicle[]> {
+  return await db
+    .select()
+    .from(vehicles)
+    .where(eq(vehicles.isActive, true))
+    .limit(limit);
+}
+
+/**
  * Get vehicle by ID
  */
 export async function getVehicleById(

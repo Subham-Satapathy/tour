@@ -124,6 +124,153 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
         {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type.message}</p>}
       </div>
 
+      <div className="grid md:grid-cols-3 gap-4">
+        <div>
+          <label htmlFor="brand" className="block text-sm font-medium mb-1">
+            Brand
+          </label>
+          <input
+            id="brand"
+            type="text"
+            {...register('brand')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="Toyota, Honda, BMW"
+          />
+          {errors.brand && <p className="text-red-500 text-sm mt-1">{errors.brand.message}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="model" className="block text-sm font-medium mb-1">
+            Model
+          </label>
+          <input
+            id="model"
+            type="text"
+            {...register('model')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="Innova, Activa, i4"
+          />
+          {errors.model && <p className="text-red-500 text-sm mt-1">{errors.model.message}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="year" className="block text-sm font-medium mb-1">
+            Year
+          </label>
+          <input
+            id="year"
+            type="number"
+            {...register('year', { valueAsNumber: true })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="2024"
+          />
+          {errors.year && <p className="text-red-500 text-sm mt-1">{errors.year.message}</p>}
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="color" className="block text-sm font-medium mb-1">
+            Color
+          </label>
+          <input
+            id="color"
+            type="text"
+            {...register('color')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="White, Black, Red"
+          />
+          {errors.color && <p className="text-red-500 text-sm mt-1">{errors.color.message}</p>}
+        </div>
+
+        <div>
+          <label htmlFor="licensePlate" className="block text-sm font-medium mb-1">
+            License Plate
+          </label>
+          <input
+            id="licensePlate"
+            type="text"
+            {...register('licensePlate')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="OD-02-AB-1234"
+          />
+          {errors.licensePlate && (
+            <p className="text-red-500 text-sm mt-1">{errors.licensePlate.message}</p>
+          )}
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-4">
+        <div>
+          <label htmlFor="seatingCapacity" className="block text-sm font-medium mb-1">
+            Seating Capacity
+          </label>
+          <input
+            id="seatingCapacity"
+            type="number"
+            {...register('seatingCapacity', { valueAsNumber: true })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="5"
+          />
+          {errors.seatingCapacity && (
+            <p className="text-red-500 text-sm mt-1">{errors.seatingCapacity.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="fuelType" className="block text-sm font-medium mb-1">
+            Fuel Type
+          </label>
+          <select
+            id="fuelType"
+            {...register('fuelType')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          >
+            <option value="">Select fuel type</option>
+            <option value="PETROL">Petrol</option>
+            <option value="DIESEL">Diesel</option>
+            <option value="ELECTRIC">Electric</option>
+            <option value="HYBRID">Hybrid</option>
+            <option value="CNG">CNG</option>
+          </select>
+          {errors.fuelType && (
+            <p className="text-red-500 text-sm mt-1">{errors.fuelType.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="transmissionType" className="block text-sm font-medium mb-1">
+            Transmission
+          </label>
+          <select
+            id="transmissionType"
+            {...register('transmissionType')}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          >
+            <option value="">Select transmission</option>
+            <option value="MANUAL">Manual</option>
+            <option value="AUTOMATIC">Automatic</option>
+          </select>
+          {errors.transmissionType && (
+            <p className="text-red-500 text-sm mt-1">{errors.transmissionType.message}</p>
+          )}
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="mileage" className="block text-sm font-medium mb-1">
+          Mileage
+        </label>
+        <input
+          id="mileage"
+          type="text"
+          {...register('mileage')}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          placeholder="15 km/l or 25,000 km"
+        />
+        {errors.mileage && <p className="text-red-500 text-sm mt-1">{errors.mileage.message}</p>}
+      </div>
+
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="fromCityId" className="block text-sm font-medium mb-1">
@@ -202,6 +349,56 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
         </div>
       </div>
 
+      <div className="grid md:grid-cols-3 gap-4">
+        <div>
+          <label htmlFor="extraKmCharge" className="block text-sm font-medium mb-1">
+            Extra KM Charge (₹)
+          </label>
+          <input
+            id="extraKmCharge"
+            type="number"
+            {...register('extraKmCharge', { valueAsNumber: true })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="10"
+          />
+          {errors.extraKmCharge && (
+            <p className="text-red-500 text-sm mt-1">{errors.extraKmCharge.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="includedKmPerDay" className="block text-sm font-medium mb-1">
+            Included KM/Day
+          </label>
+          <input
+            id="includedKmPerDay"
+            type="number"
+            {...register('includedKmPerDay', { valueAsNumber: true })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="200"
+          />
+          {errors.includedKmPerDay && (
+            <p className="text-red-500 text-sm mt-1">{errors.includedKmPerDay.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="securityDeposit" className="block text-sm font-medium mb-1">
+            Security Deposit (₹)
+          </label>
+          <input
+            id="securityDeposit"
+            type="number"
+            {...register('securityDeposit', { valueAsNumber: true })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+            placeholder="5000"
+          />
+          {errors.securityDeposit && (
+            <p className="text-red-500 text-sm mt-1">{errors.securityDeposit.message}</p>
+          )}
+        </div>
+      </div>
+
       <div>
         <label htmlFor="description" className="block text-sm font-medium mb-1">
           Description
@@ -215,6 +412,22 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
         />
         {errors.description && (
           <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
+        )}
+      </div>
+
+      <div>
+        <label htmlFor="features" className="block text-sm font-medium mb-1">
+          Features <span className="text-gray-500 text-xs">(comma-separated)</span>
+        </label>
+        <input
+          id="features"
+          type="text"
+          {...register('features')}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          placeholder="AC, GPS, Bluetooth, USB Charger"
+        />
+        {errors.features && (
+          <p className="text-red-500 text-sm mt-1">{errors.features.message}</p>
         )}
       </div>
 
@@ -234,16 +447,46 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
         )}
       </div>
 
-      <div className="flex items-center">
-        <input
-          id="isActive"
-          type="checkbox"
-          {...register('isActive')}
-          className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-        />
-        <label htmlFor="isActive" className="ml-2 text-sm font-medium">
-          Active (available for booking)
+      <div>
+        <label htmlFor="galleryImages" className="block text-sm font-medium mb-1">
+          Gallery Images <span className="text-gray-500 text-xs">(comma-separated URLs)</span>
         </label>
+        <input
+          id="galleryImages"
+          type="text"
+          {...register('galleryImages')}
+          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900"
+          placeholder="https://example.com/img1.jpg, https://example.com/img2.jpg"
+        />
+        {errors.galleryImages && (
+          <p className="text-red-500 text-sm mt-1">{errors.galleryImages.message}</p>
+        )}
+      </div>
+
+      <div className="flex items-center gap-6">
+        <div className="flex items-center">
+          <input
+            id="isActive"
+            type="checkbox"
+            {...register('isActive')}
+            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <label htmlFor="isActive" className="ml-2 text-sm font-medium">
+            Active (available for booking)
+          </label>
+        </div>
+
+        <div className="flex items-center">
+          <input
+            id="isFeatured"
+            type="checkbox"
+            {...register('isFeatured')}
+            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <label htmlFor="isFeatured" className="ml-2 text-sm font-medium">
+            Featured (show in popular vehicles)
+          </label>
+        </div>
       </div>
 
       {error && (

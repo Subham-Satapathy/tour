@@ -2,7 +2,7 @@ import { Navbar } from '@/components/Navbar';
 import { SearchForm } from '@/components/SearchForm';
 import { HeroSection } from '@/components/HeroSection';
 import { FeaturesSection } from '@/components/FeaturesSection';
-import { PopularDestinations } from '@/components/PopularDestinations';
+import { PopularCars } from '@/components/PopularCars';
 import { HowItWorks } from '@/components/HowItWorks';
 import { Testimonials } from '@/components/Testimonials';
 import { Stats } from '@/components/Stats';
@@ -23,7 +23,7 @@ export default async function HomePage() {
       <Navbar />
       <HeroSection cities={cities} />
       <FeaturesSection />
-      <PopularDestinations cities={cities} />
+      <PopularCars />
       <HowItWorks />
       <Testimonials />
       <Stats />
