@@ -4,8 +4,6 @@ import { HeroSection } from '@/components/HeroSection';
 import { FeaturesSection } from '@/components/FeaturesSection';
 import { PopularCars } from '@/components/PopularCars';
 import { HowItWorks } from '@/components/HowItWorks';
-import { Testimonials } from '@/components/Testimonials';
-import { Stats } from '@/components/Stats';
 import { FAQ } from '@/components/FAQ';
 import { Newsletter } from '@/components/Newsletter';
 import { Footer } from '@/components/Footer';
@@ -25,8 +23,6 @@ export default async function HomePage() {
       <FeaturesSection />
       <PopularCars />
       <HowItWorks />
-      <Testimonials />
-      <Stats />
       <FAQ />
       <Newsletter />
       <Footer />

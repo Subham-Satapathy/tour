@@ -119,15 +119,16 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
       {/* Pagination Dots */}
       <div className="flex gap-2 mb-10 justify-center lg:justify-start">
         {vehicles.map((_, index) => {
-          // On desktop (lg+), only show dots for valid carousel positions
-          const isValidDesktopIndex = index <= maxIndex;
-          if (!isValidDesktopIndex && window.innerWidth >= 1024) return null;
+          // On desktop, only show dots up to maxIndex (8 vehicles, 3 visible = 6 positions)
+          // On mobile, show all dots (one per vehicle)
+          const shouldShowDot = isMobile || index <= maxIndex;
+          if (!shouldShowDot) return null;
           
           return (
             <button
               key={index}
               onClick={() => {
-                const targetIndex = window.innerWidth >= 1024 ? Math.min(index, maxIndex) : index;
+                const targetIndex = isMobile ? index : Math.min(index, maxIndex);
                 setCurrentIndex(targetIndex);
                 scrollToIndex(targetIndex);
               }}

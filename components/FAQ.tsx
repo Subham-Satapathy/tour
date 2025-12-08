@@ -29,38 +29,42 @@ export function FAQ() {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4">
             FAQ
           </h2>
-          <p className="text-xl text-gray-600">
-            Frequently asked questions answered
-          </p>
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-0.5 w-12 bg-gray-300"></div>
+            <p className="text-lg text-gray-600">
+              Frequently asked questions answered
+            </p>
+            <div className="h-0.5 w-12 bg-gray-300"></div>
+          </div>
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
+        <div className="max-w-4xl mx-auto space-y-4">
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border-2 border-gray-200 rounded-xl overflow-hidden hover:border-blue-500 transition-colors duration-300"
+              className="border-[3px] border-gray-900 rounded-2xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
+                className="w-full px-8 py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
               >
-                <span className="font-semibold text-lg text-gray-900 pr-4">
+                <span className="font-bold text-lg md:text-xl text-gray-900 pr-4">
                   {faq.question}
                 </span>
-                <span className="text-2xl text-blue-600 flex-shrink-0">
-                  {openIndex === index ? '−' : '+'}
+                <span className="text-3xl font-black flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center transition-transform duration-300" style={{ transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0deg)' }}>
+                  +
                 </span>
               </button>
               
               {openIndex === index && (
-                <div className="px-6 py-4 bg-gray-50 border-t-2 border-gray-200">
-                  <p className="text-gray-700 leading-relaxed">
+                <div className="px-8 py-6 bg-gradient-to-r from-gray-50 to-blue-50 border-t-[3px] border-gray-900">
+                  <p className="text-gray-700 leading-relaxed font-medium">
                     {faq.answer}
                   </p>
                 </div>
@@ -69,11 +73,11 @@ export function FAQ() {
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <p className="text-lg text-gray-600 mb-4">
+        <div className="text-center mt-20">
+          <p className="text-xl font-bold text-gray-900 mb-6">
             Still have questions?
           </p>
-          <button className="px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl transition-all duration-300">
+          <button className="px-10 py-5 bg-black text-white rounded-full font-bold text-lg hover:bg-gray-800 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
             Contact Support
           </button>
         </div>

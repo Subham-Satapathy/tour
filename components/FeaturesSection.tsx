@@ -97,10 +97,10 @@ export function FeaturesSection() {
             {/* Right - Call to Action */}
             <div className="p-8 lg:p-16">
               <h2 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-4 lg:mb-6 leading-tight">
-                Save money with our rental
+                Save money with Triveni Tours
               </h2>
               <p className="text-gray-300 mb-8 lg:mb-10 text-sm lg:text-base">
-                Best prices in the city with full refund in case of cancellation
+                Best prices in Odisha with full refund in case of cancellation
               </p>
               <button className="px-7 py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center gap-2 shadow-lg text-sm lg:text-base">
                 Book Now <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />

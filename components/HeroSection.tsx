@@ -27,7 +27,7 @@ export function HeroSection({ cities }: HeroSectionProps) {
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image 
                     src="/heroCar.webp" 
-                    alt="Red SUV - Premium Vehicle Rental" 
+                    alt="Red SUV - Triveni Tours and Travels" 
                     width={900}
                     height={700}
                     className="object-contain w-full h-full drop-shadow-2xl"
@@ -111,7 +111,7 @@ export function HeroSection({ cities }: HeroSectionProps) {
             <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span>1+ Years</span>
             </h3>
-            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Serving Odisha with reliable and affordable vehicle rental services</p>
+            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Serving Odisha with reliable and affordable self-drive vehicles and family trips</p>
           </div>
           <div className="text-center md:text-left">
             <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
