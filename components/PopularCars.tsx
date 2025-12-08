@@ -11,9 +11,9 @@ export async function PopularCars() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
+    <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <div className="max-w-[1800px] mx-auto">
+        <div className="px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
           <div>
             <div className="inline-block mb-3 md:mb-4">
               <div className="border-t-2 border-black w-14 md:w-20 mb-2"></div>
@@ -32,7 +32,9 @@ export async function PopularCars() {
           </button>
         </div>
 
-        <PopularCarsCarousel vehicles={vehicles} />
+        <div className="px-4 sm:px-6 lg:px-16">
+          <PopularCarsCarousel vehicles={vehicles} />
+        </div>
       </div>
     </section>
   );

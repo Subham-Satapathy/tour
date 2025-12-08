@@ -26,16 +26,19 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
 
   useEffect(() => {
     const carousel = carouselRef.current;
-    if (!carousel || !isMobile) return;
+    if (!carousel) return;
 
     const handleScroll = () => {
-      const scrollLeft = carousel.scrollLeft;
-      const scrollWidth = carousel.scrollWidth;
-      const clientWidth = carousel.clientWidth;
+      // Only update pagination on mobile (when using scroll)
+      if (window.innerWidth >= 640) return;
       
-      // Calculate the index based on scroll position
-      const cardWidth = (scrollWidth - clientWidth) / (vehicles.length - 1);
-      const newIndex = Math.round(scrollLeft / cardWidth);
+      const scrollLeft = carousel.scrollLeft;
+      const cardWidth = 0.85 * window.innerWidth + 16; // 85vw + 16px gap
+      const spacerWidth = 0.075 * window.innerWidth; // 7.5vw
+      
+      // Adjust for the initial spacer
+      const adjustedScrollLeft = scrollLeft - spacerWidth;
+      const newIndex = Math.round(adjustedScrollLeft / cardWidth);
       
       // Clamp the index between 0 and vehicles.length - 1
       const clampedIndex = Math.min(Math.max(0, newIndex), vehicles.length - 1);
@@ -44,7 +47,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
 
     carousel.addEventListener('scroll', handleScroll);
     return () => carousel.removeEventListener('scroll', handleScroll);
-  }, [isMobile, vehicles.length]);
+  }, [vehicles.length]);
 
   const visibleVehicles = 3;
   const maxIndex = Math.max(0, vehicles.length - visibleVehicles);
@@ -86,7 +89,9 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
 
   const scrollToIndex = (index: number) => {
     if (carouselRef.current && isMobile) {
-      const scrollLeft = index * (carouselRef.current.offsetWidth);
+      const cardWidth = 0.85 * window.innerWidth + 16; // 85vw + 16px gap
+      const spacerWidth = 0.075 * window.innerWidth; // 7.5vw
+      const scrollLeft = spacerWidth + (index * cardWidth);
       carouselRef.current.scrollTo({ left: scrollLeft, behavior: 'smooth' });
     }
   };
@@ -113,33 +118,46 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
 
       {/* Pagination Dots */}
       <div className="flex gap-2 mb-10 justify-center lg:justify-start">
-        {vehicles.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setCurrentIndex(index);
-              scrollToIndex(index);
-            }}
-            className={`h-1.5 rounded-full transition-all ${
-              index === currentIndex
-                ? 'w-10 bg-black'
-                : 'w-4 bg-gray-300'
-            }`}
-          />
-        ))}
+        {vehicles.map((_, index) => {
+          // On desktop (lg+), only show dots for valid carousel positions
+          const isValidDesktopIndex = index <= maxIndex;
+          if (!isValidDesktopIndex && window.innerWidth >= 1024) return null;
+          
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                const targetIndex = window.innerWidth >= 1024 ? Math.min(index, maxIndex) : index;
+                setCurrentIndex(targetIndex);
+                scrollToIndex(targetIndex);
+              }}
+              className={`h-1.5 rounded-full transition-all ${
+                index === currentIndex
+                  ? 'w-10 bg-black'
+                  : 'w-4 bg-gray-300'
+              }`}
+            />
+          );
+        })}
       </div>
 
       {/* Vehicles Grid */}
       <div 
         ref={carouselRef}
-        className="overflow-x-auto overflow-y-hidden sm:overflow-visible scrollbar-hide snap-x snap-mandatory sm:snap-none"
+        className="overflow-x-auto sm:overflow-hidden lg:overflow-visible scrollbar-hide snap-x snap-mandatory sm:snap-none"
         style={{
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
-          WebkitOverflowScrolling: 'touch'
+          WebkitOverflowScrolling: 'touch',
         }}
       >
-        <div className="flex gap-4 sm:gap-6 px-[7.5vw] sm:px-0">
+        <div 
+          className="flex gap-4 sm:gap-6 sm:transition-transform sm:duration-500 sm:ease-out"
+          style={{
+            transform: isMobile ? undefined : `translateX(-${currentIndex * (100 / 3)}%)`,
+            paddingLeft: isMobile ? '7.5vw' : undefined,
+          }}
+        >
           {vehicles.map((vehicle, index) => (
             <div
               key={vehicle.id}
@@ -241,6 +259,9 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
               </div>
             </div>
           ))}
+          
+          {/* End spacer: viewport (100vw) - card width (85vw) - already have 7.5vw on left = need 7.5vw more */}
+          <div className="flex-shrink-0 w-[calc(100vw-85vw-7.5vw-16px)] sm:hidden" aria-hidden="true"></div>
         </div>
       </div>
     </div>
