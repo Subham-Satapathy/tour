@@ -35,12 +35,10 @@ export function Navbar() {
     <nav className={`fixed top-0 left-0 right-0 z-[9999] bg-white/95 backdrop-blur-md transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          {/* Logo - RENT */}
-          <Link href="/" className="flex items-center gap-1 group">
-            <span className="text-3xl font-black">R</span>
-            <span className="text-3xl font-black text-gray-300">E</span>
-            <span className="text-3xl font-black">N</span>
-            <span className="text-3xl font-black">T</span>
+          {/* Logo - Triveni Tours */}
+          <Link href="/" className="flex items-center gap-2 group">
+            <span className="text-2xl">🚗</span>
+            <span className="text-2xl font-black">Triveni Tours</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -52,35 +50,52 @@ export function Navbar() {
               Home
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
             </Link>
-            <a 
-              href="#models" 
-              className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer flex items-center gap-2"
-            >
-              Model
-              <span className="text-gray-400">⊕</span>
-            </a>
-            <a 
-              href="#services"
+            <Link 
+              href="/search" 
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
-              Services
-            </a>
+              Self Drive
+            </Link>
             <a 
-              href="#gallery" 
+              href="#how-it-works"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
-              Gallery
+              How It Works
+            </a>
+            <a 
+              href="#faq" 
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
+            >
+              FAQ
+            </a>
+            <a 
+              href="#contact" 
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
+            >
+              Contact
             </a>
           </div>
 
-          {/* Right Side - Search & Sign Up */}
+          {/* Right Side - Search & Book Now */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
+            <Link href="/search" className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
               <Search className="w-5 h-5 text-gray-600" />
-            </button>
-            <button className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300">
-              Sign Up
-            </button>
+            </Link>
+            <Link href="/search" className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300">
+              Book Now
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -108,6 +123,13 @@ export function Navbar() {
               >
                 🏠 Home
               </Link>
+              <Link 
+                href="/search" 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all"
+              >
+                🚗 Self Drive
+              </Link>
               <a 
                 href="#how-it-works" 
                 onClick={(e) => {
@@ -120,6 +142,17 @@ export function Navbar() {
                 ℹ️ How It Works
               </a>
               <a 
+                href="#faq" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all cursor-pointer"
+              >
+                ❓ FAQ
+              </a>
+              <a 
                 href="#contact" 
                 onClick={(e) => {
                   e.preventDefault();
@@ -130,12 +163,13 @@ export function Navbar() {
               >
                 📞 Contact
               </a>
-              <a 
-                href="tel:+919876543210" 
+              <Link 
+                href="/search" 
+                onClick={() => setIsMobileMenuOpen(false)}
                 className="mx-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-center hover:from-blue-700 hover:to-indigo-700 shadow-lg transition-all"
               >
-                📞 Call Us Now
-              </a>
+                📅 Book Now
+              </Link>
             </div>
           </div>
         )}

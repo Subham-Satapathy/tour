@@ -11,28 +11,28 @@ export function Newsletter() {
         <div className="max-w-5xl mx-auto">
           {/* Heading */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-4">
               Stay updated with Triveni Tours
             </h2>
-            <p className="text-lg md:text-xl text-gray-600 font-medium">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-4">
               Subscribe to get exclusive deals and travel tips from Triveni Tours and Travels
             </p>
           </div>
 
           {/* Subscribe Form */}
-          <form className="max-w-4xl mx-auto">
-            <div className="relative flex items-center bg-white p-2.5 rounded-full border-[3px] border-gray-900 shadow-xl">
+          <form className="w-full px-4 sm:px-6 md:max-w-4xl md:mx-auto">
+            <div className="relative flex items-center bg-white p-2 sm:p-3 rounded-full border-[3px] border-gray-900 shadow-xl">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="flex-1 px-8 py-3.5 rounded-full text-gray-900 bg-transparent border-none focus:outline-none text-lg font-medium placeholder:text-gray-400"
+                className="flex-1 px-4 sm:px-8 py-2.5 sm:py-4 rounded-full text-gray-900 bg-transparent border-none focus:outline-none text-sm sm:text-lg font-medium placeholder:text-gray-400"
               />
               <button
                 type="submit"
-                className="subscribe-button relative px-12 rounded-full font-bold text-2xl text-white cursor-pointer overflow-hidden border-none flex items-center justify-center"
-                style={{ minWidth: '200px', height: '56px', zIndex: 1 }}
+                className="subscribe-button relative px-6 sm:px-20 rounded-full font-bold text-base sm:text-2xl text-white cursor-pointer overflow-hidden border-none flex items-center justify-center flex-shrink-0"
+                style={{ height: '52px', minHeight: '52px', minWidth: '120px', zIndex: 1 }}
               >
                 <span className="subscribe-text absolute left-0 top-0 w-full h-full flex items-center justify-center rounded-full border-none z-10"
                   style={{
@@ -42,50 +42,10 @@ export function Newsletter() {
                   }}>
                   Subscribe
                 </span>
-                <span className="blob blob-1" style={{
-                  position: 'absolute',
-                  zIndex: -1,
-                  borderRadius: '5em',
-                  width: '6em',
-                  height: '4em',
-                  left: '-0.5em',
-                  top: '0',
-                  background: '#ff930f',
-                  transition: 'transform 0.3s ease-in-out, background 0.3s ease-in-out'
-                }} />
-                <span className="blob blob-2" style={{
-                  position: 'absolute',
-                  zIndex: -1,
-                  borderRadius: '5em',
-                  width: '6em',
-                  height: '4em',
-                  left: '2.5em',
-                  top: '0',
-                  background: '#bf0fff',
-                  transition: 'transform 0.3s ease-in-out, background 0.3s ease-in-out'
-                }} />
-                <span className="blob blob-3" style={{
-                  position: 'absolute',
-                  zIndex: -1,
-                  borderRadius: '5em',
-                  width: '6em',
-                  height: '4em',
-                  left: '5.5em',
-                  top: '-0.5em',
-                  background: '#ff1b6b',
-                  transition: 'transform 0.3s ease-in-out, background 0.3s ease-in-out'
-                }} />
-                <span className="blob blob-4" style={{
-                  position: 'absolute',
-                  zIndex: -1,
-                  borderRadius: '5em',
-                  width: '6em',
-                  height: '4em',
-                  left: '6.5em',
-                  top: '1em',
-                  background: '#0061ff',
-                  transition: 'transform 0.3s ease-in-out, background 0.3s ease-in-out'
-                }} />
+                <span className="blob blob-1" />
+                <span className="blob blob-2" />
+                <span className="blob blob-3" />
+                <span className="blob blob-4" />
               </button>
             </div>
           </form>
@@ -97,6 +57,68 @@ export function Newsletter() {
       </div>
 
       <style jsx>{`
+        .blob {
+          position: absolute;
+          z-index: -1;
+          border-radius: 80px;
+          transition: transform 0.3s ease-in-out, background 0.3s ease-in-out;
+        }
+        
+        @media (max-width: 640px) {
+          .blob {
+            width: 80px;
+            height: 50px;
+          }
+          .blob-1 {
+            left: -5px;
+            top: -3px;
+            background: #ff930f;
+          }
+          .blob-2 {
+            left: 30px;
+            top: -3px;
+            background: #bf0fff;
+          }
+          .blob-3 {
+            left: 60px;
+            top: -8px;
+            background: #ff1b6b;
+          }
+          .blob-4 {
+            left: 70px;
+            top: 5px;
+            background: #0061ff;
+          }
+        }
+        
+        @media (min-width: 641px) {
+          .blob {
+            width: 190px;
+            height: 130px;
+            border-radius: 150px;
+          }
+          .blob-1 {
+            left: -30px;
+            top: -32px;
+            background: #ff930f;
+          }
+          .blob-2 {
+            left: 80px;
+            top: -32px;
+            background: #bf0fff;
+          }
+          .blob-3 {
+            left: 185px;
+            top: -37px;
+            background: #ff1b6b;
+          }
+          .blob-4 {
+            left: 215px;
+            top: 22px;
+            background: #0061ff;
+          }
+        }
+        
         .subscribe-button:hover .blob-1 {
           background: #0061ff;
           transform: scale(1.3);
