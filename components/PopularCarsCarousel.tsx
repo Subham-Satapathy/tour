@@ -24,6 +24,28 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || !isMobile) return;
+
+    const handleScroll = () => {
+      const scrollLeft = carousel.scrollLeft;
+      const scrollWidth = carousel.scrollWidth;
+      const clientWidth = carousel.clientWidth;
+      
+      // Calculate the index based on scroll position
+      const cardWidth = (scrollWidth - clientWidth) / (vehicles.length - 1);
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      
+      // Clamp the index between 0 and vehicles.length - 1
+      const clampedIndex = Math.min(Math.max(0, newIndex), vehicles.length - 1);
+      setCurrentIndex(clampedIndex);
+    };
+
+    carousel.addEventListener('scroll', handleScroll);
+    return () => carousel.removeEventListener('scroll', handleScroll);
+  }, [isMobile, vehicles.length]);
+
   const visibleVehicles = 3;
   const maxIndex = Math.max(0, vehicles.length - visibleVehicles);
 
@@ -62,6 +84,13 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
     setTouchEnd(0);
   };
 
+  const scrollToIndex = (index: number) => {
+    if (carouselRef.current && isMobile) {
+      const scrollLeft = index * (carouselRef.current.offsetWidth);
+      carouselRef.current.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative z-10">
       {/* Navigation Buttons - Desktop Only */}
@@ -87,7 +116,10 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
         {vehicles.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => {
+              setCurrentIndex(index);
+              scrollToIndex(index);
+            }}
             className={`h-1.5 rounded-full transition-all ${
               index === currentIndex
                 ? 'w-10 bg-black'
@@ -100,23 +132,18 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
       {/* Vehicles Grid */}
       <div 
         ref={carouselRef}
-        className="overflow-hidden touch-pan-y"
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
+        className="overflow-x-auto overflow-y-hidden sm:overflow-visible scrollbar-hide snap-x snap-mandatory sm:snap-none"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
+        }}
       >
-        <div
-          className="flex transition-transform duration-500 ease-out gap-4 sm:gap-6"
-          style={{
-            transform: isMobile 
-              ? `translateX(calc(7.5vw - ${currentIndex * 85}vw - ${currentIndex * 16}px))` 
-              : `translateX(-${currentIndex * (100 / 3)}%)`,
-          }}
-        >
+        <div className="flex gap-4 sm:gap-6 px-[7.5vw] sm:px-0">
           {vehicles.map((vehicle, index) => (
             <div
               key={vehicle.id}
-              className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px]"
+              className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px] sm:max-w-none snap-center"
             >
               <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-black transition-all duration-300 hover:shadow-2xl group">
                 {/* Vehicle Image */}
