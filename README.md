@@ -2,6 +2,8 @@
 
 A full-stack travel booking application built with Next.js, TypeScript, Tailwind CSS, and Neon Postgres. This application allows users to search for and book cars and bikes for travel, while administrators can manage vehicles and view bookings through a dedicated admin panel.
 
+> Last Updated: December 9, 2025
+
 ## Features
 
 ### User Features
