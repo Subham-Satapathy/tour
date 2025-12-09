@@ -112,7 +112,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
             <p className="text-gray-600 mb-6">{error}</p>
             <button
               onClick={() => router.push('/vehicles')}
-              className="bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800"
+              className="bg-black text-white px-8 py-3 rounded-lg font-bold hover:scale-105 hover:shadow-xl"
             >
               Back to Vehicles
             </button>
@@ -157,7 +157,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                   </button>
                   <button
                     onClick={() => router.push('/my-bookings')}
-                    className="flex-1 px-6 py-3 bg-black text-white rounded-xl font-bold hover:bg-gray-800 transition-all cursor-pointer"
+                    className="flex-1 px-6 py-3 bg-black text-white rounded-xl font-bold hover:scale-105 hover:shadow-xl transition-all cursor-pointer"
                   >
                     Leave Page
                   </button>
@@ -342,7 +342,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                   <button
                     type="submit"
                     disabled={processing}
-                    className="w-full bg-black text-white py-4 rounded-lg font-bold hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-black text-white py-4 rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {processing ? 'Processing Payment...' : `Pay ₹${((booking?.totalAmount || 0) + (booking?.securityDeposit || 0)).toLocaleString()}`}
                   </button>

@@ -400,7 +400,7 @@ function SignUpForm() {
             <button
               type="submit"
               disabled={loading || !!phoneError || checkingPhone}
-              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:scale-105 hover:shadow-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? 'Sending OTP...' : 'Continue with Email Verification'}
             </button>
@@ -446,7 +446,7 @@ function SignUpForm() {
             <button
               onClick={handleVerifyOTP}
               disabled={loading || otp.length !== 6}
-              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:scale-105 hover:shadow-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? 'Verifying...' : 'Verify & Create Account'}
             </button>

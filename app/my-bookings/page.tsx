@@ -193,7 +193,7 @@ export default function MyBookingsPage() {
               </p>
               <Link
                 href="/vehicles"
-                className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 transition-all"
+                className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all"
               >
                 Browse Vehicles
               </Link>
@@ -288,7 +288,7 @@ export default function MyBookingsPage() {
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <Link
                           href={`/booking/success/${booking.id}`}
-                          className="px-4 sm:px-6 py-2 bg-black text-white rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-800 transition-all text-center cursor-pointer"
+                          className="px-4 sm:px-6 py-2 bg-black text-white rounded-lg text-sm sm:text-base font-semibold hover:scale-105 hover:shadow-xl transition-all text-center cursor-pointer"
                         >
                           View Details
                         </Link>

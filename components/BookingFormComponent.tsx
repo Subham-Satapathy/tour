@@ -553,7 +553,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
               {step < 3 ? (
                 <button
                   onClick={handleNext}
-                  className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-bold hover:bg-gray-800 transition-all cursor-pointer"
+                  className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all cursor-pointer"
                 >
                   Continue
                 </button>
@@ -561,7 +561,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                 <button
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-bold hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {loading ? 'Processing...' : 'Proceed to Payment'}
                 </button>

@@ -131,7 +131,7 @@ export function Navbar() {
                 </div>
                 <Link
                   href="/vehicles"
-                  className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300"
+                  className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:scale-105 hover:shadow-xl transition-all duration-300"
                 >
                   Book Now
                 </Link>
@@ -143,7 +143,7 @@ export function Navbar() {
                 </Link>
                 <Link
                   href="/vehicles"
-                  className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300"
+                  className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:scale-105 hover:shadow-xl transition-all duration-300"
                 >
                   Book Now
                 </Link>
@@ -250,7 +250,7 @@ export function Navbar() {
                     <Link
                       href="/vehicles"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block w-full px-6 py-3 bg-black text-white rounded-lg font-bold text-center hover:bg-gray-800 transition-all"
+                      className="block w-full px-6 py-3 bg-black text-white rounded-lg font-bold text-center hover:scale-105 hover:shadow-xl transition-all"
                     >
                       Book Now
                     </Link>
@@ -267,7 +267,7 @@ export function Navbar() {
                     <Link
                       href="/vehicles"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block w-full px-6 py-3 bg-black text-white rounded-lg font-bold text-center hover:bg-gray-800 transition-all"
+                      className="block w-full px-6 py-3 bg-black text-white rounded-lg font-bold text-center hover:scale-105 hover:shadow-xl transition-all"
                     >
                       Book Now
                     </Link>

@@ -145,7 +145,7 @@ export function BookingForm({
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition cursor-pointer"
+        className="w-full bg-black text-white py-3 rounded-md font-semibold hover:scale-105 hover:shadow-xl disabled:bg-gray-400 disabled:cursor-not-allowed transition cursor-pointer"
       >
         {isLoading ? 'Processing...' : 'Confirm & Pay'}
       </button>

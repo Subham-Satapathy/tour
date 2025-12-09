@@ -26,7 +26,7 @@ export async function PopularCars() {
               Explore our premium fleet of cars and bikes for your perfect journey
             </p>
           </div>
-          <button className="mt-6 md:mt-0 px-8 py-4 bg-black rounded-full font-semibold text-white hover:bg-gray-800 transition-all hover:scale-105 shadow-lg flex items-center gap-2">
+          <button className="mt-6 md:mt-0 px-8 py-4 bg-black rounded-full font-semibold text-white hover:scale-105 hover:shadow-xl transition-all hover:scale-105 shadow-lg flex items-center gap-2">
             Open Fleet
             <ArrowRight className="w-5 h-5" />
           </button>
