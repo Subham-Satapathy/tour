@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Vehicle } from '@/server/db/schema';
+import Link from 'next/link';
 
 interface PopularCarsCarouselProps {
   vehicles: Vehicle[];
@@ -160,9 +161,10 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
           }}
         >
           {vehicles.map((vehicle, index) => (
-            <div
+            <Link
               key={vehicle.id}
-              className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px] sm:max-w-none snap-center"
+              href={`/booking/${vehicle.id}`}
+              className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px] sm:max-w-none snap-center block cursor-pointer"
             >
               <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-black transition-all duration-300 hover:shadow-2xl group">
                 {/* Vehicle Image */}
@@ -245,20 +247,19 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                       <p className="text-lg sm:text-2xl md:text-3xl font-black text-black tracking-tight leading-none">₹{vehicle.ratePerDay}</p>
                       <p className="text-xs sm:text-sm text-gray-600 font-medium">per day</p>
                     </div>
-                    <button
-                      disabled={!vehicle.isActive}
-                      className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-all shadow-md whitespace-nowrap ${
+                    <span
+                      className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-all shadow-md whitespace-nowrap inline-block ${
                         vehicle.isActive
-                          ? 'bg-black text-white hover:scale-105 hover:shadow-xl hover:scale-105 cursor-pointer'
+                          ? 'bg-black text-white group-hover:scale-105 group-hover:shadow-xl'
                           : 'bg-gray-200 text-gray-400 cursor-not-allowed border-2 border-gray-300'
                       }`}
                     >
                       {vehicle.isActive ? 'Book Now' : 'Unavailable'}
-                    </button>
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
           
           {/* End spacer: viewport (100vw) - card width (85vw) - already have 7.5vw on left = need 7.5vw more */}
