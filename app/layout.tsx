@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 
 export const metadata: Metadata = {
-  title: "Triveni Tours and Travels - Self Drive Cars, Bikes & Family Trips",
+  title: "Triveni Tours & Travels - Self Drive Cars, Bikes & Family Trips",
   description: "Book self-drive cars, bikes and family trips with vehicle & driver in Odisha",
   icons: {
     icon: '/favicon.ico',

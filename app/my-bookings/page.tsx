@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Calendar, MapPin, Car, Clock, CheckCircle, XCircle, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Calendar, MapPin, Car, Clock, CheckCircle, XCircle, AlertCircle, ArrowLeft, FileText } from 'lucide-react';
 import Link from 'next/link';
 
 interface Booking {
@@ -288,10 +288,20 @@ export default function MyBookingsPage() {
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <Link
                           href={`/booking/success/${booking.id}`}
-                          className="px-4 sm:px-6 py-2 bg-black text-white rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-800 transition-all text-center"
+                          className="px-4 sm:px-6 py-2 bg-black text-white rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-800 transition-all text-center cursor-pointer"
                         >
                           View Details
                         </Link>
+                        {booking.status === 'PAID' && (
+                          <Link
+                            href={`/booking/success/${booking.id}`}
+                            className="px-4 sm:px-6 py-2 border-2 border-black text-black rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-50 transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
+                          >
+                            <FileText className="w-4 h-4" />
+                            <span className="hidden sm:inline">View Invoice</span>
+                            <span className="sm:hidden">Invoice</span>
+                          </Link>
+                        )}
                         {isUpcoming(booking.startDateTime) && booking.status === 'PAID' && (
                           <button
                             onClick={() => {
@@ -300,9 +310,10 @@ export default function MyBookingsPage() {
                                 alert('Cancellation feature coming soon!');
                               }
                             }}
-                            className="px-6 py-2 border-2 border-red-600 text-red-600 rounded-lg font-semibold hover:bg-red-50 transition-all"
+                            className="px-4 sm:px-6 py-2 border-2 border-red-600 text-red-600 rounded-lg text-sm sm:text-base font-semibold hover:bg-red-50 transition-all cursor-pointer"
                           >
-                            Cancel Booking
+                            <span className="hidden sm:inline">Cancel Booking</span>
+                            <span className="sm:hidden">Cancel</span>
                           </button>
                         )}
                       </div>

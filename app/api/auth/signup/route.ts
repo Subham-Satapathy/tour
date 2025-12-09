@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { hash } from 'bcryptjs';
 import { db } from '@/server/db';
-import { users } from '@/server/db/schema';
-import { eq } from 'drizzle-orm';
+import { users, otpVerifications } from '@/server/db/schema';
+import { eq, and } from 'drizzle-orm';
 
 export async function POST(request: NextRequest) {
   try {
@@ -34,12 +34,41 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check if OTP was verified for this email
+    const verifiedOTP = await db
+      .select()
+      .from(otpVerifications)
+      .where(
+        and(
+          eq(otpVerifications.email, email),
+          eq(otpVerifications.verified, true)
+        )
+      )
+      .limit(1);
+
+    if (verifiedOTP.length === 0) {
+      return NextResponse.json(
+        { error: 'Email not verified. Please verify your email with OTP first.' },
+        { status: 400 }
+      );
+    }
+
     // Check if user already exists
     const existingUsers = await db.select().from(users).where(eq(users.email, email));
 
     if (existingUsers.length > 0) {
       return NextResponse.json(
         { error: 'User with this email already exists' },
+        { status: 409 }
+      );
+    }
+
+    // Check if phone number already exists
+    const existingPhone = await db.select().from(users).where(eq(users.phone, cleanPhone));
+
+    if (existingPhone.length > 0) {
+      return NextResponse.json(
+        { error: 'User with this phone number already exists' },
         { status: 409 }
       );
     }
@@ -55,6 +84,11 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
       role: 'customer',
     }).returning();
+
+    // Delete the used OTP verification records
+    await db
+      .delete(otpVerifications)
+      .where(eq(otpVerifications.email, email));
 
     return NextResponse.json(
       { 

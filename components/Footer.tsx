@@ -97,7 +97,7 @@ export function Footer() {
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-gray-600">
-              © 2025 Triveni Tours and Travels. All rights reserved.
+              © 2025 Triveni Tours & Travels. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
               <a href="/privacy" className="text-gray-600 hover:text-gray-900 transition-colors underline">Privacy Policy</a>

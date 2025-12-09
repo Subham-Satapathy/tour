@@ -3,6 +3,8 @@ import { getServerSession } from 'next-auth';
 import { db } from '@/server/db';
 import { bookings } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
+import { generateInvoice } from '@/server/invoice/generateInvoice';
+import { sendInvoiceEmail } from '@/server/email/sendInvoice';
 
 export const dynamic = 'force-dynamic';
 
@@ -49,8 +51,28 @@ export async function POST(
       );
     }
 
-    // TODO: Send confirmation email here
-    // await sendBookingConfirmationEmail(updatedBooking);
+    // Generate invoice after successful payment
+    try {
+      const invoiceNumber = await generateInvoice(bookingId);
+      
+      if (invoiceNumber) {
+        // Send invoice email to customer
+        await sendInvoiceEmail({
+          email: updatedBooking.customerEmail,
+          customerName: updatedBooking.customerName,
+          bookingId: bookingId,
+          invoiceNumber: invoiceNumber,
+          totalAmount: updatedBooking.totalAmount,
+        });
+        
+        console.log(`Invoice ${invoiceNumber} generated and sent for booking #${bookingId}`);
+      } else {
+        console.error(`Failed to generate invoice for booking #${bookingId}`);
+      }
+    } catch (invoiceError) {
+      // Log error but don't fail the booking confirmation
+      console.error('Error generating/sending invoice:', invoiceError);
+    }
 
     return NextResponse.json({
       success: true,

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { CheckCircle, Calendar, MapPin, Car, Mail, Phone, Clock, AlertCircle, User, CreditCard, ArrowLeft } from 'lucide-react';
+import { CheckCircle, Calendar, MapPin, Car, Mail, Phone, Clock, AlertCircle, User, CreditCard, ArrowLeft, FileText, Download } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SuccessPage({ params }: { params: Promise<{ id: string }> }) {
@@ -14,6 +14,8 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
   const [bookingId, setBookingId] = useState<string>('');
   const [booking, setBooking] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [invoice, setInvoice] = useState<any>(null);
+  const [generatingInvoice, setGeneratingInvoice] = useState(false);
 
   useEffect(() => {
     params.then(p => setBookingId(p.id));
@@ -38,10 +40,42 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
       }
       const data = await response.json();
       setBooking(data.booking);
+      
+      // Fetch invoice if booking is PAID
+      if (data.booking.status === 'PAID') {
+        fetchInvoice();
+      }
     } catch (err) {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchInvoice = async () => {
+    try {
+      const response = await fetch(`/api/invoices/${bookingId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setInvoice(data);
+      }
+    } catch (err) {
+      console.error('Error fetching invoice:', err);
+    }
+  };
+
+  const handleGenerateInvoice = async () => {
+    setGeneratingInvoice(true);
+    try {
+      const response = await fetch(`/api/invoices/${bookingId}`);
+      if (response.ok) {
+        const data = await response.json();
+        setInvoice(data);
+      }
+    } catch (err) {
+      console.error('Error generating invoice:', err);
+    } finally {
+      setGeneratingInvoice(false);
     }
   };
 
@@ -285,6 +319,58 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                 </div>
               </div>
             </div>
+
+            {/* Invoice Section */}
+            {booking.status === 'PAID' && (
+              <div className="px-6 py-6 bg-white border-t border-gray-200">
+                <h3 className="text-base font-black text-gray-900 mb-4 flex items-center gap-2">
+                  <FileText className="w-4 h-4" />
+                  Invoice
+                </h3>
+                {invoice ? (
+                  <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-lg p-4">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-600 mb-1">Invoice Number</p>
+                        <p className="text-lg font-black text-gray-900">{invoice.invoiceNumber}</p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          Generated on {new Date(invoice.generatedAt || new Date()).toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short',
+                            year: 'numeric',
+                          })}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 w-full sm:w-auto">
+                        <div className="flex items-center gap-2 bg-green-100 text-green-800 px-3 py-2 rounded-lg text-sm font-semibold">
+                          <CheckCircle className="w-4 h-4" />
+                          Sent to Email
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-sm text-gray-600 mt-3 bg-white px-3 py-2 rounded border border-green-200">
+                      💌 Invoice has been sent to <strong>{booking.customerEmail}</strong>
+                    </p>
+                  </div>
+                ) : (
+                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <div className="flex-1">
+                        <p className="text-sm text-gray-600">Your invoice will be generated shortly</p>
+                      </div>
+                      <button
+                        onClick={handleGenerateInvoice}
+                        disabled={generatingInvoice}
+                        className="flex items-center gap-2 bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm cursor-pointer"
+                      >
+                        <Download className="w-4 h-4" />
+                        {generatingInvoice ? 'Generating...' : 'Generate Invoice'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Important Information */}

@@ -103,7 +103,7 @@ export const users = pgTable('users', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 200 }).notNull(),
   email: varchar('email', { length: 200 }).notNull().unique(),
-  phone: varchar('phone', { length: 20 }).notNull(),
+  phone: varchar('phone', { length: 20 }).notNull().unique(),
   password: varchar('password', { length: 200 }).notNull(),
   role: varchar('role', { length: 50 }).notNull().default('customer'),
   isActive: boolean('is_active').notNull().default(true),
@@ -114,6 +114,32 @@ export const users = pgTable('users', {
   phoneIdx: index('users_phone_idx').on(table.phone),
   roleIdx: index('users_role_idx').on(table.role),
   isActiveIdx: index('users_is_active_idx').on(table.isActive),
+}));
+
+// OTP Verification table
+export const otpVerifications = pgTable('otp_verifications', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 200 }).notNull(),
+  code: varchar('code', { length: 6 }).notNull(),
+  expiresAt: timestamp('expires_at').notNull(),
+  verified: boolean('verified').notNull().default(false),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+}, (table) => ({
+  emailIdx: index('otp_verifications_email_idx').on(table.email),
+  expiresAtIdx: index('otp_verifications_expires_at_idx').on(table.expiresAt),
+}));
+
+// Invoice table
+export const invoices = pgTable('invoices', {
+  id: serial('id').primaryKey(),
+  bookingId: integer('booking_id').notNull().references(() => bookings.id).unique(),
+  invoiceNumber: varchar('invoice_number', { length: 100 }).notNull().unique(),
+  pdfUrl: text('pdf_url'),
+  amount: integer('amount').notNull(),
+  generatedAt: timestamp('generated_at').notNull().defaultNow(),
+}, (table) => ({
+  bookingIdIdx: index('invoices_booking_id_idx').on(table.bookingId),
+  invoiceNumberIdx: index('invoices_invoice_number_idx').on(table.invoiceNumber),
 }));
 
 // Types
@@ -131,3 +157,9 @@ export type NewAdminUser = typeof adminUsers.$inferInsert;
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
+
+export type OtpVerification = typeof otpVerifications.$inferSelect;
+export type NewOtpVerification = typeof otpVerifications.$inferInsert;
+
+export type Invoice = typeof invoices.$inferSelect;
+export type NewInvoice = typeof invoices.$inferInsert;

@@ -15,7 +15,7 @@ export function Newsletter() {
               Stay updated with Triveni Tours
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-gray-600 font-medium px-4">
-              Subscribe to get exclusive deals and travel tips from Triveni Tours and Travels
+              Subscribe to get exclusive deals and travel tips from Triveni Tours & Travels
             </p>
           </div>
 

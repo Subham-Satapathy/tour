@@ -2,6 +2,7 @@
 
 import { Car, Truck, FileText, Bike, Home as HomeIcon, ArrowRight, ArrowUp, ArrowDown, Settings } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface City {
   id: number;
@@ -27,7 +28,7 @@ export function HeroSection({ cities }: HeroSectionProps) {
                 <div className="relative w-full h-full flex items-center justify-center">
                   <Image 
                     src="/heroCar.webp" 
-                    alt="Red SUV - Triveni Tours and Travels" 
+                    alt="Red SUV - Triveni Tours & Travels" 
                     width={900}
                     height={700}
                     className="object-contain w-full h-full drop-shadow-2xl"
@@ -62,12 +63,12 @@ export function HeroSection({ cities }: HeroSectionProps) {
               </p>
 
               <div className="flex flex-wrap gap-3 md:gap-4">
-                <button className="px-8 py-4 md:px-10 md:py-5 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-base md:text-lg lg:text-xl !text-white cursor-pointer">
+                <Link href="/vehicles" className="px-8 py-4 md:px-10 md:py-5 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-base md:text-lg lg:text-xl !text-white cursor-pointer">
                   Book Now <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                </button>
-                <button className="px-8 py-4 md:px-10 md:py-5 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-base md:text-lg lg:text-xl !text-black cursor-pointer">
+                </Link>
+                <Link href="/vehicles" className="px-8 py-4 md:px-10 md:py-5 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-base md:text-lg lg:text-xl !text-black cursor-pointer">
                   View Vehicles <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
-                </button>
+                </Link>
               </div>
             </div>
 
@@ -96,12 +97,12 @@ export function HeroSection({ cities }: HeroSectionProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white cursor-pointer">
+            <Link href="/vehicles" className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white cursor-pointer">
               Book Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-            </button>
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black cursor-pointer">
+            </Link>
+            <Link href="/vehicles" className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black cursor-pointer">
               View Vehicles <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
-            </button>
+            </Link>
           </div>
         </div>
 

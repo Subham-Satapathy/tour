@@ -59,7 +59,7 @@ export function HowItWorks() {
                   
                   <p className="text-gray-900 text-sm font-bold leading-relaxed transition-all duration-500"
                     style={{ transform: 'translate3d(0px, 0px, 30px)' }}>
-                    Select your preferred location effortlessly with Triveni Tours and Travels' user-friendly interface for seamless self-drive experiences
+                    Select your preferred location effortlessly with Triveni Tours & Travels' user-friendly interface for seamless self-drive experiences
                   </p>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export function HowItWorks() {
                   
                   <p className="text-gray-900 text-sm font-bold leading-relaxed transition-all duration-500"
                     style={{ transform: 'translate3d(0px, 0px, 30px)' }}>
-                    Choose your preferred pick-up date effortlessly and start your journey on time with Triveni Tours and Travels
+                    Choose your preferred pick-up date effortlessly and start your journey on time with Triveni Tours & Travels
                   </p>
                 </div>
               </div>

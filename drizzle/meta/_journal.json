@@ -22,6 +22,13 @@
       "when": 1765256257723,
       "tag": "0002_yummy_william_stryker",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1765272538695,
+      "tag": "0003_perfect_excalibur",
+      "breakpoints": true
     }
   ]
 }

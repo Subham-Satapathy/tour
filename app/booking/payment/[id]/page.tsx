@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { CreditCard, Lock, Calendar, MapPin, Car, Check, ArrowLeft } from 'lucide-react';
 
 export default function PaymentPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -128,36 +127,39 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
       <Navbar />
       <main className="min-h-screen bg-white py-8 sm:py-12 pt-24 sm:pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-          <div className="mb-8">
+          <div className="mb-8 sm:mb-12">
             <button
               onClick={() => setShowBackConfirm(true)}
-              className="flex items-center gap-2 text-gray-600 hover:text-black mb-4 transition-colors group"
+              className="text-base font-semibold text-gray-700 hover:text-black mb-6 transition-colors underline decoration-2 underline-offset-4 cursor-pointer"
             >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              <span className="font-medium">Back</span>
+              ← Back to Bookings
             </button>
-            <h1 className="text-3xl sm:text-4xl font-black text-gray-900">Complete Payment</h1>
-            <p className="text-gray-600 mt-2">Secure payment for your booking</p>
+            <div className="border-l-4 border-black pl-6">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-2">Complete Payment</h1>
+              <p className="text-lg sm:text-xl text-gray-600">Secure your booking with payment</p>
+            </div>
           </div>
 
           {/* Back Confirmation Modal */}
           {showBackConfirm && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <div className="bg-white rounded-xl p-6 max-w-md w-full">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Cancel Payment?</h3>
-                <p className="text-gray-600 mb-6">Are you sure you want to go back? Your booking will remain unpaid and may be cancelled.</p>
-                <div className="flex gap-3">
+            <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+              <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl">
+                <div className="mb-6">
+                  <h3 className="text-2xl font-black text-gray-900 mb-3">Cancel Payment?</h3>
+                  <p className="text-base text-gray-600 leading-relaxed">Your booking will remain unpaid and may be cancelled if payment is not completed.</p>
+                </div>
+                <div className="flex gap-4">
                   <button
                     onClick={() => setShowBackConfirm(false)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg font-medium hover:bg-gray-50 transition-colors cursor-pointer"
+                    className="flex-1 px-6 py-3 border-2 border-gray-900 rounded-xl font-bold text-gray-900 hover:bg-gray-50 transition-all cursor-pointer"
                   >
-                    Stay on Payment
+                    Stay Here
                   </button>
                   <button
                     onClick={() => router.push('/my-bookings')}
-                    className="flex-1 px-4 py-2 bg-black text-white rounded-lg font-medium hover:bg-gray-800 transition-colors cursor-pointer"
+                    className="flex-1 px-6 py-3 bg-black text-white rounded-xl font-bold hover:bg-gray-800 transition-all cursor-pointer"
                   >
-                    Go Back
+                    Leave Page
                   </button>
                 </div>
               </div>
@@ -174,65 +176,62 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                   </div>
                 )}
 
-                <div className="mb-6 p-4 bg-green-50 rounded-lg flex items-start gap-3">
-                  <Lock className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="font-bold text-green-900">Secure Payment</p>
-                    <p className="text-sm text-green-700">Your payment information is encrypted and secure</p>
-                  </div>
+                <div className="mb-8 p-6 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl">
+                  <p className="font-black text-lg text-green-900 mb-1">🔒 Secure Payment Gateway</p>
+                  <p className="text-sm text-green-800">Your payment information is encrypted with industry-standard security</p>
                 </div>
 
-                <form onSubmit={handlePayment} className="space-y-6">
+                <form onSubmit={handlePayment} className="space-y-8">
                   {/* Payment Method Selection */}
                   <div>
-                    <label className="block text-sm md:text-base font-bold text-gray-900 mb-3">
-                      Payment Method
+                    <label className="block text-xl font-black text-gray-900 mb-4">
+                      Choose Payment Method
                     </label>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-3 gap-4">
                       <button
                         type="button"
                         onClick={() => setPaymentMethod('card')}
-                        className={`p-4 border-2 rounded-lg font-bold transition-all cursor-pointer ${
+                        className={`p-6 border-2 rounded-2xl font-bold transition-all cursor-pointer ${
                           paymentMethod === 'card'
-                            ? 'border-black bg-white'
-                            : 'border-gray-200 hover:border-gray-300 bg-white'
+                            ? 'border-black bg-black text-white shadow-lg'
+                            : 'border-gray-300 hover:border-gray-400 bg-white text-gray-900'
                         }`}
                       >
-                        <CreditCard className="w-6 h-6 mx-auto mb-2" />
-                        <span className="text-sm">Card</span>
+                        <span className="text-3xl mb-2 block">💳</span>
+                        <span className="text-sm font-black">CARD</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setPaymentMethod('upi')}
-                        className={`p-4 border-2 rounded-lg font-bold transition-all cursor-pointer ${
+                        className={`p-6 border-2 rounded-2xl font-bold transition-all cursor-pointer ${
                           paymentMethod === 'upi'
-                            ? 'border-black bg-white'
-                            : 'border-gray-200 hover:border-gray-300 bg-white'
+                            ? 'border-black bg-black text-white shadow-lg'
+                            : 'border-gray-300 hover:border-gray-400 bg-white text-gray-900'
                         }`}
                       >
-                        <div className="text-2xl mb-2">📱</div>
-                        <span className="text-sm">UPI</span>
+                        <span className="text-3xl mb-2 block">📱</span>
+                        <span className="text-sm font-black">UPI</span>
                       </button>
                       <button
                         type="button"
                         onClick={() => setPaymentMethod('netbanking')}
-                        className={`p-4 border-2 rounded-lg font-bold transition-all cursor-pointer ${
+                        className={`p-6 border-2 rounded-2xl font-bold transition-all cursor-pointer ${
                           paymentMethod === 'netbanking'
-                            ? 'border-black bg-white'
-                            : 'border-gray-200 hover:border-gray-300 bg-white'
+                            ? 'border-black bg-black text-white shadow-lg'
+                            : 'border-gray-300 hover:border-gray-400 bg-white text-gray-900'
                         }`}
                       >
-                        <div className="text-2xl mb-2">🏦</div>
-                        <span className="text-sm">Banking</span>
+                        <span className="text-3xl mb-2 block">🏦</span>
+                        <span className="text-sm font-black">BANK</span>
                       </button>
                     </div>
                   </div>
 
                   {/* Card Payment Form */}
                   {paymentMethod === 'card' && (
-                    <div className="space-y-4">
+                    <div className="space-y-6 p-6 bg-gray-50 rounded-2xl">
                       <div>
-                        <label className="block text-sm font-bold text-gray-900 mb-2">
+                        <label className="block text-sm font-black text-gray-900 mb-3 uppercase tracking-wide">
                           Card Number
                         </label>
                         <div className="relative">
@@ -244,35 +243,30 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                               setCardDetails({ ...cardDetails, number: value });
                             }}
                             placeholder="1234 5678 9012 3456"
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                            className="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-lg font-semibold tracking-wider"
                             required
                           />
-                          {cardDetails.number.length >= 16 && (
-                            <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                              CVV
-                            </div>
-                          )}
                         </div>
                       </div>
 
                       <div>
-                        <label className="block text-sm font-bold text-gray-900 mb-2">
+                        <label className="block text-sm font-black text-gray-900 mb-3 uppercase tracking-wide">
                           Cardholder Name
                         </label>
                         <input
                           type="text"
                           value={cardDetails.name}
                           onChange={(e) => setCardDetails({ ...cardDetails, name: e.target.value })}
-                          placeholder="John Doe"
-                          className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                          placeholder="JOHN DOE"
+                          className="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-lg font-semibold uppercase"
                           required
                         />
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-bold text-gray-900 mb-2">
-                            Expiry Date
+                          <label className="block text-sm font-black text-gray-900 mb-3 uppercase tracking-wide">
+                            Expiry
                           </label>
                           <input
                             type="text"
@@ -286,12 +280,12 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                             }}
                             placeholder="MM/YY"
                             maxLength={5}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                            className="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-lg font-semibold"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-bold text-gray-900 mb-2">
+                          <label className="block text-sm font-black text-gray-900 mb-3 uppercase tracking-wide">
                             CVV
                           </label>
                           <input
@@ -303,7 +297,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                             }}
                             placeholder="123"
                             maxLength={3}
-                            className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
+                            className="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-lg font-semibold"
                             required
                           />
                         </div>
@@ -358,57 +352,48 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
 
             {/* Booking Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white border border-gray-200 rounded-xl p-6 sticky top-24">
-                <h3 className="text-xl md:text-2xl font-black text-gray-900 mb-6">Booking Summary</h3>
+              <div className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-300 rounded-2xl p-8 sticky top-24 shadow-lg">
+                <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-8 pb-4 border-b-4 border-black">Booking Summary</h3>
                 
                 {booking && (
-                  <div className="space-y-5">
-                    <div className="flex items-start gap-3">
-                      <Car className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1">
-                        <p className="text-sm md:text-base text-gray-600 mb-1">Vehicle</p>
-                        <p className="font-bold text-base md:text-lg text-gray-900">{booking.vehicle?.name}</p>
-                      </div>
+                  <div className="space-y-6">
+                    <div className="pb-4 border-b-2 border-gray-200">
+                      <p className="text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">Vehicle</p>
+                      <p className="font-black text-xl text-gray-900">{booking.vehicle?.name}</p>
                     </div>
 
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1">
-                        <p className="text-sm md:text-base text-gray-600 mb-1">Route</p>
-                        <p className="font-bold text-base md:text-lg text-gray-900">
-                          {booking.fromCity?.name} → {booking.toCity?.name}
-                        </p>
-                      </div>
+                    <div className="pb-4 border-b-2 border-gray-200">
+                      <p className="text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">Route</p>
+                      <p className="font-black text-lg text-gray-900">
+                        {booking.fromCity?.name} → {booking.toCity?.name}
+                      </p>
                     </div>
 
-                    <div className="flex items-start gap-3">
-                      <Calendar className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
-                      <div className="flex-1">
-                        <p className="text-sm md:text-base text-gray-600 mb-1">Duration</p>
-                        <p className="font-bold text-base md:text-lg text-gray-900">{booking.tripDurationHours} hours</p>
-                        <p className="text-sm md:text-base text-gray-500">
-                          {new Date(booking.startDateTime).toLocaleDateString('en-IN', { day: 'numeric', month: 'numeric', year: 'numeric' })} - {new Date(booking.endDateTime).toLocaleDateString('en-IN', { day: 'numeric', month: 'numeric', year: 'numeric' })}
-                        </p>
-                      </div>
+                    <div className="pb-4 border-b-2 border-gray-200">
+                      <p className="text-xs font-black text-gray-500 mb-2 uppercase tracking-widest">Duration</p>
+                      <p className="font-black text-lg text-gray-900">{booking.tripDurationHours} hours</p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {new Date(booking.startDateTime).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })} - {new Date(booking.endDateTime).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      </p>
                     </div>
 
-                    <div className="border-t border-gray-200 pt-4 mt-6 space-y-3">
-                      <div className="flex justify-between text-sm md:text-base">
-                        <span className="text-gray-700">Base Fare</span>
-                        <span className="font-bold text-gray-900">₹{booking.totalAmount?.toLocaleString()}</span>
+                    <div className="pt-2 space-y-4">
+                      <div className="flex justify-between text-base">
+                        <span className="text-gray-700 font-semibold">Base Fare</span>
+                        <span className="font-black text-gray-900">₹{booking.totalAmount?.toLocaleString()}</span>
                       </div>
                       {booking.securityDeposit > 0 && (
                         <>
-                          <div className="flex justify-between text-sm md:text-base">
-                            <span className="text-gray-700">Security Deposit</span>
-                            <span className="font-bold text-gray-900">₹{booking.securityDeposit?.toLocaleString()}</span>
+                          <div className="flex justify-between text-base">
+                            <span className="text-gray-700 font-semibold">Security Deposit</span>
+                            <span className="font-black text-gray-900">₹{booking.securityDeposit?.toLocaleString()}</span>
                           </div>
-                          <p className="text-sm text-blue-600 font-medium">* Refundable at trip completion</p>
+                          <p className="text-sm text-blue-600 font-bold bg-blue-50 px-3 py-2 rounded-lg">* Fully refundable after trip</p>
                         </>
                       )}
-                      <div className="flex justify-between border-t border-gray-200 pt-3 mt-3">
-                        <span className="font-bold text-base md:text-lg text-gray-900">Total Amount</span>
-                        <span className="font-black text-xl md:text-2xl text-gray-900">₹{((booking.totalAmount || 0) + (booking.securityDeposit || 0)).toLocaleString()}</span>
+                      <div className="flex justify-between border-t-4 border-black pt-6 mt-4">
+                        <span className="font-black text-xl text-gray-900">TOTAL</span>
+                        <span className="font-black text-3xl text-gray-900">₹{((booking.totalAmount || 0) + (booking.securityDeposit || 0)).toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
