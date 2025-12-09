@@ -35,10 +35,9 @@ export function Navbar() {
     <nav className={`fixed top-0 left-0 right-0 z-[9999] bg-white/95 backdrop-blur-md transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-20">
-          {/* Logo - Triveni Tours */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="text-2xl">🚗</span>
-            <span className="text-2xl font-black">Triveni Tours</span>
+            <img src="/logo.png" alt="Triveni Tours Logo" className="h-12 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

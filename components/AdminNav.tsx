@@ -13,8 +13,8 @@ export function AdminNav() {
     <nav className="bg-gray-800 text-white shadow-md">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
-          <Link href="/admin" className="text-2xl font-bold">
-            Admin Panel
+          <Link href="/admin" className="flex items-center gap-2">
+            <img src="/logo.png" alt="Triveni Tours Logo" className="h-10 w-auto" />
           </Link>
           <div className="flex gap-6 items-center">
             <Link
