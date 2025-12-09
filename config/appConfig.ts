@@ -4,6 +4,8 @@
 export const appConfig = {
   // Pricing strategy: 'per-hour' | 'per-day' | 'min-of-both'
   pricingStrategy: 'min-of-both' as const,
+  // Base URL for links in emails and app
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000',
   
   // Email settings
   email: {

@@ -18,12 +18,21 @@ export interface BookingEmailData {
   customerName: string;
   customerEmail: string;
   vehicleName: string;
+  vehicleBrand?: string;
+  vehicleModel?: string;
+  seatingCapacity?: number;
+  fuelType?: string;
+  transmissionType?: string;
   fromCity: string;
   toCity: string;
   startDateTime: Date;
   endDateTime: Date;
   totalAmount: number;
+  securityDeposit?: number;
   tripDurationHours: number;
+  pricePerHour?: number;
+  pricePerDay?: number;
+  invoiceNumber?: string;
 }
 
 /**
@@ -39,105 +48,295 @@ export function generateBookingConfirmationEmail(data: BookingEmailData): string
     timeStyle: 'short',
   });
 
+  const vehicleDetails = `${data.vehicleName}${data.vehicleBrand ? ` (${data.vehicleBrand}${data.vehicleModel ? ` ${data.vehicleModel}` : ''})` : ''}`;
+  const grandTotal = data.totalAmount + (data.securityDeposit || 0);
+
   return `
 <!DOCTYPE html>
 <html>
 <head>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
       color: #333;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
     }
     .container {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
+      max-width: 650px;
+      margin: 20px auto;
+      background-color: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .header {
-      background-color: #2563eb;
+      background: linear-gradient(135deg, #000000 0%, #333333 100%);
       color: white;
-      padding: 20px;
+      padding: 40px 30px;
       text-align: center;
     }
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 32px;
+      font-weight: 700;
+    }
+    .header p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.9;
+    }
     .content {
-      background-color: #f9fafb;
-      padding: 20px;
-      border: 1px solid #e5e7eb;
+      padding: 30px;
+    }
+    .success-badge {
+      background-color: #10b981;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    .booking-id {
+      background-color: #f3f4f6;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1f2937;
+      margin: 25px 0 15px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
     }
     .booking-details {
-      background-color: white;
-      padding: 15px;
+      background-color: #f9fafb;
+      padding: 20px;
       margin: 15px 0;
-      border-radius: 5px;
+      border-radius: 8px;
+      border-left: 4px solid #000000;
     }
     .detail-row {
       display: flex;
       justify-content: space-between;
-      padding: 8px 0;
+      padding: 10px 0;
       border-bottom: 1px solid #e5e7eb;
     }
-    .detail-label {
-      font-weight: bold;
+    .detail-row:last-child {
+      border-bottom: none;
     }
-    .total {
-      font-size: 1.2em;
-      color: #2563eb;
-      font-weight: bold;
+    .detail-label {
+      font-weight: 600;
+      color: #6b7280;
+      font-size: 14px;
+    }
+    .detail-value {
+      color: #1f2937;
+      font-weight: 500;
+      text-align: right;
+      font-size: 14px;
+    }
+    .pricing-section {
+      background-color: #f9fafb;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 15px;
+    }
+    .price-row.total {
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 2px solid #d1d5db;
+      font-size: 20px;
+      font-weight: 700;
+      color: #000000;
+    }
+    .security-note {
+      background-color: #fef3c7;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #92400e;
+    }
+    .invoice-note {
+      background-color: #dbeafe;
+      border-left: 4px solid #3b82f6;
+      padding: 12px 16px;
+      margin: 15px 0;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #1e40af;
+    }
+    .cta-button {
+      display: inline-block;
+      background-color: #000000;
+      color: white;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      margin: 20px 0;
+      text-align: center;
     }
     .footer {
+      background-color: #f9fafb;
       text-align: center;
       color: #6b7280;
-      padding: 20px;
-      font-size: 0.9em;
+      padding: 30px;
+      font-size: 13px;
+      border-top: 1px solid #e5e7eb;
+    }
+    .footer p {
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>Booking Confirmed!</h1>
+      <h1>🎉 Booking Confirmed!</h1>
+      <p>Your journey awaits with Triveni Tours & Travels</p>
     </div>
+    
     <div class="content">
-      <p>Dear ${data.customerName},</p>
-      <p>Your booking has been confirmed. Here are the details:</p>
+      <div class="success-badge">✓ Payment Successful</div>
       
+      <p style="font-size: 16px; color: #1f2937; margin-bottom: 10px;">Dear <strong>${data.customerName}</strong>,</p>
+      <p style="font-size: 15px; color: #4b5563; line-height: 1.6;">
+        Great news! Your booking has been confirmed and payment received successfully. 
+        We're excited to serve you on your upcoming trip.
+      </p>
+      
+      <div class="booking-id">
+        Booking ID: <span style="color: #000000;">#${data.bookingId}</span>
+        ${data.invoiceNumber ? `<br><span style="font-size: 14px; color: #6b7280;">Invoice: ${data.invoiceNumber}</span>` : ''}
+      </div>
+
+      <h2 class="section-title">🚗 Vehicle Details</h2>
       <div class="booking-details">
         <div class="detail-row">
-          <span class="detail-label">Booking ID:</span>
-          <span>#${data.bookingId}</span>
+          <span class="detail-label">Vehicle</span>
+          <span class="detail-value">${vehicleDetails}</span>
+        </div>
+        ${data.seatingCapacity ? `
+        <div class="detail-row">
+          <span class="detail-label">Seating Capacity</span>
+          <span class="detail-value">${data.seatingCapacity} seats</span>
+        </div>` : ''}
+        ${data.fuelType ? `
+        <div class="detail-row">
+          <span class="detail-label">Fuel Type</span>
+          <span class="detail-value">${data.fuelType}</span>
+        </div>` : ''}
+        ${data.transmissionType ? `
+        <div class="detail-row">
+          <span class="detail-label">Transmission</span>
+          <span class="detail-value">${data.transmissionType}</span>
+        </div>` : ''}
+      </div>
+
+      <h2 class="section-title">📍 Trip Details</h2>
+      <div class="booking-details">
+        <div class="detail-row">
+          <span class="detail-label">Route</span>
+          <span class="detail-value">${data.fromCity} → ${data.toCity}</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">Vehicle:</span>
-          <span>${data.vehicleName}</span>
+          <span class="detail-label">Pickup Date & Time</span>
+          <span class="detail-value">${startDate}</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">Route:</span>
-          <span>${data.fromCity} → ${data.toCity}</span>
+          <span class="detail-label">Return Date & Time</span>
+          <span class="detail-value">${endDate}</span>
         </div>
         <div class="detail-row">
-          <span class="detail-label">Start:</span>
-          <span>${startDate}</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">End:</span>
-          <span>${endDate}</span>
-        </div>
-        <div class="detail-row">
-          <span class="detail-label">Duration:</span>
-          <span>${data.tripDurationHours} hours</span>
-        </div>
-        <div class="detail-row" style="border-bottom: none; margin-top: 10px;">
-          <span class="detail-label">Total Amount:</span>
-          <span class="total">₹${data.totalAmount}</span>
+          <span class="detail-label">Duration</span>
+          <span class="detail-value">${data.tripDurationHours} hours (${Math.ceil(data.tripDurationHours / 24)} days)</span>
         </div>
       </div>
+
+      <h2 class="section-title">💰 Payment Summary</h2>
+      <div class="pricing-section">
+        <div class="price-row">
+          <span>Base Rental Amount</span>
+          <span>₹${data.totalAmount.toLocaleString()}</span>
+        </div>
+        ${data.securityDeposit ? `
+        <div class="price-row">
+          <span>Security Deposit (Refundable)</span>
+          <span>₹${data.securityDeposit.toLocaleString()}</span>
+        </div>
+        <div class="price-row total">
+          <span>Total Paid</span>
+          <span>₹${grandTotal.toLocaleString()}</span>
+        </div>` : `
+        <div class="price-row total">
+          <span>Total Paid</span>
+          <span>₹${data.totalAmount.toLocaleString()}</span>
+        </div>`}
+      </div>
+
+      ${data.securityDeposit ? `
+      <div class="security-note">
+        <strong>💡 Security Deposit:</strong> Your security deposit of ₹${data.securityDeposit.toLocaleString()} 
+        will be refunded within 7 business days after the vehicle is returned in good condition.
+      </div>` : ''}
+
+      ${data.invoiceNumber ? `
+      <div class="invoice-note">
+        <strong>📄 Invoice Attached:</strong> Your tax invoice (${data.invoiceNumber}) is attached to this email for your records.
+      </div>` : ''}
+
+      <div style="text-align: center;">
+        <a href="${appConfig.baseUrl || 'http://localhost:3000'}/my-bookings" class="cta-button">
+          View Booking Details
+        </a>
+      </div>
+
+      <h2 class="section-title">📋 Important Notes</h2>
+      <ul style="color: #4b5563; font-size: 14px; line-height: 1.8;">
+        <li>Please carry a valid driving license during the entire rental period</li>
+        <li>Arrive 15 minutes early for vehicle pickup</li>
+        <li>Fuel charges are not included in the rental amount</li>
+        <li>The vehicle must be returned in the same condition</li>
+        <li>Late return charges: ₹500 per hour beyond agreed time</li>
+      </ul>
+
+      <p style="font-size: 15px; color: #1f2937; margin-top: 25px;">
+        Thank you for choosing <strong>Triveni Tours & Travels</strong>. 
+        We wish you a safe and wonderful journey! 🚗✨
+      </p>
       
-      <p>Thank you for choosing our service. We hope you have a great trip!</p>
+      <p style="font-size: 14px; color: #6b7280; margin-top: 15px;">
+        Need help? Contact us at <a href="mailto:support@trivenitravels.com" style="color: #3b82f6;">support@trivenitravels.com</a> 
+        or call <a href="tel:+919337478478" style="color: #3b82f6;">+91 9337478478</a>
+      </p>
     </div>
+    
     <div class="footer">
-      <p>This is an automated email. Please do not reply.</p>
-      <p>&copy; ${new Date().getFullYear()} Tour Booking. All rights reserved.</p>
+      <p style="font-weight: 600; color: #1f2937;">Triveni Tours & Travels</p>
+      <p>Self Drive Cars, Bikes & Family Trips</p>
+      <p style="margin-top: 15px;">&copy; ${new Date().getFullYear()} Triveni Tours & Travels. All rights reserved.</p>
+      <p style="font-size: 12px; color: #9ca3af; margin-top: 10px;">
+        This is an automated email. Please do not reply to this message.
+      </p>
     </div>
   </div>
 </body>
@@ -146,35 +345,86 @@ export function generateBookingConfirmationEmail(data: BookingEmailData): string
 }
 
 /**
- * Send booking confirmation email
+ * Send booking confirmation email with optional PDF invoice attachment
  */
 export async function sendBookingConfirmationEmail(
-  data: BookingEmailData
+  data: BookingEmailData,
+  pdfBuffer?: Buffer
 ): Promise<void> {
   const transporter = createTransporter();
+
+  const grandTotal = data.totalAmount + (data.securityDeposit || 0);
+  
+  const attachments: any[] = [];
+  
+  // Add invoice PDF if provided
+  if (pdfBuffer && data.invoiceNumber) {
+    attachments.push({
+      filename: `${data.invoiceNumber}.pdf`,
+      content: pdfBuffer,
+      contentType: 'application/pdf',
+    });
+  }
 
   const mailOptions = {
     from: `"${appConfig.email.fromName}" <${appConfig.email.fromAddress}>`,
     to: data.customerEmail,
-    subject: `Booking Confirmation - ID #${data.bookingId}`,
+    subject: `🎉 Booking Confirmed - #${data.bookingId} | Triveni Tours & Travels`,
     html: generateBookingConfirmationEmail(data),
     text: `
 Dear ${data.customerName},
 
-Your booking has been confirmed!
+🎉 BOOKING CONFIRMED!
 
+Your booking has been confirmed and payment received successfully.
+
+BOOKING DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Booking ID: #${data.bookingId}
-Vehicle: ${data.vehicleName}
+${data.invoiceNumber ? `Invoice: ${data.invoiceNumber}` : ''}
+
+VEHICLE DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Vehicle: ${data.vehicleName}${data.vehicleBrand ? ` (${data.vehicleBrand}${data.vehicleModel ? ` ${data.vehicleModel}` : ''})` : ''}
+${data.seatingCapacity ? `Seating: ${data.seatingCapacity} seats` : ''}
+${data.fuelType ? `Fuel Type: ${data.fuelType}` : ''}
+${data.transmissionType ? `Transmission: ${data.transmissionType}` : ''}
+
+TRIP DETAILS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Route: ${data.fromCity} → ${data.toCity}
-Start: ${data.startDateTime.toLocaleString()}
-End: ${data.endDateTime.toLocaleString()}
-Duration: ${data.tripDurationHours} hours
-Total Amount: ₹${data.totalAmount}
+Pickup: ${data.startDateTime.toLocaleString()}
+Return: ${data.endDateTime.toLocaleString()}
+Duration: ${data.tripDurationHours} hours (${Math.ceil(data.tripDurationHours / 24)} days)
 
-Thank you for choosing our service!
+PAYMENT SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Base Rental: ₹${data.totalAmount.toLocaleString()}
+${data.securityDeposit ? `Security Deposit: ₹${data.securityDeposit.toLocaleString()} (Refundable)` : ''}
+Total Paid: ₹${grandTotal.toLocaleString()}
 
-Tour Booking
+${data.securityDeposit ? `\n💡 Security deposit will be refunded within 7 business days after vehicle return.\n` : ''}
+IMPORTANT NOTES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Carry a valid driving license during rental period
+• Arrive 15 minutes early for vehicle pickup
+• Fuel charges are not included
+• Vehicle must be returned in same condition
+• Late return charges: ₹500/hour
+
+Thank you for choosing Triveni Tours & Travels!
+Safe travels! 🚗✨
+
+Need help?
+Email: support@trivenitravels.com
+Phone: +91 9337478478
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Triveni Tours & Travels
+Self Drive Cars, Bikes & Family Trips
+© ${new Date().getFullYear()} All rights reserved.
     `.trim(),
+    attachments,
   };
 
   await transporter.sendMail(mailOptions);

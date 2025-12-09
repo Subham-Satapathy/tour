@@ -38,7 +38,7 @@ export default async function BookingPage({ params, searchParams }: BookingPageP
             </p>
             <Link
               href="/vehicles"
-              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all"
+              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
             >
               Browse Vehicles
             </Link>
@@ -69,7 +69,7 @@ export default async function BookingPage({ params, searchParams }: BookingPageP
             </p>
             <Link
               href="/vehicles"
-              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all"
+              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
             >
               Browse Other Vehicles
             </Link>

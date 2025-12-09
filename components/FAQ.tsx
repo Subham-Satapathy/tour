@@ -77,7 +77,7 @@ export function FAQ() {
           <p className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
             Still have questions?
           </p>
-          <button className="px-8 py-3 sm:px-10 sm:py-4 lg:py-5 bg-black text-white rounded-full font-bold text-sm sm:text-base lg:text-lg hover:scale-105 hover:shadow-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform cursor-pointer">
+          <button className="px-8 py-3 sm:px-10 sm:py-4 lg:py-5 bg-black text-white rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-gray-800 active:scale-95 shadow-xl transition-all duration-200 cursor-pointer">
             Contact Support
           </button>
         </div>

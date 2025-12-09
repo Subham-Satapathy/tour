@@ -499,7 +499,7 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 bg-black text-white py-3 rounded-md font-semibold hover:scale-105 hover:shadow-xl disabled:bg-gray-400 disabled:cursor-not-allowed transition cursor-pointer"
+          className="flex-1 bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-800 active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:bg-gray-400 transition-all duration-200 cursor-pointer"
         >
           {isLoading ? 'Saving...' : mode === 'create' ? 'Create Vehicle' : 'Update Vehicle'}
         </button>

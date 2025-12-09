@@ -121,7 +121,7 @@ export function VehicleCard({
         
         <Link
           href={bookingUrl}
-          className="block w-full bg-black text-white text-center py-3 rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all duration-300"
+          className="block w-full bg-black text-white text-center py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
         >
           Book Now
         </Link>

@@ -27,7 +27,7 @@ export async function PopularCars() {
               Explore our premium fleet of cars and bikes for your perfect journey
             </p>
           </div>
-          <Link href="/vehicles" className="mt-6 md:mt-0 px-8 py-4 bg-black rounded-full font-semibold text-white hover:scale-105 hover:shadow-xl transition-all shadow-lg flex items-center gap-2 cursor-pointer">
+          <Link href="/vehicles" className="mt-6 md:mt-0 px-8 py-4 bg-black rounded-full font-semibold text-white hover:bg-gray-800 active:scale-95 transition-all duration-200 shadow-lg flex items-center gap-2 cursor-pointer">
             Open Fleet
             <ArrowRight className="w-5 h-5" />
           </Link>

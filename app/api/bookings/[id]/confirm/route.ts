@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { db } from '@/server/db';
-import { bookings } from '@/server/db/schema';
+import { bookings, vehicles, cities } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
-import { generateInvoice } from '@/server/invoice/generateInvoice';
-import { sendInvoiceEmail } from '@/server/email/sendInvoice';
+import { generateInvoice, generateInvoicePDFBuffer } from '@/server/invoice/generateInvoice';
+import { sendBookingConfirmationEmail } from '@/server/email/sendBookingConfirmation';
 
 export const dynamic = 'force-dynamic';
 
@@ -51,33 +51,70 @@ export async function POST(
       );
     }
 
-    // Generate invoice after successful payment
-    try {
-      const invoiceNumber = await generateInvoice(bookingId);
-      
-      if (invoiceNumber) {
-        // Send invoice email to customer
-        await sendInvoiceEmail({
-          email: updatedBooking.customerEmail,
-          customerName: updatedBooking.customerName,
-          bookingId: bookingId,
-          invoiceNumber: invoiceNumber,
-          totalAmount: updatedBooking.totalAmount,
-        });
-        
-        console.log(`Invoice ${invoiceNumber} generated and sent for booking #${bookingId}`);
-      } else {
-        console.error(`Failed to generate invoice for booking #${bookingId}`);
-      }
-    } catch (invoiceError) {
-      // Log error but don't fail the booking confirmation
-      console.error('Error generating/sending invoice:', invoiceError);
-    }
+    // Fetch vehicle and city details for email
+    const [vehicle] = await db
+      .select()
+      .from(vehicles)
+      .where(eq(vehicles.id, updatedBooking.vehicleId))
+      .limit(1);
 
-    return NextResponse.json({
+    const [fromCity] = await db
+      .select()
+      .from(cities)
+      .where(eq(cities.id, updatedBooking.fromCityId))
+      .limit(1);
+
+    const [toCity] = await db
+      .select()
+      .from(cities)
+      .where(eq(cities.id, updatedBooking.toCityId))
+      .limit(1);
+
+    // Return success immediately to user, then send email asynchronously
+    const response = NextResponse.json({
       success: true,
       booking: updatedBooking,
     });
+
+    // Send email asynchronously (fire-and-forget) - don't await
+    // This prevents blocking the response to the user
+    Promise.resolve().then(async () => {
+      try {
+        const invoiceNumber = await generateInvoice(bookingId);
+        const invoicePDF = await generateInvoicePDFBuffer(bookingId);
+        
+        await sendBookingConfirmationEmail(
+          {
+            bookingId: bookingId,
+            customerName: updatedBooking.customerName,
+            customerEmail: updatedBooking.customerEmail,
+            vehicleName: vehicle.name,
+            vehicleBrand: vehicle.brand || undefined,
+            vehicleModel: vehicle.model || undefined,
+            seatingCapacity: vehicle.seatingCapacity || undefined,
+            fuelType: vehicle.fuelType || undefined,
+            transmissionType: vehicle.transmissionType || undefined,
+            fromCity: fromCity.name,
+            toCity: toCity.name,
+            startDateTime: new Date(updatedBooking.startDateTime),
+            endDateTime: new Date(updatedBooking.endDateTime),
+            totalAmount: updatedBooking.totalAmount,
+            securityDeposit: updatedBooking.securityDeposit || undefined,
+            tripDurationHours: updatedBooking.tripDurationHours,
+            pricePerHour: updatedBooking.pricePerHour || undefined,
+            pricePerDay: updatedBooking.pricePerDay || undefined,
+            invoiceNumber: invoiceNumber || undefined,
+          },
+          invoicePDF || undefined
+        );
+        
+        console.log(`Booking confirmation email sent with invoice for booking #${bookingId}`);
+      } catch (emailError) {
+        console.error('Error sending booking confirmation email:', emailError);
+      }
+    });
+
+    return response;
   } catch (error) {
     console.error('Booking confirmation error:', error);
     return NextResponse.json(

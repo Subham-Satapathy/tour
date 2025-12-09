@@ -32,7 +32,7 @@ export default async function AdminVehiclesPage() {
             <h1 className="text-3xl font-bold text-gray-900">Manage Vehicles</h1>
             <Link
               href="/admin/vehicles/new"
-              className="bg-black text-white px-6 py-3 rounded-md font-semibold hover:scale-105 hover:shadow-xl transition cursor-pointer"
+              className="bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               + Add New Vehicle
             </Link>
@@ -43,7 +43,7 @@ export default async function AdminVehiclesPage() {
               <p className="text-gray-500 mb-4">No vehicles found</p>
               <Link
                 href="/admin/vehicles/new"
-                className="inline-block bg-black text-white px-6 py-3 rounded-md font-semibold hover:scale-105 hover:shadow-xl transition cursor-pointer"
+                className="inline-block bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer"
               >
                 Add Your First Vehicle
               </Link>

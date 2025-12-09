@@ -111,7 +111,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
         <button
           onClick={handleNext}
           disabled={currentIndex >= maxIndex}
-          className="w-14 h-14 rounded-full bg-black text-white border-2 border-black flex items-center justify-center hover:scale-105 hover:shadow-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-black shadow-md relative z-20 cursor-pointer"
+          className="w-14 h-14 rounded-full bg-black text-white border-2 border-black flex items-center justify-center hover:bg-gray-800 active:scale-95 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-black shadow-md relative z-20 cursor-pointer"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -255,7 +255,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                     <span
                       className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-all shadow-md whitespace-nowrap inline-block ${
                         vehicle.isActive
-                          ? 'bg-black text-white group-hover:scale-105 group-hover:shadow-xl'
+                          ? 'bg-black text-white'
                           : 'bg-gray-200 text-gray-400 cursor-not-allowed border-2 border-gray-300'
                       }`}
                     >

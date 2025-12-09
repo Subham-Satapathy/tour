@@ -112,7 +112,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
             <p className="text-gray-600 mb-6">{error}</p>
             <button
               onClick={() => router.push('/vehicles')}
-              className="bg-black text-white px-8 py-3 rounded-lg font-bold hover:scale-105 hover:shadow-xl"
+              className="bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
             >
               Back to Vehicles
             </button>
@@ -130,7 +130,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
           <div className="mb-8 sm:mb-12">
             <button
               onClick={() => setShowBackConfirm(true)}
-              className="text-base font-semibold text-gray-700 hover:text-black mb-6 transition-colors underline decoration-2 underline-offset-4 cursor-pointer"
+              className="text-base font-semibold text-gray-700 hover:text-black mb-6 transition-colors cursor-pointer"
             >
               ← Back to Bookings
             </button>
@@ -157,7 +157,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                   </button>
                   <button
                     onClick={() => router.push('/my-bookings')}
-                    className="flex-1 px-6 py-3 bg-black text-white rounded-xl font-bold hover:scale-105 hover:shadow-xl transition-all cursor-pointer"
+                    className="flex-1 px-6 py-3 bg-black text-white rounded-xl font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer"
                   >
                     Leave Page
                   </button>
@@ -339,7 +339,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                   <button
                     type="submit"
                     disabled={processing}
-                    className="w-full bg-black text-white py-4 rounded-lg font-bold hover:scale-105 hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-black text-white py-4 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black"
                   >
                     {processing ? 'Processing Payment...' : `Pay ₹${((booking?.totalAmount || 0) + (booking?.securityDeposit || 0)).toLocaleString()}`}
                   </button>

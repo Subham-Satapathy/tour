@@ -102,7 +102,7 @@ export function FeaturesSection() {
               <p className="text-gray-600 mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm lg:text-base">
                 Best prices in Odisha with full refund in case of cancellation
               </p>
-              <button className="px-6 py-2.5 sm:px-7 sm:py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all flex items-center gap-2 shadow-lg text-xs sm:text-sm lg:text-base cursor-pointer">
+              <button className="px-6 py-2.5 sm:px-7 sm:py-3 bg-black text-white rounded-full font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 flex items-center gap-2 shadow-lg text-xs sm:text-sm lg:text-base cursor-pointer">
                 Book Now <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
               </button>
             </div>

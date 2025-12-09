@@ -136,7 +136,7 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
           {/* Filter Button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:scale-105 hover:shadow-xl transition-all flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
+            className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
           >
             <Filter className="w-5 h-5" />
             Filters {hasActiveFilters && `(${Object.values(filters).filter(v => v && v !== 'ALL').length})`}
@@ -320,7 +320,7 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:scale-105 hover:shadow-xl transition-all cursor-pointer"
+              className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               Clear All Filters
             </button>
