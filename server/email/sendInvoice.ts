@@ -22,7 +22,7 @@ export async function sendInvoiceEmail({
     const transporter = createTransporter();
     
     const mailOptions: any = {
-      from: `${appConfig.smtp.fromName} <${appConfig.smtp.from}>`,
+      from: `${appConfig.email.fromName} <${appConfig.email.fromAddress}>`,
       to: email,
       subject: `Invoice ${invoiceNumber} - Tour Booking Confirmation`,
       html: `
@@ -41,8 +41,8 @@ export async function sendInvoiceEmail({
                     <!-- Header -->
                     <tr>
                       <td style="padding: 40px 40px 20px; text-align: center; background: linear-gradient(135deg, #000000 0%, #333333 100%); border-radius: 8px 8px 0 0;">
-                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Tour Booking</h1>
-                        <p style="margin: 10px 0 0; color: #cccccc; font-size: 14px;">Professional Vehicle Rental Services</p>
+                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Triveni Tours & Travels</h1>
+                        <p style="margin: 10px 0 0; color: #cccccc; font-size: 14px;">Self Drive Cars, Bikes & Family Trips</p>
                       </td>
                     </tr>
                     
@@ -51,7 +51,7 @@ export async function sendInvoiceEmail({
                       <td style="padding: 40px;">
                         <h2 style="margin: 0 0 20px; font-size: 24px; color: #000000;">Invoice Generated</h2>
                         <p style="margin: 0 0 20px; font-size: 16px; color: #333333;">Dear ${customerName},</p>
-                        <p style="margin: 0 0 20px; font-size: 16px; color: #333333;">Thank you for your booking! Your payment has been successfully processed.</p>
+                        <p style="margin: 0 0 20px; font-size: 16px; color: #333333;">Thank you for choosing Triveni Tours & Travels! Your payment has been successfully processed and your booking is confirmed.</p>
                         
                         <!-- Invoice Details Box -->
                         <table role="presentation" style="width: 100%; margin: 30px 0; background-color: #f8f9fa; border-radius: 8px; border: 2px solid #e9ecef;">
@@ -112,7 +112,7 @@ export async function sendInvoiceEmail({
                         <div style="background-color: #e7f3ff; border-left: 4px solid #0066cc; padding: 15px; margin-top: 30px; border-radius: 4px;">
                           <p style="margin: 0; font-size: 13px; color: #004a99;">
                             <strong>📞 Need Help?</strong><br>
-                            Contact our support team at support@tourbooking.com or call +91 1800-XXX-XXXX
+                            Contact us at support@trivenitravels.com or call +91 9337478478
                           </p>
                         </div>
                       </td>
@@ -121,8 +121,9 @@ export async function sendInvoiceEmail({
                     <!-- Footer -->
                     <tr>
                       <td style="padding: 30px 40px; background-color: #f8f9fa; border-radius: 0 0 8px 8px; border-top: 1px solid #e9ecef;">
-                        <p style="margin: 0 0 10px; font-size: 13px; color: #666666; text-align: center;">This is an automated message, please do not reply.</p>
-                        <p style="margin: 0; font-size: 13px; color: #666666; text-align: center;">© ${new Date().getFullYear()} Tour Booking. All rights reserved.</p>
+                        <p style="margin: 0 0 10px; font-size: 13px; color: #666666; text-align: center;">Triveni Tours & Travels | support@trivenitravels.com | +91 9337478478</p>
+                        <p style="margin: 0 0 5px; font-size: 13px; color: #666666; text-align: center;">This is an automated message, please do not reply.</p>
+                        <p style="margin: 0; font-size: 13px; color: #666666; text-align: center;">© ${new Date().getFullYear()} Triveni Tours & Travels. All rights reserved.</p>
                       </td>
                     </tr>
                   </table>

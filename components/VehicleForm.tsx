@@ -499,7 +499,7 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
         <button
           type="submit"
           disabled={isLoading}
-          className="flex-1 bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+          className="flex-1 bg-black text-white py-3 rounded-md font-semibold hover:bg-gray-800 disabled:bg-gray-400 disabled:cursor-not-allowed transition cursor-pointer"
         >
           {isLoading ? 'Saving...' : mode === 'create' ? 'Create Vehicle' : 'Update Vehicle'}
         </button>
@@ -509,7 +509,7 @@ export function VehicleForm({ cities, initialData, mode }: VehicleFormProps) {
             type="button"
             onClick={handleDelete}
             disabled={isLoading}
-            className="bg-red-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-red-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition"
+            className="bg-white border-2 border-black text-black px-6 py-3 rounded-md font-semibold hover:bg-gray-100 disabled:bg-gray-400 disabled:cursor-not-allowed transition cursor-pointer"
           >
             Delete
           </button>

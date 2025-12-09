@@ -6,7 +6,7 @@ export async function sendOTP(email: string, code: string, name?: string) {
     const transporter = createTransporter();
     
     const mailOptions = {
-      from: `${appConfig.smtp.fromName} <${appConfig.smtp.from}>`,
+      from: `${appConfig.email.fromName} <${appConfig.email.fromAddress}>`,
       to: email,
       subject: 'Your OTP for Tour Booking Signup',
       html: `
@@ -25,7 +25,8 @@ export async function sendOTP(email: string, code: string, name?: string) {
                     <!-- Header -->
                     <tr>
                       <td style="padding: 40px 40px 20px; text-align: center; background: linear-gradient(135deg, #000000 0%, #333333 100%); border-radius: 8px 8px 0 0;">
-                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Tour Booking</h1>
+                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Triveni Tours & Travels</h1>
+                        <p style="margin: 8px 0 0; color: #cccccc; font-size: 14px;">Self Drive Cars, Bikes & Family Trips</p>
                       </td>
                     </tr>
                     
@@ -33,7 +34,7 @@ export async function sendOTP(email: string, code: string, name?: string) {
                     <tr>
                       <td style="padding: 40px;">
                         ${name ? `<p style="margin: 0 0 20px; font-size: 16px; color: #333333;">Hi ${name},</p>` : ''}
-                        <p style="margin: 0 0 20px; font-size: 16px; color: #333333;">Thank you for signing up with Tour Booking! To complete your registration, please verify your email address using the OTP below:</p>
+                        <p style="margin: 0 0 20px; font-size: 16px; color: #333333;">Thank you for choosing Triveni Tours & Travels! To complete your registration, please verify your email address using the OTP below:</p>
                         
                         <!-- OTP Box -->
                         <table role="presentation" style="width: 100%; margin: 30px 0;">
@@ -62,8 +63,9 @@ export async function sendOTP(email: string, code: string, name?: string) {
                     <!-- Footer -->
                     <tr>
                       <td style="padding: 30px 40px; background-color: #f8f9fa; border-radius: 0 0 8px 8px; border-top: 1px solid #e9ecef;">
-                        <p style="margin: 0 0 10px; font-size: 13px; color: #666666; text-align: center;">This is an automated message, please do not reply.</p>
-                        <p style="margin: 0; font-size: 13px; color: #666666; text-align: center;">© ${new Date().getFullYear()} Tour Booking. All rights reserved.</p>
+                        <p style="margin: 0 0 10px; font-size: 13px; color: #666666; text-align: center;">For support: support@trivenitravels.com | +91 9337478478</p>
+                        <p style="margin: 0 0 5px; font-size: 13px; color: #666666; text-align: center;">This is an automated message, please do not reply.</p>
+                        <p style="margin: 0; font-size: 13px; color: #666666; text-align: center;">© ${new Date().getFullYear()} Triveni Tours & Travels. All rights reserved.</p>
                       </td>
                     </tr>
                   </table>

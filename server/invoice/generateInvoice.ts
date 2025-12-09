@@ -78,10 +78,10 @@ export async function generateInvoice(bookingId: number): Promise<string | null>
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(28);
     doc.setFont('helvetica', 'bold');
-    doc.text('TOUR BOOKING', pageWidth / 2, 20, { align: 'center' });
+    doc.text('TRIVENI TOURS & TRAVELS', pageWidth / 2, 20, { align: 'center' });
     doc.setFontSize(12);
     doc.setFont('helvetica', 'normal');
-    doc.text('Professional Vehicle Rental Services', pageWidth / 2, 30, { align: 'center' });
+    doc.text('Self Drive Cars, Bikes & Family Trips', pageWidth / 2, 30, { align: 'center' });
 
     currentY = 50;
 
@@ -228,8 +228,8 @@ export async function generateInvoice(bookingId: number): Promise<string | null>
     doc.line(14, footerY - 5, pageWidth - 14, footerY - 5);
     doc.setFontSize(9);
     doc.setTextColor(100, 100, 100);
-    doc.text('Thank you for choosing Tour Booking!', pageWidth / 2, footerY, { align: 'center' });
-    doc.text('For support: support@tourbooking.com | +91 1800-XXX-XXXX', pageWidth / 2, footerY + 5, { align: 'center' });
+    doc.text('Thank you for choosing Triveni Tours & Travels!', pageWidth / 2, footerY, { align: 'center' });
+    doc.text('For support: support@trivenitravels.com | +91 9337478478', pageWidth / 2, footerY + 5, { align: 'center' });
 
     // Save invoice to database
     await db.insert(invoices).values({

@@ -7,8 +7,8 @@ export const appConfig = {
   
   // Email settings
   email: {
-    fromAddress: process.env.EMAIL_FROM || 'noreply@tour.com',
-    fromName: process.env.EMAIL_FROM_NAME || 'Tour Booking',
+    fromAddress: process.env.EMAIL_FROM || 'support@trivenitravels.com',
+    fromName: process.env.EMAIL_FROM_NAME || 'Triveni Tours & Travels',
   },
   
   // Feature flags
@@ -20,14 +20,14 @@ export const appConfig = {
   
   // Admin settings
   admin: {
-    defaultEmail: process.env.ADMIN_DEFAULT_EMAIL || 'admin@example.com',
+    defaultEmail: process.env.ADMIN_DEFAULT_EMAIL || 'support@trivenitravels.com',
     defaultPassword: process.env.ADMIN_DEFAULT_PASSWORD || 'admin123',
   },
   
   // SMTP settings
   smtp: {
-    host: process.env.SMTP_HOST || 'smtp.mailtrap.io',
-    port: parseInt(process.env.SMTP_PORT || '2525'),
+    host: process.env.SMTP_HOST || 'mail.spacemail.com',
+    port: parseInt(process.env.SMTP_PORT || '465'),
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
   },

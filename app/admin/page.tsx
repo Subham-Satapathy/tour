@@ -84,7 +84,7 @@ export default async function AdminDashboard() {
             <div className="flex gap-4">
               <Link
                 href="/admin/vehicles/new"
-                className="bg-blue-600 text-white px-6 py-3 rounded-md font-semibold hover:bg-blue-700 transition"
+                className="bg-black text-white px-6 py-3 rounded-md font-semibold hover:bg-gray-800 transition cursor-pointer"
               >
                 + Add New Vehicle
               </Link>

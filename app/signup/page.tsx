@@ -29,6 +29,8 @@ function SignUpForm() {
   });
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [checkingPhone, setCheckingPhone] = useState(false);
   const [loading, setLoading] = useState(false);
   const [otpSent, setOtpSent] = useState(false);
   const [otpExpiry, setOtpExpiry] = useState<Date | null>(null);
@@ -41,6 +43,47 @@ function SignUpForm() {
       return () => clearTimeout(timer);
     }
   }, [resendCooldown]);
+
+  // Debounced phone number checking
+  useEffect(() => {
+    const checkPhone = async () => {
+      const cleanPhone = formData.phone.replace(/[^0-9]/g, '');
+      const phoneRegex = /^[6-9]\d{9}$/;
+      
+      if (!phoneRegex.test(cleanPhone)) {
+        setPhoneError('');
+        return;
+      }
+
+      setCheckingPhone(true);
+      try {
+        const response = await fetch('/api/auth/check-phone', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: cleanPhone }),
+        });
+        
+        const data = await response.json();
+        if (!data.available) {
+          setPhoneError('This phone number is already registered');
+        } else {
+          setPhoneError('');
+        }
+      } catch (err) {
+        console.error('Error checking phone:', err);
+      } finally {
+        setCheckingPhone(false);
+      }
+    };
+
+    const timer = setTimeout(() => {
+      if (formData.phone) {
+        checkPhone();
+      }
+    }, 500); // Debounce 500ms
+
+    return () => clearTimeout(timer);
+  }, [formData.phone]);
 
   const handleSendOTP = async () => {
     setError('');
@@ -156,6 +199,12 @@ function SignUpForm() {
     e.preventDefault();
     setError('');
 
+    // Check for phone errors
+    if (phoneError) {
+      setError(phoneError);
+      return;
+    }
+
     // Validation
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
@@ -250,23 +299,36 @@ function SignUpForm() {
               <label htmlFor="phone" className="block text-sm font-semibold text-gray-900 mb-2">
                 Phone Number
               </label>
-              <input
-                id="phone"
-                type="tel"
-                required
-                value={formData.phone}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/[^0-9]/g, '');
-                  if (value.length <= 10) {
-                    setFormData({ ...formData, phone: value });
-                  }
-                }}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
-                placeholder="9876543210"
-                maxLength={10}
-                pattern="[6-9][0-9]{9}"
-              />
-              <p className="text-sm text-gray-500 mt-1">Enter 10-digit mobile number</p>
+              <div className="relative">
+                <input
+                  id="phone"
+                  type="tel"
+                  required
+                  value={formData.phone}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/[^0-9]/g, '');
+                    if (value.length <= 10) {
+                      setFormData({ ...formData, phone: value });
+                    }
+                  }}
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 ${
+                    phoneError ? 'border-red-300' : 'border-gray-200'
+                  }`}
+                  placeholder="9876543210"
+                  maxLength={10}
+                  pattern="[6-9][0-9]{9}"
+                />
+                {checkingPhone && (
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                    <div className="w-5 h-5 border-2 border-gray-300 border-t-black rounded-full animate-spin"></div>
+                  </div>
+                )}
+              </div>
+              {phoneError ? (
+                <p className="text-sm text-red-600 mt-1">{phoneError}</p>
+              ) : (
+                <p className="text-sm text-gray-500 mt-1">Enter 10-digit mobile number</p>
+              )}
             </div>
 
             <div>
@@ -337,7 +399,7 @@ function SignUpForm() {
 
             <button
               type="submit"
-              disabled={loading}
+              disabled={loading || !!phoneError || checkingPhone}
               className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             >
               {loading ? 'Sending OTP...' : 'Continue with Email Verification'}
@@ -405,6 +467,7 @@ function SignUpForm() {
             {/* Back to Form */}
             <div className="text-center">
               <button
+                type="button"
                 onClick={() => {
                   setStep('form');
                   setOtp('');
