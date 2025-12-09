@@ -197,7 +197,6 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                             : 'border-gray-300 hover:border-gray-400 bg-white text-gray-900'
                         }`}
                       >
-                        <span className="text-3xl mb-2 block">💳</span>
                         <span className="text-sm font-black">CARD</span>
                       </button>
                       <button
@@ -209,7 +208,6 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                             : 'border-gray-300 hover:border-gray-400 bg-white text-gray-900'
                         }`}
                       >
-                        <span className="text-3xl mb-2 block">📱</span>
                         <span className="text-sm font-black">UPI</span>
                       </button>
                       <button
@@ -221,7 +219,6 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                             : 'border-gray-300 hover:border-gray-400 bg-white text-gray-900'
                         }`}
                       >
-                        <span className="text-3xl mb-2 block">🏦</span>
                         <span className="text-sm font-black">BANK</span>
                       </button>
                     </div>
