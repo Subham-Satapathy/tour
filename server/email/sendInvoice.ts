@@ -40,9 +40,10 @@ export async function sendInvoiceEmail({
                   <table role="presentation" style="width: 600px; max-width: 100%; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <!-- Header -->
                     <tr>
-                      <td style="padding: 40px 40px 20px; text-align: center; background: linear-gradient(135deg, #000000 0%, #333333 100%); border-radius: 8px 8px 0 0;">
-                        <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">Triveni Tours & Travels</h1>
-                        <p style="margin: 10px 0 0; color: #cccccc; font-size: 14px;">Self Drive Cars, Bikes & Family Trips</p>
+                      <td style="padding: 40px 40px 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                        <img src="${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/logo.png" alt="Triveni Tours & Travels" style="height: 60px; width: auto; margin: 0 auto 15px;" />
+                        <h1 style="margin: 0; color: #000000; font-size: 28px; font-weight: 700;">Triveni Tours & Travels</h1>
+                        <p style="margin: 10px 0 0; color: #666666; font-size: 14px;">Self Drive Cars, Bikes & Family Trips</p>
                       </td>
                     </tr>
                     

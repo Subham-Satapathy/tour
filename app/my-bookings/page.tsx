@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { Calendar, MapPin, Car, Clock, CheckCircle, XCircle, AlertCircle, ArrowLeft, FileText } from 'lucide-react';
+import { Calendar, MapPin, Car, Clock, CheckCircle, XCircle, AlertCircle, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 interface Booking {
@@ -292,16 +292,6 @@ export default function MyBookingsPage() {
                         >
                           View Details
                         </Link>
-                        {booking.status === 'PAID' && (
-                          <Link
-                            href={`/booking/success/${booking.id}`}
-                            className="px-4 sm:px-6 py-2 border-2 border-black text-black rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-50 transition-all text-center flex items-center justify-center gap-2 cursor-pointer"
-                          >
-                            <FileText className="w-4 h-4" />
-                            <span className="hidden sm:inline">View Invoice</span>
-                            <span className="sm:hidden">Invoice</span>
-                          </Link>
-                        )}
                         {isUpcoming(booking.startDateTime) && booking.status === 'PAID' && (
                           <button
                             onClick={() => {
