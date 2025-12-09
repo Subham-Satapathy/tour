@@ -29,7 +29,7 @@ export function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-gray-50 scroll-mt-20">
+    <section id="faq" className="py-16 sm:py-20 lg:py-24 bg-white scroll-mt-20">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-3 sm:mb-4">

@@ -164,11 +164,11 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
             <Link
               key={vehicle.id}
               href={`/booking/${vehicle.id}`}
-              className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px] sm:max-w-none snap-center block cursor-pointer"
+              className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px] sm:max-w-none snap-center block cursor-pointer h-full"
             >
-              <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-black transition-all duration-300 hover:shadow-2xl group">
+              <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-black transition-all duration-300 hover:shadow-2xl group h-full flex flex-col">
                 {/* Vehicle Image */}
-                <div className="relative h-36 sm:h-48 md:h-56 lg:h-64 bg-gray-50 overflow-hidden">
+                <div className="relative h-36 sm:h-48 md:h-56 lg:h-64 bg-gray-50 overflow-hidden flex-shrink-0">
                   <img
                     src={vehicle.imageUrl || '/placeholder-vehicle.jpg'}
                     alt={vehicle.name}
@@ -187,7 +187,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                 </div>
 
                 {/* Vehicle Details */}
-                <div className="p-3 sm:p-4 md:p-6">
+                <div className="p-3 sm:p-4 md:p-6 flex flex-col flex-1">
                   <h3 className="text-base sm:text-xl md:text-2xl font-black text-black mb-0.5 sm:mb-1 tracking-tight leading-tight">
                     {vehicle.name}
                   </h3>
@@ -197,12 +197,17 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                     </p>
                   )}
 
-                  {/* Description - Hidden on mobile */}
-                  {vehicle.description && (
-                    <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4 line-clamp-2 hidden md:block">
-                      {vehicle.description}
-                    </p>
-                  )}
+                  {/* Description - Hidden on mobile, fixed height to maintain uniformity */}
+                  <div className="hidden md:block h-10 mb-3 sm:mb-4">
+                    {vehicle.description && (
+                      <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
+                        {vehicle.description}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Spacer to push specs and CTA to bottom */}
+                  <div className="flex-1"></div>
 
                   {/* Specs */}
                   <div className="flex justify-between mb-3 sm:mb-6 bg-gray-50 rounded-lg sm:rounded-xl p-1.5 sm:p-4 border border-gray-100">

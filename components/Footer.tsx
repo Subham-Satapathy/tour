@@ -25,7 +25,7 @@ export function Footer() {
   };
 
   return (
-    <footer id="contact" className="bg-gray-50 scroll-mt-20 py-8 sm:py-10 lg:py-12">
+    <footer id="contact" className="bg-white scroll-mt-20 py-8 sm:py-10 lg:py-12">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 xl:px-16">
         {/* Rounded Container */}
         <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm border border-gray-100 px-6 sm:px-8 lg:px-12 xl:px-16 py-8 sm:py-10 lg:py-12 xl:py-16">

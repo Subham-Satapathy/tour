@@ -51,7 +51,7 @@ export function FeaturesSection() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-gray-50 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-lg"
+                className="bg-white border-2 border-gray-100 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:border-gray-200"
               >
                 <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                   {feature.title}
@@ -78,28 +78,28 @@ export function FeaturesSection() {
           </div>
 
           {/* Background Box */}
-          <div className="bg-gradient-to-r from-slate-700 to-slate-800 rounded-3xl overflow-hidden pt-6 sm:pt-8 lg:pt-16">
+          <div className="bg-white border-4 border-gray-900 rounded-3xl overflow-hidden pt-6 sm:pt-8 lg:pt-16">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[300px] sm:min-h-[350px] lg:min-h-[400px]">
               {/* Left - Stats Area */}
               <div className="relative h-full flex items-end px-6 sm:px-8 lg:px-12 pb-6 sm:pb-8 lg:pb-12 lg:pt-12">
                 <div className="flex flex-wrap gap-3 sm:gap-4 z-20">
-                  <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4">
-                    <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">24/7</p>
-                    <p className="text-xs sm:text-sm lg:text-base text-gray-300">Customer Support</p>
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4">
+                    <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900">24/7</p>
+                    <p className="text-xs sm:text-sm lg:text-base text-gray-600">Customer Support</p>
                   </div>
-                  <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4">
-                    <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">100%</p>
-                    <p className="text-xs sm:text-sm lg:text-base text-gray-300">Verified Vehicles</p>
+                  <div className="bg-gray-50 border-2 border-gray-200 rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4">
+                    <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-900">100%</p>
+                    <p className="text-xs sm:text-sm lg:text-base text-gray-600">Verified Vehicles</p>
                   </div>
                 </div>
               </div>
 
             {/* Right - Call to Action */}
             <div className="p-6 sm:p-8 lg:p-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-3 sm:mb-4 lg:mb-6 leading-tight break-words">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-3 sm:mb-4 lg:mb-6 leading-tight break-words">
                 Save money with Triveni Tours
               </h2>
-              <p className="text-gray-300 mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm lg:text-base">
+              <p className="text-gray-600 mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm lg:text-base">
                 Best prices in Odisha with full refund in case of cancellation
               </p>
               <button className="px-6 py-2.5 sm:px-7 sm:py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all flex items-center gap-2 shadow-lg text-xs sm:text-sm lg:text-base cursor-pointer">

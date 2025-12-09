@@ -42,9 +42,9 @@ export function VehicleCard({
     : `/booking/${vehicle.id}`;
 
   return (
-    <div className="group relative bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-black flex flex-col h-full">
+    <div className="group relative bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-black flex flex-col h-full min-h-[600px]">
       <div className="relative">
-        <div className="h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
+        <div className="h-56 bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
           {vehicle.imageUrl ? (
             <img
               src={vehicle.imageUrl}
@@ -96,11 +96,14 @@ export function VehicleCard({
           </div>
         )}
 
-        {vehicle.description && (
-          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-            {vehicle.description}
-          </p>
-        )}
+        {/* Description with fixed height to maintain uniform card size */}
+        <div className="h-10 mb-4">
+          {vehicle.description && (
+            <p className="text-gray-600 text-sm line-clamp-2">
+              {vehicle.description}
+            </p>
+          )}
+        </div>
         
         {/* Spacer to push pricing and button to bottom */}
         <div className="flex-1"></div>

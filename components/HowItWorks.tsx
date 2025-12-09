@@ -2,7 +2,7 @@
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-white scroll-mt-20">
+    <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-white scroll-mt-20">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
