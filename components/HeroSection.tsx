@@ -62,10 +62,10 @@ export function HeroSection({ cities }: HeroSectionProps) {
               </p>
 
               <div className="flex flex-wrap gap-3 md:gap-4">
-                <button className="px-8 py-4 md:px-10 md:py-5 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-base md:text-lg lg:text-xl !text-white">
+                <button className="px-8 py-4 md:px-10 md:py-5 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-base md:text-lg lg:text-xl !text-white cursor-pointer">
                   Book Now <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
-                <button className="px-8 py-4 md:px-10 md:py-5 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-base md:text-lg lg:text-xl !text-black">
+                <button className="px-8 py-4 md:px-10 md:py-5 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-base md:text-lg lg:text-xl !text-black cursor-pointer">
                   View Vehicles <ArrowRight className="w-5 h-5 md:w-6 md:h-6" />
                 </button>
               </div>
@@ -75,13 +75,13 @@ export function HeroSection({ cities }: HeroSectionProps) {
             <div className="hidden lg:flex flex-col gap-3 fixed right-8 bottom-32 z-50">
               <button 
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors shadow-lg"
+                className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors shadow-lg cursor-pointer"
               >
                 <ArrowUp className="w-5 h-5 text-gray-700" />
               </button>
               <button 
                 onClick={() => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' })}
-                className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg"
+                className="w-14 h-14 rounded-full bg-black text-white flex items-center justify-center hover:bg-gray-800 transition-colors shadow-lg cursor-pointer"
               >
                 <ArrowDown className="w-5 h-5" />
               </button>
@@ -96,10 +96,10 @@ export function HeroSection({ cities }: HeroSectionProps) {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white">
+            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:bg-gray-800 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white cursor-pointer">
               Book Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </button>
-            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black">
+            <button className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black cursor-pointer">
               View Vehicles <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </button>
           </div>

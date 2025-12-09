@@ -2,12 +2,15 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Search } from 'lucide-react';
+import { Search, User, LogOut, Calendar } from 'lucide-react';
+import { useSession, signOut } from 'next-auth/react';
 
 export function Navbar() {
+  const { data: session, status } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [showUserMenu, setShowUserMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,12 +52,16 @@ export function Navbar() {
               Home
               <span className="absolute -bottom-2 left-0 w-full h-0.5 bg-black opacity-0 group-hover:opacity-100 transition-opacity"></span>
             </Link>
-            <Link 
-              href="/search" 
+            <a 
+              href="#vehicles"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('vehicles')?.scrollIntoView({ behavior: 'smooth' });
+              }}
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
-              Self Drive
-            </Link>
+              Vehicles
+            </a>
             <a 
               href="#how-it-works"
               onClick={(e) => {
@@ -87,14 +94,61 @@ export function Navbar() {
             </a>
           </div>
 
-          {/* Right Side - Search & Book Now */}
+          {/* Right Side - Login & Book Now */}
           <div className="hidden md:flex items-center gap-4">
-            <Link href="/search" className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-50 transition-colors">
-              <Search className="w-5 h-5 text-gray-600" />
-            </Link>
-            <Link href="/search" className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300">
-              Book Now
-            </Link>
+            {status === 'authenticated' && session?.user ? (
+              <>
+                <div className="relative">
+                  <button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-full hover:bg-gray-50 transition-all cursor-pointer"
+                  >
+                    <User className="w-4 h-4" />
+                    <span className="font-medium text-gray-900">{session.user.name || session.user.email}</span>
+                  </button>
+                  {showUserMenu && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                      <Link
+                        href="/my-bookings"
+                        onClick={() => setShowUserMenu(false)}
+                        className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                      >
+                        <Calendar className="w-4 h-4" />
+                        My Bookings
+                      </Link>
+                      <button
+                        onClick={() => {
+                          signOut({ callbackUrl: '/' });
+                          setShowUserMenu(false);
+                        }}
+                        className="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Logout
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <Link
+                  href="/vehicles"
+                  className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300"
+                >
+                  Book Now
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className="px-6 py-2.5 border border-black text-black rounded-full font-medium hover:bg-gray-50 transition-all duration-300">
+                  Login
+                </Link>
+                <Link
+                  href="/vehicles"
+                  className="px-6 py-2.5 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition-all duration-300"
+                >
+                  Book Now
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -113,22 +167,26 @@ export function Navbar() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 animate-fadeIn">
-            <div className="flex flex-col gap-4">
+          <div className="md:hidden py-6 border-t border-gray-200 animate-fadeIn">
+            <div className="flex flex-col gap-3">
               <Link 
                 href="/" 
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all"
+                className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all"
               >
-                🏠 Home
+                Home
               </Link>
-              <Link 
-                href="/search" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all"
+              <a 
+                href="#vehicles" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  document.getElementById('vehicles')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
-                🚗 Self Drive
-              </Link>
+                Vehicles
+              </a>
               <a 
                 href="#how-it-works" 
                 onClick={(e) => {
@@ -136,9 +194,9 @@ export function Navbar() {
                   setIsMobileMenuOpen(false);
                   document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all cursor-pointer"
+                className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
-                ℹ️ How It Works
+                How It Works
               </a>
               <a 
                 href="#faq" 
@@ -147,9 +205,9 @@ export function Navbar() {
                   setIsMobileMenuOpen(false);
                   document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all cursor-pointer"
+                className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
-                ❓ FAQ
+                FAQ
               </a>
               <a 
                 href="#contact" 
@@ -158,17 +216,56 @@ export function Navbar() {
                   setIsMobileMenuOpen(false);
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg font-semibold transition-all cursor-pointer"
+                className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
-                📞 Contact
+                Contact
               </a>
-              <Link 
-                href="/search" 
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="mx-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-bold text-center hover:from-blue-700 hover:to-indigo-700 shadow-lg transition-all"
-              >
-                📅 Book Now
-              </Link>
+              <div className="pt-4 px-4 space-y-3 border-t border-gray-200 mt-2">
+                {status === 'authenticated' && session?.user ? (
+                  <>
+                    <div className="px-4 py-3 bg-gray-100 rounded-lg">
+                      <div className="flex items-center gap-2 text-gray-900 font-semibold mb-2">
+                        <User className="w-4 h-4" />
+                        <span>{session.user.name || session.user.email}</span>
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => {
+                        signOut({ callbackUrl: '/' });
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="block w-full px-6 py-3 border-2 border-black text-black rounded-lg font-bold text-center hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Logout
+                    </button>
+                    <Link
+                      href="/vehicles"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full px-6 py-3 bg-black text-white rounded-lg font-bold text-center hover:bg-gray-800 transition-all"
+                    >
+                      Book Now
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link 
+                      href="/login" 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full px-6 py-3 border-2 border-black text-black rounded-lg font-bold text-center hover:bg-gray-50 transition-all"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      href="/vehicles"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full px-6 py-3 bg-black text-white rounded-lg font-bold text-center hover:bg-gray-800 transition-all"
+                    >
+                      Book Now
+                    </Link>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         )}

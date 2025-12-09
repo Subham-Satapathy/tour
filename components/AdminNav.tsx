@@ -48,7 +48,7 @@ export function AdminNav() {
             </Link>
             <button
               onClick={() => signOut({ callbackUrl: '/admin/login' })}
-              className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded transition"
+              className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded transition cursor-pointer"
             >
               Logout
             </button>

@@ -15,6 +15,13 @@
       "when": 1765124051894,
       "tag": "0001_nervous_exodus",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1765256257723,
+      "tag": "0002_yummy_william_stryker",
+      "breakpoints": true
     }
   ]
 }

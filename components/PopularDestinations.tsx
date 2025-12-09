@@ -37,7 +37,7 @@ export function PopularDestinations({ cities }: PopularDestinationsProps) {
           {cities.slice(0, 5).map((city) => (
             <button
               key={city.id}
-              className="px-6 py-3 bg-white border-2 border-gray-200 rounded-full font-semibold text-gray-700 hover:border-blue-500 hover:text-blue-600 hover:shadow-lg transition-all duration-300"
+              className="px-6 py-3 bg-white border-2 border-gray-200 rounded-full font-semibold text-gray-700 hover:border-blue-500 hover:text-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer"
             >
               {city.name}
             </button>

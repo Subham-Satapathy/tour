@@ -103,14 +103,14 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-black shadow-md relative z-20"
+          className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-black shadow-md relative z-20 cursor-pointer"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={handleNext}
           disabled={currentIndex >= maxIndex}
-          className="w-14 h-14 rounded-full bg-black text-white border-2 border-black flex items-center justify-center hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-black shadow-md relative z-20"
+          className="w-14 h-14 rounded-full bg-black text-white border-2 border-black flex items-center justify-center hover:bg-gray-800 transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-black shadow-md relative z-20 cursor-pointer"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -132,7 +132,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                 setCurrentIndex(targetIndex);
                 scrollToIndex(targetIndex);
               }}
-              className={`h-1.5 rounded-full transition-all ${
+              className={`h-1.5 rounded-full transition-all cursor-pointer ${
                 index === currentIndex
                   ? 'w-10 bg-black'
                   : 'w-4 bg-gray-300'
@@ -249,7 +249,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                       disabled={!vehicle.isActive}
                       className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-[11px] sm:text-base font-semibold transition-all shadow-md whitespace-nowrap ${
                         vehicle.isActive
-                          ? 'bg-black text-white hover:bg-gray-800 hover:scale-105'
+                          ? 'bg-black text-white hover:bg-gray-800 hover:scale-105 cursor-pointer'
                           : 'bg-gray-200 text-gray-400 cursor-not-allowed border-2 border-gray-300'
                       }`}
                     >

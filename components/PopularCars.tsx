@@ -11,7 +11,7 @@ export async function PopularCars() {
   }
 
   return (
-    <section className="py-16 md:py-24 bg-white overflow-hidden">
+    <section id="vehicles" className="py-16 md:py-24 bg-white overflow-hidden scroll-mt-20">
       <div className="max-w-[1800px] mx-auto">
         <div className="px-4 sm:px-6 lg:px-16 flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-16">
           <div>

@@ -4,6 +4,11 @@ interface Vehicle {
   id: number;
   name: string;
   type: 'CAR' | 'BIKE';
+  brand?: string | null;
+  model?: string | null;
+  seatingCapacity?: number | null;
+  fuelType?: string | null;
+  transmissionType?: string | null;
   ratePerHour: number;
   ratePerDay: number;
   description: string | null;
@@ -12,10 +17,10 @@ interface Vehicle {
 
 interface VehicleCardProps {
   vehicle: Vehicle;
-  fromCityId: number;
-  toCityId: number;
-  startDateTime: string;
-  endDateTime: string;
+  fromCityId?: number;
+  toCityId?: number;
+  startDateTime?: string;
+  endDateTime?: string;
 }
 
 export function VehicleCard({
@@ -25,23 +30,26 @@ export function VehicleCard({
   startDateTime,
   endDateTime,
 }: VehicleCardProps) {
-  const params = new URLSearchParams({
-    fromCityId: fromCityId.toString(),
-    toCityId: toCityId.toString(),
-    startDateTime,
-    endDateTime,
-  });
+  const hasBookingParams = fromCityId && toCityId && startDateTime && endDateTime;
+  
+  const bookingUrl = hasBookingParams
+    ? `/booking/${vehicle.id}?${new URLSearchParams({
+        fromCityId: fromCityId.toString(),
+        toCityId: toCityId.toString(),
+        startDateTime,
+        endDateTime,
+      }).toString()}`
+    : `/booking/${vehicle.id}`;
 
   return (
-    <div className="group relative bg-white border-2 border-gray-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    <div className="group relative bg-white border-2 border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300 hover:border-black flex flex-col h-full">
       <div className="relative">
-        <div className="h-56 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center overflow-hidden">
+        <div className="h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
           {vehicle.imageUrl ? (
             <img
               src={vehicle.imageUrl}
               alt={vehicle.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
             <div className="text-gray-300 text-6xl group-hover:scale-110 transition-transform duration-300">
@@ -50,33 +58,69 @@ export function VehicleCard({
           )}
         </div>
       </div>
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-1">
         <div className="flex justify-between items-start mb-3">
-          <h3 className="text-2xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">{vehicle.name}</h3>
-          <span className="px-3 py-1.5 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-xs font-bold rounded-full shadow-md">
+          <div className="flex-1">
+            <h3 className="text-xl font-black text-gray-900 group-hover:text-black transition-colors">
+              {vehicle.name}
+            </h3>
+            {vehicle.brand && vehicle.model && (
+              <p className="text-sm text-gray-600 mt-1">
+                {vehicle.brand} {vehicle.model}
+              </p>
+            )}
+          </div>
+          <span className="px-3 py-1 bg-black text-white text-xs font-bold rounded-full ml-2 flex-shrink-0">
             {vehicle.type}
           </span>
         </div>
+
+        {/* Vehicle Details */}
+        {(vehicle.seatingCapacity || vehicle.fuelType || vehicle.transmissionType) && (
+          <div className="flex flex-wrap gap-2 mb-4">
+            {vehicle.seatingCapacity && (
+              <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded">
+                {vehicle.seatingCapacity} Seats
+              </span>
+            )}
+            {vehicle.fuelType && (
+              <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded capitalize">
+                {vehicle.fuelType.toLowerCase()}
+              </span>
+            )}
+            {vehicle.transmissionType && (
+              <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded capitalize">
+                {vehicle.transmissionType.toLowerCase()}
+              </span>
+            )}
+          </div>
+        )}
+
         {vehicle.description && (
-          <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+          <p className="text-gray-600 text-sm mb-4 line-clamp-2">
             {vehicle.description}
           </p>
         )}
-        <div className="flex justify-between items-center mb-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-4">
+        
+        {/* Spacer to push pricing and button to bottom */}
+        <div className="flex-1"></div>
+        
+        <div className="flex justify-between items-center mb-4 bg-gray-50 rounded-lg p-4 border border-gray-200">
           <div>
-            <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Rate per Hour</p>
-            <p className="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">₹{vehicle.ratePerHour}</p>
+            <p className="text-xs text-gray-500 font-semibold mb-1">Per Hour</p>
+            <p className="text-xl font-black text-gray-900">₹{vehicle.ratePerHour}</p>
           </div>
           <div className="text-right">
-            <p className="text-xs text-gray-500 uppercase font-semibold mb-1">Rate per Day</p>
-            <p className="text-2xl font-extrabold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">₹{vehicle.ratePerDay}</p>
+            <p className="text-xs text-gray-500 font-semibold mb-1">Per Day</p>
+            <p className="text-xl font-black text-gray-900">₹{vehicle.ratePerDay}</p>
           </div>
         </div>
+        
         <Link
-          href={`/booking/${vehicle.id}?${params.toString()}`}
-          className="block w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-center py-3.5 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+          href={bookingUrl}
+          className="block w-full bg-black text-white text-center py-3 rounded-lg font-bold hover:bg-gray-800 transition-all duration-300"
         >
-          🚀 Select & Book
+          Book Now
         </Link>
       </div>
     </div>
