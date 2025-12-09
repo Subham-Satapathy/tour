@@ -31,3 +31,100 @@ body {
     display: none;
   }
 }
+
+/* Enhanced styling for date and time inputs */
+input[type="date"],
+input[type="time"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color-scheme: light;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+/* Calendar and clock icons */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  filter: invert(0.2);
+  opacity: 0.8;
+  width: 18px;
+  height: 18px;
+  transition: opacity 0.2s;
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator,
+input[type="time"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  filter: invert(0);
+}
+
+/* Text value styling */
+input[type="date"]::-webkit-date-and-time-value,
+input[type="time"]::-webkit-date-and-time-value {
+  text-align: left;
+  color: #111827;
+  min-height: 1.5em;
+  padding-right: 30px;
+}
+
+/* Focus state enhancement */
+input[type="date"]:focus,
+input[type="time"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Placeholder-like empty state */
+input[type="date"]:invalid,
+input[type="time"]:invalid {
+  color: #9ca3af;
+}
+
+/* Fix for datetime-local inputs on Safari/iOS */
+input[type="datetime-local"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color-scheme: light;
+  min-height: 48px;
+  height: auto;
+  display: block;
+  line-height: 1.5;
+}
+
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(0);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit {
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-fields-wrapper {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-text,
+input[type="datetime-local"]::-webkit-datetime-edit-month-field,
+input[type="datetime-local"]::-webkit-datetime-edit-day-field,
+input[type="datetime-local"]::-webkit-datetime-edit-year-field,
+input[type="datetime-local"]::-webkit-datetime-edit-hour-field,
+input[type="datetime-local"]::-webkit-datetime-edit-minute-field,
+input[type="datetime-local"]::-webkit-datetime-edit-ampm-field {
+  padding: 2px;
+  color: #111827;
+  background: transparent;
+}

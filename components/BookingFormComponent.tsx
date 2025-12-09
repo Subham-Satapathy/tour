@@ -329,33 +329,75 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-5">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 mb-3">
                       <Calendar className="w-4 h-4 inline mr-1" />
                       Start Date & Time
                     </label>
-                    <input
-                      type="datetime-local"
-                      value={formData.startDateTime}
-                      onChange={(e) => setFormData({ ...formData, startDateTime: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
-                      required
-                    />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="relative">
+                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Date</label>
+                        <input
+                          type="date"
+                          value={formData.startDateTime.split('T')[0] || ''}
+                          onChange={(e) => {
+                            const time = formData.startDateTime.split('T')[1] || '00:00';
+                            setFormData({ ...formData, startDateTime: `${e.target.value}T${time}` });
+                          }}
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          required
+                        />
+                      </div>
+                      <div className="relative">
+                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Time</label>
+                        <input
+                          type="time"
+                          value={formData.startDateTime.split('T')[1] || ''}
+                          onChange={(e) => {
+                            const date = formData.startDateTime.split('T')[0] || '';
+                            setFormData({ ...formData, startDateTime: `${date}T${e.target.value}` });
+                          }}
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          required
+                        />
+                      </div>
+                    </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 mb-3">
                       <Calendar className="w-4 h-4 inline mr-1" />
                       End Date & Time
                     </label>
-                    <input
-                      type="datetime-local"
-                      value={formData.endDateTime}
-                      onChange={(e) => setFormData({ ...formData, endDateTime: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors"
-                      required
-                    />
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="relative">
+                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Date</label>
+                        <input
+                          type="date"
+                          value={formData.endDateTime.split('T')[0] || ''}
+                          onChange={(e) => {
+                            const time = formData.endDateTime.split('T')[1] || '00:00';
+                            setFormData({ ...formData, endDateTime: `${e.target.value}T${time}` });
+                          }}
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          required
+                        />
+                      </div>
+                      <div className="relative">
+                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Time</label>
+                        <input
+                          type="time"
+                          value={formData.endDateTime.split('T')[1] || ''}
+                          onChange={(e) => {
+                            const date = formData.endDateTime.split('T')[0] || '';
+                            setFormData({ ...formData, endDateTime: `${date}T${e.target.value}` });
+                          }}
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          required
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 
