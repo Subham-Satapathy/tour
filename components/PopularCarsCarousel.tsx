@@ -209,7 +209,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                         <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
-                        <span className="text-[8px] sm:text-xs text-gray-700 font-semibold text-center leading-tight">{vehicle.mileage}</span>
+                        <span className="text-xs sm:text-sm text-gray-700 font-semibold text-center leading-tight">{vehicle.mileage}</span>
                       </div>
                     )}
                     {vehicle.fuelType && (
@@ -217,7 +217,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                         <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 2v20M2 12h20" />
                         </svg>
-                        <span className="text-[8px] sm:text-xs text-gray-700 font-semibold">{vehicle.fuelType}</span>
+                        <span className="text-xs sm:text-sm text-gray-700 font-semibold">{vehicle.fuelType}</span>
                       </div>
                     )}
                     {vehicle.transmissionType && (
@@ -226,7 +226,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                           <circle cx="12" cy="12" r="10" strokeWidth={2.5} />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2" />
                         </svg>
-                        <span className="text-[8px] sm:text-xs text-gray-700 font-semibold">{vehicle.transmissionType}</span>
+                        <span className="text-xs sm:text-sm text-gray-700 font-semibold">{vehicle.transmissionType}</span>
                       </div>
                     )}
                     {vehicle.seatingCapacity && (
@@ -234,7 +234,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                         <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span className="text-[8px] sm:text-xs text-gray-700 font-semibold">{vehicle.seatingCapacity} seats</span>
+                        <span className="text-xs sm:text-sm text-gray-700 font-semibold">{vehicle.seatingCapacity} seats</span>
                       </div>
                     )}
                   </div>
@@ -243,11 +243,11 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                   <div className="flex items-center justify-between gap-2">
                     <div>
                       <p className="text-lg sm:text-2xl md:text-3xl font-black text-black tracking-tight leading-none">₹{vehicle.ratePerDay}</p>
-                      <p className="text-[9px] sm:text-xs text-gray-600 font-medium">per day</p>
+                      <p className="text-xs sm:text-sm text-gray-600 font-medium">per day</p>
                     </div>
                     <button
                       disabled={!vehicle.isActive}
-                      className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-[11px] sm:text-base font-semibold transition-all shadow-md whitespace-nowrap ${
+                      className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-all shadow-md whitespace-nowrap ${
                         vehicle.isActive
                           ? 'bg-black text-white hover:bg-gray-800 hover:scale-105 cursor-pointer'
                           : 'bg-gray-200 text-gray-400 cursor-not-allowed border-2 border-gray-300'

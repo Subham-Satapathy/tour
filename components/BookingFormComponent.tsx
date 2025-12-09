@@ -71,6 +71,26 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
         customerName: session.user.name || '',
         customerEmail: session.user.email || '',
       }));
+      
+      // Check for saved booking data
+      const savedData = localStorage.getItem('pendingBookingData');
+      if (savedData) {
+        try {
+          const { vehicleId, formData: savedFormData, pricing: savedPricing } = JSON.parse(savedData);
+          if (vehicleId === vehicle.id) {
+            setFormData(prev => ({
+              ...savedFormData,
+              customerName: session.user.name || '',
+              customerEmail: session.user.email || '',
+            }));
+            setPricing(savedPricing);
+            setStep(2); // Move to step 2 since step 1 was completed
+            localStorage.removeItem('pendingBookingData');
+          }
+        } catch (err) {
+          console.error('Failed to restore booking data:', err);
+        }
+      }
     }
   }, [session]);
 
@@ -144,6 +164,12 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
       
       // Check if user is logged in
       if (status === 'unauthenticated') {
+        // Save form data to localStorage before redirecting
+        localStorage.setItem('pendingBookingData', JSON.stringify({
+          vehicleId: vehicle.id,
+          formData,
+          pricing
+        }));
         router.push(`/login?redirect=/booking/${vehicle.id}`);
         return;
       }
@@ -369,7 +395,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                     maxLength={10}
                     required
                   />
-                  <p className="text-xs text-gray-500 mt-1">Enter 10-digit mobile number</p>
+                  <p className="text-sm text-gray-500 mt-1">Enter 10-digit mobile number</p>
                 </div>
               </div>
             )}
@@ -534,34 +560,34 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
               )}
               <div className="flex flex-wrap gap-2 mt-2">
                 {vehicle.seatingCapacity && (
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded">{vehicle.seatingCapacity} Seats</span>
+                  <span className="text-sm bg-gray-100 px-2 py-1 rounded">{vehicle.seatingCapacity} Seats</span>
                 )}
                 {vehicle.fuelType && (
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded capitalize">{vehicle.fuelType.toLowerCase()}</span>
+                  <span className="text-sm bg-gray-100 px-2 py-1 rounded capitalize">{vehicle.fuelType.toLowerCase()}</span>
                 )}
                 {vehicle.transmissionType && (
-                  <span className="text-xs bg-gray-100 px-2 py-1 rounded capitalize">{vehicle.transmissionType.toLowerCase()}</span>
+                  <span className="text-sm bg-gray-100 px-2 py-1 rounded capitalize">{vehicle.transmissionType.toLowerCase()}</span>
                 )}
               </div>
             </div>
 
             {/* Pricing */}
             <div className="border-t border-gray-200 pt-4 space-y-3">
-              <div className="flex justify-between text-sm">
+              <div className="flex justify-between text-sm md:text-base">
                 <span className="text-gray-600">Base Fare</span>
                 <span className="font-semibold">₹{pricing.baseAmount.toLocaleString()}</span>
               </div>
               {vehicle.securityDeposit ? (
-                <div className="flex justify-between text-sm">
+                <div className="flex justify-between text-sm md:text-base">
                   <span className="text-gray-600">Security Deposit</span>
                   <span className="font-semibold">₹{pricing.securityDeposit.toLocaleString()}</span>
                 </div>
               ) : null}
               <div className="border-t border-gray-200 pt-3 flex justify-between">
-                <span className="font-bold text-gray-900">Total Amount</span>
-                <span className="font-black text-xl">₹{pricing.totalAmount.toLocaleString()}</span>
+                <span className="font-bold text-gray-900 text-base md:text-lg">Total Amount</span>
+                <span className="font-black text-xl md:text-2xl">₹{pricing.totalAmount.toLocaleString()}</span>
               </div>
-              <p className="text-xs text-gray-500 mt-2">
+              <p className="text-sm text-gray-500 mt-2">
                 {vehicle.securityDeposit ? '* Security deposit is refundable' : ''}
               </p>
             </div>

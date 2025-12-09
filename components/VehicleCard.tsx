@@ -107,11 +107,11 @@ export function VehicleCard({
         
         <div className="flex justify-between items-center mb-4 bg-gray-50 rounded-lg p-4 border border-gray-200">
           <div>
-            <p className="text-xs text-gray-500 font-semibold mb-1">Per Hour</p>
-            <p className="text-xl font-black text-gray-900">₹{vehicle.ratePerHour}</p>
+            <p className="text-sm text-gray-500 font-semibold mb-1">Per Hour</p>
+            <p className="text-2xl font-black text-gray-900">₹{vehicle.ratePerHour}</p>
           </div>
-          <div className="text-right">
-            <p className="text-xs text-gray-500 font-semibold mb-1">Per Day</p>
+          <div className="text-center">
+            <p className="text-sm text-gray-500 font-semibold mb-1">Per Day</p>
             <p className="text-xl font-black text-gray-900">₹{vehicle.ratePerDay}</p>
           </div>
         </div>

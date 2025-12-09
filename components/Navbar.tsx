@@ -229,6 +229,14 @@ export function Navbar() {
                         <span>{session.user.name || session.user.email}</span>
                       </div>
                     </div>
+                    <Link
+                      href="/my-bookings"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block w-full px-6 py-3 border-2 border-gray-300 text-gray-900 rounded-lg font-bold text-center hover:bg-gray-50 transition-all flex items-center justify-center gap-2"
+                    >
+                      <Calendar className="w-4 h-4" />
+                      My Bookings
+                    </Link>
                     <button
                       onClick={() => {
                         signOut({ callbackUrl: '/' });

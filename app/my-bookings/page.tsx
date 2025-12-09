@@ -231,7 +231,7 @@ export default function MyBookingsPage() {
                           <p className="text-2xl font-black text-gray-900">
                             ₹{booking.totalAmount?.toLocaleString()}
                           </p>
-                          <p className="text-xs text-gray-500">Total Amount</p>
+                          <p className="text-sm text-gray-500">Total Amount</p>
                         </div>
                       </div>
 
@@ -239,8 +239,8 @@ export default function MyBookingsPage() {
                         <div className="flex items-start gap-2">
                           <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-xs text-gray-600">From</p>
-                            <p className="text-sm font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600">From</p>
+                            <p className="text-base font-semibold text-gray-900">
                               {booking.fromCity?.name || 'N/A'}
                             </p>
                           </div>
@@ -249,8 +249,8 @@ export default function MyBookingsPage() {
                         <div className="flex items-start gap-2">
                           <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-xs text-gray-600">To</p>
-                            <p className="text-sm font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600">To</p>
+                            <p className="text-base font-semibold text-gray-900">
                               {booking.toCity?.name || 'N/A'}
                             </p>
                           </div>
@@ -259,8 +259,8 @@ export default function MyBookingsPage() {
                         <div className="flex items-start gap-2">
                           <Calendar className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-xs text-gray-600">Start Date</p>
-                            <p className="text-sm font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600">Start Date</p>
+                            <p className="text-base font-semibold text-gray-900">
                               {new Date(booking.startDateTime).toLocaleDateString('en-IN', {
                                 day: 'numeric',
                                 month: 'short',
@@ -273,8 +273,8 @@ export default function MyBookingsPage() {
                         <div className="flex items-start gap-2">
                           <Clock className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-xs text-gray-600">Duration</p>
-                            <p className="text-sm font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600">Duration</p>
+                            <p className="text-base font-semibold text-gray-900">
                               {booking.tripDurationHours}h ({Math.ceil(booking.tripDurationHours / 24)}d)
                             </p>
                           </div>

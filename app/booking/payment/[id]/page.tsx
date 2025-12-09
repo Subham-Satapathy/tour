@@ -185,7 +185,7 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                 <form onSubmit={handlePayment} className="space-y-6">
                   {/* Payment Method Selection */}
                   <div>
-                    <label className="block text-sm font-bold text-gray-900 mb-3">
+                    <label className="block text-sm md:text-base font-bold text-gray-900 mb-3">
                       Payment Method
                     </label>
                     <div className="grid grid-cols-3 gap-3">
@@ -359,23 +359,23 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
             {/* Booking Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white border border-gray-200 rounded-xl p-6 sticky top-24">
-                <h3 className="text-xl font-black text-gray-900 mb-6">Booking Summary</h3>
+                <h3 className="text-xl md:text-2xl font-black text-gray-900 mb-6">Booking Summary</h3>
                 
                 {booking && (
                   <div className="space-y-5">
                     <div className="flex items-start gap-3">
                       <Car className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">Vehicle</p>
-                        <p className="font-bold text-gray-900">{booking.vehicle?.name}</p>
+                        <p className="text-sm md:text-base text-gray-600 mb-1">Vehicle</p>
+                        <p className="font-bold text-base md:text-lg text-gray-900">{booking.vehicle?.name}</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                       <MapPin className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">Route</p>
-                        <p className="font-bold text-gray-900">
+                        <p className="text-sm md:text-base text-gray-600 mb-1">Route</p>
+                        <p className="font-bold text-base md:text-lg text-gray-900">
                           {booking.fromCity?.name} → {booking.toCity?.name}
                         </p>
                       </div>
@@ -384,31 +384,31 @@ export default function PaymentPage({ params }: { params: Promise<{ id: string }
                     <div className="flex items-start gap-3">
                       <Calendar className="w-5 h-5 text-gray-700 flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
-                        <p className="text-sm text-gray-600 mb-1">Duration</p>
-                        <p className="font-bold text-gray-900">{booking.tripDurationHours} hours</p>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm md:text-base text-gray-600 mb-1">Duration</p>
+                        <p className="font-bold text-base md:text-lg text-gray-900">{booking.tripDurationHours} hours</p>
+                        <p className="text-sm md:text-base text-gray-500">
                           {new Date(booking.startDateTime).toLocaleDateString('en-IN', { day: 'numeric', month: 'numeric', year: 'numeric' })} - {new Date(booking.endDateTime).toLocaleDateString('en-IN', { day: 'numeric', month: 'numeric', year: 'numeric' })}
                         </p>
                       </div>
                     </div>
 
                     <div className="border-t border-gray-200 pt-4 mt-6 space-y-3">
-                      <div className="flex justify-between text-sm">
+                      <div className="flex justify-between text-sm md:text-base">
                         <span className="text-gray-700">Base Fare</span>
                         <span className="font-bold text-gray-900">₹{booking.totalAmount?.toLocaleString()}</span>
                       </div>
                       {booking.securityDeposit > 0 && (
                         <>
-                          <div className="flex justify-between text-sm">
+                          <div className="flex justify-between text-sm md:text-base">
                             <span className="text-gray-700">Security Deposit</span>
                             <span className="font-bold text-gray-900">₹{booking.securityDeposit?.toLocaleString()}</span>
                           </div>
-                          <p className="text-xs text-blue-600 font-medium">* Refundable at trip completion</p>
+                          <p className="text-sm text-blue-600 font-medium">* Refundable at trip completion</p>
                         </>
                       )}
                       <div className="flex justify-between border-t border-gray-200 pt-3 mt-3">
-                        <span className="font-bold text-gray-900">Total Amount</span>
-                        <span className="font-black text-xl text-gray-900">₹{((booking.totalAmount || 0) + (booking.securityDeposit || 0)).toLocaleString()}</span>
+                        <span className="font-bold text-base md:text-lg text-gray-900">Total Amount</span>
+                        <span className="font-black text-xl md:text-2xl text-gray-900">₹{((booking.totalAmount || 0) + (booking.securityDeposit || 0)).toLocaleString()}</span>
                       </div>
                     </div>
                   </div>

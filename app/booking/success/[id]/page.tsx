@@ -111,8 +111,8 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
             <div className="bg-gradient-to-r from-gray-50 to-white px-6 py-4 border-b border-gray-200">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs text-gray-500 mb-1">Booking ID</p>
-                  <p className="text-xl font-black text-gray-900">#{booking.id}</p>
+                  <p className="text-sm text-gray-500 mb-1">Booking ID</p>
+                  <p className="text-xl md:text-2xl font-black text-gray-900">#{booking.id}</p>
                 </div>
                 <span className="px-4 py-2 bg-green-100 text-green-800 font-bold rounded-lg text-sm">
                   {booking.status?.toUpperCase()}
@@ -132,9 +132,9 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                     <Car className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Vehicle</p>
-                    <p className="font-bold text-gray-900">{booking.vehicle?.name || 'N/A'}</p>
-                    <p className="text-sm text-gray-600">{booking.vehicle?.type}</p>
+                    <p className="text-sm text-gray-500 mb-1">Vehicle</p>
+                    <p className="font-bold text-base text-gray-900">{booking.vehicle?.name || 'N/A'}</p>
+                    <p className="text-sm md:text-base text-gray-600">{booking.vehicle?.type}</p>
                   </div>
                 </div>
 
@@ -143,9 +143,9 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                     <Clock className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Duration</p>
-                    <p className="font-bold text-gray-900">{booking.tripDurationHours} hours</p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-500 mb-1">Duration</p>
+                    <p className="font-bold text-base text-gray-900">{booking.tripDurationHours} hours</p>
+                    <p className="text-sm md:text-base text-gray-600">
                       {Math.ceil(booking.tripDurationHours / 24)} day(s)
                     </p>
                   </div>
@@ -156,8 +156,8 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                     <MapPin className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Pickup Location</p>
-                    <p className="font-bold text-gray-900">{booking.fromCity?.name || 'N/A'}</p>
+                    <p className="text-sm text-gray-500 mb-1">Pickup Location</p>
+                    <p className="font-bold text-base text-gray-900">{booking.fromCity?.name || 'N/A'}</p>
                   </div>
                 </div>
 
@@ -166,8 +166,8 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                     <MapPin className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Drop-off Location</p>
-                    <p className="font-bold text-gray-900">{booking.toCity?.name || 'N/A'}</p>
+                    <p className="text-sm text-gray-500 mb-1">Drop-off Location</p>
+                    <p className="font-bold text-base text-gray-900">{booking.toCity?.name || 'N/A'}</p>
                   </div>
                 </div>
 
@@ -176,15 +176,15 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                     <Calendar className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">Start Date & Time</p>
-                    <p className="font-bold text-gray-900">
+                    <p className="text-sm text-gray-500 mb-1">Start Date & Time</p>
+                    <p className="font-bold text-base text-gray-900">
                       {new Date(booking.startDateTime).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',
                       })}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm md:text-base text-gray-600">
                       {new Date(booking.startDateTime).toLocaleTimeString('en-IN', {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -198,15 +198,15 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                     <Calendar className="w-5 h-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-xs text-gray-500 mb-1">End Date & Time</p>
-                    <p className="font-bold text-gray-900">
+                    <p className="text-sm text-gray-500 mb-1">End Date & Time</p>
+                    <p className="font-bold text-base text-gray-900">
                       {new Date(booking.endDateTime).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
                         year: 'numeric',
                       })}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm md:text-base text-gray-600">
                       {new Date(booking.endDateTime).toLocaleTimeString('en-IN', {
                         hour: '2-digit',
                         minute: '2-digit',
@@ -222,41 +222,41 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Customer Details */}
                 <div>
-                  <h3 className="text-sm font-black text-gray-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-base font-black text-gray-900 mb-4 flex items-center gap-2">
                     <User className="w-4 h-4" />
                     Customer Details
                   </h3>
                   <div className="space-y-3">
                     <div>
-                      <p className="text-xs text-gray-500">Name</p>
-                      <p className="font-semibold text-gray-900">{booking.customerName}</p>
+                      <p className="text-sm text-gray-500">Name</p>
+                      <p className="font-semibold text-base text-gray-900">{booking.customerName}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Email</p>
-                      <p className="font-semibold text-gray-900 text-sm">{booking.customerEmail}</p>
+                      <p className="text-sm text-gray-500">Email</p>
+                      <p className="font-semibold text-base text-gray-900">{booking.customerEmail}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">Phone</p>
-                      <p className="font-semibold text-gray-900">+91 {booking.customerPhone}</p>
+                      <p className="text-sm text-gray-500">Phone</p>
+                      <p className="font-semibold text-base text-gray-900">+91 {booking.customerPhone}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Payment Details */}
                 <div>
-                  <h3 className="text-sm font-black text-gray-900 mb-4 flex items-center gap-2">
+                  <h3 className="text-base font-black text-gray-900 mb-4 flex items-center gap-2">
                     <CreditCard className="w-4 h-4" />
                     Payment Summary
                   </h3>
                   <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
-                    <div className="flex justify-between items-center text-sm">
+                    <div className="flex justify-between items-center text-sm md:text-base">
                       <span className="text-gray-600">Trip Amount</span>
                       <span className="font-semibold text-gray-900">
                         ₹{booking.totalAmount?.toLocaleString()}
                       </span>
                     </div>
                     {booking.securityDeposit > 0 && (
-                      <div className="flex justify-between items-center text-sm border-t pt-2">
+                      <div className="flex justify-between items-center text-sm md:text-base border-t pt-2">
                         <span className="text-gray-600">Security Deposit</span>
                         <span className="font-semibold text-gray-900">
                           ₹{booking.securityDeposit?.toLocaleString()}
@@ -264,12 +264,12 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                       </div>
                     )}
                     <div className="flex justify-between items-center border-t pt-3">
-                      <span className="text-sm text-gray-600">Total Paid</span>
+                      <span className="text-sm md:text-base text-gray-600">Total Paid</span>
                       <span className="text-2xl font-black text-gray-900">
                         ₹{((booking.totalAmount || 0) + (booking.securityDeposit || 0)).toLocaleString()}
                       </span>
                     </div>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-sm text-gray-500">
                       Payment received on {new Date(booking.createdAt).toLocaleDateString('en-IN', {
                         day: 'numeric',
                         month: 'short',
@@ -277,7 +277,7 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
                       })}
                     </p>
                     {booking.securityDeposit > 0 && (
-                      <p className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
+                      <p className="text-sm text-blue-600 bg-blue-50 px-2 py-1 rounded">
                         * Security deposit is refundable
                       </p>
                     )}
@@ -289,11 +289,11 @@ export default function SuccessPage({ params }: { params: Promise<{ id: string }
 
           {/* Important Information */}
           <div className="bg-blue-50 border border-blue-200 rounded-xl p-5 mb-6">
-            <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <h3 className="font-bold text-base md:text-lg text-gray-900 mb-3 flex items-center gap-2">
               <AlertCircle className="w-5 h-5 text-blue-600" />
               Important Information
             </h3>
-            <ul className="space-y-2 text-sm text-gray-700">
+            <ul className="space-y-2 text-sm md:text-base text-gray-700">
               <li className="flex items-start gap-2">
                 <span className="text-blue-600 mt-0.5">•</span>
                 <span>Please carry a valid driving license at the time of pickup</span>

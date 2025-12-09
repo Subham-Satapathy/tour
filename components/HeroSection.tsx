@@ -91,7 +91,7 @@ export function HeroSection({ cities }: HeroSectionProps) {
 
         {/* Description and Buttons Below - Mobile/Tablet Only */}
         <div className="lg:hidden space-y-3 sm:space-y-4 md:space-y-5 px-0 sm:px-4 md:px-8 mt-4">
-          <p className="text-[11px] sm:text-xs md:text-sm leading-relaxed max-w-3xl !text-gray-700">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl !text-gray-700">
             From temples to beaches, explore Odisha's stunning destinations at your own pace. Choose from our wide range of cars and bikes, available across all major cities in Odisha.
           </p>
 
@@ -111,19 +111,19 @@ export function HeroSection({ cities }: HeroSectionProps) {
             <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span>1+ Years</span>
             </h3>
-            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Serving Odisha with reliable and affordable self-drive vehicles and family trips</p>
+            <p className="text-sm md:text-base leading-relaxed px-4 md:px-0 !text-gray-600">Serving Odisha with reliable and affordable self-drive vehicles and family trips</p>
           </div>
           <div className="text-center md:text-left">
             <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span>25+ Vehicles</span>
             </h3>
-            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Wide range of well-maintained cars and bikes for every journey</p>
+            <p className="text-sm md:text-base leading-relaxed px-4 md:px-0 !text-gray-600">Wide range of well-maintained cars and bikes for every journey</p>
           </div>
           <div className="text-center md:text-left">
             <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black mb-2 leading-none !text-black">
               <span className="whitespace-nowrap">100+ Bookings</span>
             </h3>
-            <p className="text-xs md:text-sm leading-relaxed px-4 md:px-0 !text-gray-600">Explore temples, beaches, and heritage sites across Odisha</p>
+            <p className="text-sm md:text-base leading-relaxed px-4 md:px-0 !text-gray-600">Explore temples, beaches, and heritage sites across Odisha</p>
           </div>
         </div>
       </div>

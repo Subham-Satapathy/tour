@@ -1,12 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 export default function SignUpPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [redirectUrl, setRedirectUrl] = useState('/');
+  
+  useEffect(() => {
+    const redirect = searchParams.get('redirect');
+    if (redirect) {
+      setRedirectUrl(redirect);
+    }
+  }, [searchParams]);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -65,8 +74,9 @@ export default function SignUpPage() {
         return;
       }
 
-      // Redirect to login page
-      router.push('/login?signup=success');
+      // Redirect to login page with redirect parameter
+      const loginUrl = redirectUrl !== '/' ? `/login?signup=success&redirect=${encodeURIComponent(redirectUrl)}` : '/login?signup=success';
+      router.push(loginUrl);
     } catch (err) {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -156,7 +166,7 @@ export default function SignUpPage() {
               maxLength={10}
               pattern="[6-9][0-9]{9}"
             />
-            <p className="text-xs text-gray-500 mt-1">Enter 10-digit mobile number</p>
+            <p className="text-sm text-gray-500 mt-1">Enter 10-digit mobile number</p>
           </div>
 
           <div>

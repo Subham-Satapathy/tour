@@ -150,7 +150,7 @@ export function BookingForm({
         {isLoading ? 'Processing...' : 'Confirm & Pay'}
       </button>
 
-      <p className="text-xs text-gray-500 text-center">
+      <p className="text-sm text-gray-500 text-center">
         By proceeding, you agree to our terms and conditions. Payment is processed securely.
       </p>
     </form>

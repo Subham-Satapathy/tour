@@ -56,7 +56,7 @@ export function FeaturesSection() {
                 <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-xs lg:text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -85,11 +85,11 @@ export function FeaturesSection() {
                 <div className="flex flex-wrap gap-4 z-20">
                   <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-3 lg:px-6 lg:py-4">
                     <p className="text-3xl lg:text-4xl font-black text-white">24/7</p>
-                    <p className="text-xs lg:text-sm text-gray-300">Customer Support</p>
+                    <p className="text-sm lg:text-base text-gray-300">Customer Support</p>
                   </div>
                   <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-3 lg:px-6 lg:py-4">
                     <p className="text-3xl lg:text-4xl font-black text-white">100%</p>
-                    <p className="text-xs lg:text-sm text-gray-300">Verified Vehicles</p>
+                    <p className="text-sm lg:text-base text-gray-300">Verified Vehicles</p>
                   </div>
                 </div>
               </div>
