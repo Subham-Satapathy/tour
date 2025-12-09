@@ -69,8 +69,8 @@ export function SearchForm({ cities }: SearchFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-8 border border-white/50">
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
+    <form onSubmit={handleSubmit(onSubmit)} className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-4 sm:p-6 md:p-8 border border-white/50 mx-4 sm:mx-6 md:mx-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
         <div>
           <label htmlFor="fromCityId" className="block text-sm font-bold mb-2 text-gray-900">
             From
@@ -78,7 +78,7 @@ export function SearchForm({ cities }: SearchFormProps) {
           <select
             id="fromCityId"
             {...register('fromCityId')}
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium text-sm sm:text-base"
           >
             <option value="">Select city</option>
             {cities.map((city) => (
@@ -88,7 +88,7 @@ export function SearchForm({ cities }: SearchFormProps) {
             ))}
           </select>
           {errors.fromCityId && (
-            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.fromCityId.message}</p>
+            <p className="text-red-500 text-xs sm:text-sm mt-1 font-semibold">{errors.fromCityId.message}</p>
           )}
         </div>
 
@@ -99,7 +99,7 @@ export function SearchForm({ cities }: SearchFormProps) {
           <select
             id="toCityId"
             {...register('toCityId')}
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium text-sm sm:text-base"
           >
             <option value="">Select city</option>
             {cities.map((city) => (
@@ -109,7 +109,7 @@ export function SearchForm({ cities }: SearchFormProps) {
             ))}
           </select>
           {errors.toCityId && (
-            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.toCityId.message}</p>
+            <p className="text-red-500 text-xs sm:text-sm mt-1 font-semibold">{errors.toCityId.message}</p>
           )}
         </div>
 
@@ -121,10 +121,10 @@ export function SearchForm({ cities }: SearchFormProps) {
             id="startDateTime"
             type="datetime-local"
             {...register('startDateTime')}
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium text-sm sm:text-base"
           />
           {errors.startDateTime && (
-            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.startDateTime.message}</p>
+            <p className="text-red-500 text-xs sm:text-sm mt-1 font-semibold">{errors.startDateTime.message}</p>
           )}
         </div>
 
@@ -136,22 +136,22 @@ export function SearchForm({ cities }: SearchFormProps) {
             id="endDateTime"
             type="datetime-local"
             {...register('endDateTime')}
-            className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium"
+            className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium text-sm sm:text-base"
           />
           {errors.endDateTime && (
-            <p className="text-red-500 text-sm mt-1 font-semibold">{errors.endDateTime.message}</p>
+            <p className="text-red-500 text-xs sm:text-sm mt-1 font-semibold">{errors.endDateTime.message}</p>
           )}
         </div>
       </div>
 
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <label htmlFor="type" className="block text-sm font-bold mb-2 text-gray-900">
           Vehicle Type
         </label>
         <select
           id="type"
           {...register('type')}
-          className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium"
+          className="w-full px-3 sm:px-4 py-2.5 sm:py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white transition-colors font-medium text-sm sm:text-base"
         >
           <option value="BOTH">Both (Car & Bike)</option>
           <option value="CAR">Car Only</option>
@@ -160,7 +160,7 @@ export function SearchForm({ cities }: SearchFormProps) {
       </div>
 
       {error && (
-        <div className="bg-red-50 border-2 border-red-200 text-red-700 px-4 py-3 rounded-xl mb-6 font-semibold">
+        <div className="bg-red-50 border-2 border-red-200 text-red-700 px-3 sm:px-4 py-2.5 sm:py-3 rounded-xl mb-4 sm:mb-6 font-semibold text-xs sm:text-sm">
           {error}
         </div>
       )}
@@ -168,7 +168,7 @@ export function SearchForm({ cities }: SearchFormProps) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+        className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg hover:from-blue-700 hover:to-indigo-700 disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98]"
       >
         {isLoading ? '🔍 Searching...' : 'Search Vehicles'}
       </button>

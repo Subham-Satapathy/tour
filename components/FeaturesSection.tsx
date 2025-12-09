@@ -22,17 +22,17 @@ export function FeaturesSection() {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="max-w-[1600px] mx-auto px-6 lg:px-16">
+    <section className="py-12 sm:py-16 lg:py-24 bg-white">
+      <div className="max-w-[1600px] mx-auto px-6 sm:px-8 lg:px-16">
         {/* Section Header */}
-        <div className="mb-12 lg:mb-16 text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900">
+        <div className="mb-10 sm:mb-12 lg:mb-16 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900">
             Why choose us
           </h2>
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-16 lg:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 items-start mb-12 sm:mb-16 lg:mb-24">
           {/* Left - Car Image */}
           <div className="relative">
             <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden">
@@ -47,16 +47,16 @@ export function FeaturesSection() {
           </div>
 
           {/* Right - Features Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="bg-gray-50 p-6 rounded-2xl transition-all duration-300 hover:shadow-lg"
+                className="bg-gray-50 p-5 sm:p-6 rounded-2xl transition-all duration-300 hover:shadow-lg"
               >
-                <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-sm lg:text-base text-gray-600 leading-relaxed">
+                <p className="text-xs sm:text-sm lg:text-base text-gray-600 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -65,9 +65,9 @@ export function FeaturesSection() {
         </div>
 
         {/* Bottom Banner */}
-        <div className="relative mt-32 lg:mt-48">
+        <div className="relative mt-20 sm:mt-32 lg:mt-48">
           {/* Car Image - Positioned to overflow above */}
-          <div className="relative lg:absolute lg:left-0 lg:top-0 lg:bottom-0 lg:w-1/2 z-10 h-[300px] lg:h-auto flex items-end lg:items-center justify-center lg:-translate-y-32">
+          <div className="relative lg:absolute lg:left-0 lg:top-0 lg:bottom-0 lg:w-1/2 z-10 h-[250px] sm:h-[300px] lg:h-auto flex items-end lg:items-center justify-center lg:-translate-y-32">
             <Image
               src="/featuresJeep.svg"
               alt="Luxury Car"
@@ -78,32 +78,32 @@ export function FeaturesSection() {
           </div>
 
           {/* Background Box */}
-          <div className="bg-gradient-to-r from-slate-700 to-slate-800 rounded-3xl overflow-hidden pt-8 lg:pt-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[350px] lg:min-h-[400px]">
+          <div className="bg-gradient-to-r from-slate-700 to-slate-800 rounded-3xl overflow-hidden pt-6 sm:pt-8 lg:pt-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center min-h-[300px] sm:min-h-[350px] lg:min-h-[400px]">
               {/* Left - Stats Area */}
-              <div className="relative h-full flex items-end px-6 lg:px-12 pb-6 lg:pb-12 lg:pt-12">
-                <div className="flex flex-wrap gap-4 z-20">
-                  <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-3 lg:px-6 lg:py-4">
-                    <p className="text-3xl lg:text-4xl font-black text-white">24/7</p>
-                    <p className="text-sm lg:text-base text-gray-300">Customer Support</p>
+              <div className="relative h-full flex items-end px-6 sm:px-8 lg:px-12 pb-6 sm:pb-8 lg:pb-12 lg:pt-12">
+                <div className="flex flex-wrap gap-3 sm:gap-4 z-20">
+                  <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4">
+                    <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">24/7</p>
+                    <p className="text-xs sm:text-sm lg:text-base text-gray-300">Customer Support</p>
                   </div>
-                  <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-3 lg:px-6 lg:py-4">
-                    <p className="text-3xl lg:text-4xl font-black text-white">100%</p>
-                    <p className="text-sm lg:text-base text-gray-300">Verified Vehicles</p>
+                  <div className="bg-slate-600/30 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-2.5 sm:px-5 sm:py-3 lg:px-6 lg:py-4">
+                    <p className="text-2xl sm:text-3xl lg:text-4xl font-black text-white">100%</p>
+                    <p className="text-xs sm:text-sm lg:text-base text-gray-300">Verified Vehicles</p>
                   </div>
                 </div>
               </div>
 
             {/* Right - Call to Action */}
-            <div className="p-8 lg:p-16">
-              <h2 className="text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-4 lg:mb-6 leading-tight">
+            <div className="p-6 sm:p-8 lg:p-16">
+              <h2 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-black text-white mb-3 sm:mb-4 lg:mb-6 leading-tight break-words">
                 Save money with Triveni Tours
               </h2>
-              <p className="text-gray-300 mb-8 lg:mb-10 text-sm lg:text-base">
+              <p className="text-gray-300 mb-6 sm:mb-8 lg:mb-10 text-xs sm:text-sm lg:text-base">
                 Best prices in Odisha with full refund in case of cancellation
               </p>
-              <button className="px-7 py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all hover:scale-105 flex items-center gap-2 shadow-lg text-sm lg:text-base cursor-pointer">
-                Book Now <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5" />
+              <button className="px-6 py-2.5 sm:px-7 sm:py-3 bg-black text-white rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all flex items-center gap-2 shadow-lg text-xs sm:text-sm lg:text-base cursor-pointer">
+                Book Now <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5" />
               </button>
             </div>
           </div>

@@ -17,11 +17,11 @@ interface HeroSectionProps {
 export function HeroSection({ cities }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen bg-white overflow-hidden pt-20 pb-8 flex flex-col" style={{ colorScheme: 'light' }}>
-      <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-16 flex-1 flex flex-col justify-between">
-        <div className="grid grid-cols-5 gap-2 sm:gap-4 md:gap-8 lg:gap-12 items-center pt-4 sm:pt-8 lg:pt-12">
+      <div className="max-w-[1800px] mx-auto px-6 sm:px-8 lg:px-16 flex-1 flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 sm:gap-6 md:gap-8 lg:gap-12 items-center pt-4 sm:pt-8 lg:pt-12">
           
           {/* Left Column - Car Image */}
-          <div className="col-span-2 relative flex items-center justify-start">
+          <div className="md:col-span-2 relative flex items-center justify-start order-2 md:order-1">
             <div className="relative w-full">
               {/* Car Image - Red SUV */}
               <div className="relative w-full aspect-[4/3] bg-white flex items-center justify-center">
@@ -40,19 +40,19 @@ export function HeroSection({ cities }: HeroSectionProps) {
           </div>
 
           {/* Right Column - All Content */}
-          <div className="col-span-3 flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-6">
+          <div className="md:col-span-3 flex flex-col justify-center space-y-4 sm:space-y-5 md:space-y-6 order-1 md:order-2">
             <div>
               <div className="inline-block mb-2 sm:mb-3 md:mb-4">
-                <div className="border-t-2 border-black w-10 sm:w-14 md:w-20 mb-1.5 md:mb-2"></div>
+                <div className="border-t-2 border-black w-12 sm:w-14 md:w-20 mb-1.5 md:mb-2"></div>
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium tracking-wide !text-gray-600">Explore Odisha Your Way!</p>
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl xl:text-9xl font-black leading-[0.95] tracking-tighter mb-3 sm:mb-4 md:mb-6 !text-black">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl xl:text-9xl font-black leading-[0.95] tracking-tighter mb-4 sm:mb-5 md:mb-6 !text-black break-words">
                 Rent Cars<br/>& Bikes<br/>In Odisha
               </h1>
             </div>
 
             <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-              <div className="w-3 h-3 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-black flex-shrink-0"></div>
+              <div className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded-full bg-black flex-shrink-0"></div>
               <p className="font-medium text-sm sm:text-base md:text-lg lg:text-xl leading-tight !text-gray-800">Premium vehicles for your Odisha adventure</p>
             </div>
 
@@ -91,16 +91,16 @@ export function HeroSection({ cities }: HeroSectionProps) {
         </div>
 
         {/* Description and Buttons Below - Mobile/Tablet Only */}
-        <div className="lg:hidden space-y-3 sm:space-y-4 md:space-y-5 px-0 sm:px-4 md:px-8 mt-4">
-          <p className="text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl !text-gray-700">
+        <div className="lg:hidden space-y-4 sm:space-y-5 px-0 mt-6 sm:mt-8">
+          <p className="text-sm sm:text-base md:text-lg leading-relaxed !text-gray-700">
             From temples to beaches, explore Odisha's stunning destinations at your own pace. Choose from our wide range of cars and bikes, available across all major cities in Odisha.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
-            <Link href="/vehicles" className="px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white cursor-pointer">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full">
+            <Link href="/vehicles" className="w-full sm:flex-1 px-6 py-3 sm:px-8 sm:py-4 bg-black rounded-full font-semibold hover:scale-105 hover:shadow-xl transition-all flex items-center justify-center gap-2 sm:gap-3 shadow-lg text-sm sm:text-base md:text-lg !text-white cursor-pointer">
               Book Now <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </Link>
-            <Link href="/vehicles" className="px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black cursor-pointer">
+            <Link href="/vehicles" className="w-full sm:flex-1 px-6 py-3 sm:px-8 sm:py-4 bg-white border-2 border-gray-300 rounded-full font-semibold hover:bg-gray-50 transition-all hover:scale-105 flex items-center justify-center gap-2 sm:gap-3 shadow-md text-sm sm:text-base md:text-lg !text-black cursor-pointer">
               View Vehicles <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
             </Link>
           </div>

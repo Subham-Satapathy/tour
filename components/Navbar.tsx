@@ -4,9 +4,12 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { Search, User, LogOut, Calendar } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
+import { useRouter, usePathname } from 'next/navigation';
 
 export function Navbar() {
   const { data: session, status } = useSession();
+  const router = useRouter();
+  const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -34,9 +37,20 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    if (pathname === '/') {
+      // If on home page, scroll to section
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // If on another page, navigate to home with hash
+      router.push(`/#${sectionId}`);
+    }
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-[9999] bg-white/95 backdrop-blur-md transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
@@ -54,40 +68,28 @@ export function Navbar() {
             </Link>
             <a 
               href="#vehicles"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('vehicles')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={(e) => handleNavClick(e, 'vehicles')}
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
               Vehicles
             </a>
             <a 
               href="#how-it-works"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={(e) => handleNavClick(e, 'how-it-works')}
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
               How It Works
             </a>
             <a 
               href="#faq" 
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={(e) => handleNavClick(e, 'faq')}
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
               FAQ
             </a>
             <a 
               href="#contact" 
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={(e) => handleNavClick(e, 'contact')}
               className="text-gray-700 hover:text-black font-medium transition-colors relative group cursor-pointer"
             >
               Contact
@@ -181,7 +183,7 @@ export function Navbar() {
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMobileMenuOpen(false);
-                  document.getElementById('vehicles')?.scrollIntoView({ behavior: 'smooth' });
+                  handleNavClick(e, 'vehicles');
                 }}
                 className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
@@ -192,7 +194,7 @@ export function Navbar() {
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMobileMenuOpen(false);
-                  document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+                  handleNavClick(e, 'how-it-works');
                 }}
                 className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
@@ -203,7 +205,7 @@ export function Navbar() {
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMobileMenuOpen(false);
-                  document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' });
+                  handleNavClick(e, 'faq');
                 }}
                 className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
@@ -214,7 +216,7 @@ export function Navbar() {
                 onClick={(e) => {
                   e.preventDefault();
                   setIsMobileMenuOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                  handleNavClick(e, 'contact');
                 }}
                 className="px-4 py-3 text-gray-700 hover:text-black font-semibold transition-all cursor-pointer"
               >
