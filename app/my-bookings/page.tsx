@@ -125,55 +125,59 @@ export default function MyBookingsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white py-8 sm:py-12 pt-24 sm:pt-28">
+      <main className="min-h-screen bg-white py-6 sm:py-12 pt-20 sm:pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           {/* Header */}
-          <div className="mb-8">
-            <h1 className="text-3xl sm:text-4xl font-black text-gray-900 mb-2">My Bookings</h1>
-            <p className="text-gray-600">View and manage all your vehicle bookings</p>
+          <div className="mb-6 sm:mb-8">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-1 sm:mb-2">My Bookings</h1>
+            <p className="text-sm sm:text-base text-gray-600">View and manage all your vehicle bookings</p>
           </div>
 
           {/* Filters */}
-          <div className="flex flex-wrap gap-3 mb-8">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
             <button
               onClick={() => setFilter('all')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all cursor-pointer ${
+              className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'all'
                   ? 'bg-black text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              All ({bookings.length})
+              <span className="hidden sm:inline">All ({bookings.length})</span>
+              <span className="sm:hidden">All ({bookings.length})</span>
             </button>
             <button
               onClick={() => setFilter('upcoming')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all cursor-pointer ${
+              className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'upcoming'
                   ? 'bg-black text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Upcoming ({bookings.filter(b => isUpcoming(b.startDateTime) && b.status === 'PAID').length})
+              <span className="hidden sm:inline">Upcoming ({bookings.filter(b => isUpcoming(b.startDateTime) && b.status === 'PAID').length})</span>
+              <span className="sm:hidden">Upcoming ({bookings.filter(b => isUpcoming(b.startDateTime) && b.status === 'PAID').length})</span>
             </button>
             <button
               onClick={() => setFilter('completed')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all cursor-pointer ${
+              className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'completed'
                   ? 'bg-black text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Completed ({bookings.filter(b => isCompleted(b.endDateTime) && b.status === 'PAID').length})
+              <span className="hidden sm:inline">Completed ({bookings.filter(b => isCompleted(b.endDateTime) && b.status === 'PAID').length})</span>
+              <span className="sm:hidden">Done ({bookings.filter(b => isCompleted(b.endDateTime) && b.status === 'PAID').length})</span>
             </button>
             <button
               onClick={() => setFilter('cancelled')}
-              className={`px-6 py-2 rounded-lg font-semibold transition-all cursor-pointer ${
+              className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'cancelled'
                   ? 'bg-black text-white'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Cancelled ({bookings.filter(b => b.status === 'CANCELLED').length})
+              <span className="hidden sm:inline">Cancelled ({bookings.filter(b => b.status === 'CANCELLED').length})</span>
+              <span className="sm:hidden">Cancelled ({bookings.filter(b => b.status === 'CANCELLED').length})</span>
             </button>
           </div>
 
@@ -199,12 +203,12 @@ export default function MyBookingsPage() {
               {filteredBookings.map((booking) => (
                 <div
                   key={booking.id}
-                  className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-gray-300 transition-all"
+                  className="bg-white border-2 border-gray-200 rounded-xl p-4 sm:p-6 hover:border-gray-300 transition-all"
                 >
-                  <div className="flex flex-col lg:flex-row gap-6">
+                  <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
                     {/* Vehicle Image */}
                     {booking.vehicle?.imageUrl && (
-                      <div className="lg:w-48 lg:h-32 h-48 flex-shrink-0">
+                      <div className="w-full lg:w-48 h-40 sm:h-48 lg:h-32 flex-shrink-0">
                         <img
                           src={booking.vehicle.imageUrl}
                           alt={booking.vehicle.name}
@@ -215,27 +219,27 @@ export default function MyBookingsPage() {
 
                     {/* Booking Details */}
                     <div className="flex-1">
-                      <div className="flex items-start justify-between mb-4">
-                        <div>
-                          <div className="flex items-center gap-3 mb-2">
-                            <h3 className="text-xl font-black text-gray-900">
+                      <div className="flex flex-col sm:flex-row items-start justify-between mb-3 sm:mb-4 gap-2">
+                        <div className="flex-1">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                            <h3 className="text-lg sm:text-xl font-black text-gray-900">
                               {booking.vehicle?.name || 'Vehicle'}
                             </h3>
                             <span className={getStatusBadge(booking.status)}>
                               {booking.status}
                             </span>
                           </div>
-                          <p className="text-sm text-gray-600">Booking ID: #{booking.id}</p>
+                          <p className="text-xs sm:text-sm text-gray-600">Booking ID: #{booking.id}</p>
                         </div>
-                        <div className="text-right">
-                          <p className="text-2xl font-black text-gray-900">
+                        <div className="text-left sm:text-right">
+                          <p className="text-xl sm:text-2xl font-black text-gray-900">
                             ₹{booking.totalAmount?.toLocaleString()}
                           </p>
-                          <p className="text-sm text-gray-500">Total Amount</p>
+                          <p className="text-xs sm:text-sm text-gray-500">Total Amount</p>
                         </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
                         <div className="flex items-start gap-2">
                           <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
                           <div>
@@ -281,10 +285,10 @@ export default function MyBookingsPage() {
                         </div>
                       </div>
 
-                      <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <Link
                           href={`/booking/success/${booking.id}`}
-                          className="px-6 py-2 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all"
+                          className="px-4 sm:px-6 py-2 bg-black text-white rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-800 transition-all text-center"
                         >
                           View Details
                         </Link>

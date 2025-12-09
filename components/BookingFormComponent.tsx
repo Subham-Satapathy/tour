@@ -144,6 +144,26 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
     return true;
   };
 
+  const checkAvailability = async () => {
+    try {
+      const response = await fetch('/api/bookings/check-availability', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          vehicleId: vehicle.id,
+          startDateTime: formData.startDateTime,
+          endDateTime: formData.endDateTime,
+        }),
+      });
+
+      const data = await response.json();
+      return data.available;
+    } catch (err) {
+      console.error('Error checking availability:', err);
+      return true; // Allow to proceed if check fails
+    }
+  };
+
   const validateStep2 = () => {
     if (!formData.customerName || !formData.customerEmail || !formData.customerPhone) {
       setError('Please fill all required fields');
@@ -157,10 +177,20 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
     return true;
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     setError('');
     if (step === 1) {
       if (!validateStep1()) return;
+      
+      // Check vehicle availability
+      setLoading(true);
+      const available = await checkAvailability();
+      setLoading(false);
+      
+      if (!available) {
+        setError('Vehicle is not available for the selected dates. Please choose different dates.');
+        return;
+      }
       
       // Check if user is logged in
       if (status === 'unauthenticated') {
