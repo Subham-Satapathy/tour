@@ -2,7 +2,6 @@ import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { db } from '@/server/db';
-import { getAdminUserByEmail } from '@/server/db/queries/adminUsers';
 import { users } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 
@@ -13,37 +12,13 @@ export const authOptions: NextAuthOptions = {
       credentials: {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
-        userType: { label: 'User Type', type: 'text' },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
         }
 
-        // Check if this is an admin login
-        if (credentials.userType === 'admin') {
-          const admin = await getAdminUserByEmail(db, credentials.email);
-          if (!admin) {
-            return null;
-          }
-
-          const isValid = await bcrypt.compare(
-            credentials.password,
-            admin.passwordHash
-          );
-
-          if (!isValid) {
-            return null;
-          }
-
-          return {
-            id: admin.id.toString(),
-            email: admin.email,
-            role: 'admin',
-          };
-        }
-
-        // Regular customer login
+        // Customer login
         const [user] = await db.select().from(users).where(eq(users.email, credentials.email));
         
         if (!user) {

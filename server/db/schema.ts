@@ -88,16 +88,6 @@ export const bookings = pgTable('bookings', {
   createdAtIdx: index('bookings_created_at_idx').on(table.createdAt),
 }));
 
-// AdminUser table
-export const adminUsers = pgTable('admin_users', {
-  id: serial('id').primaryKey(),
-  email: varchar('email', { length: 200 }).notNull().unique(),
-  passwordHash: varchar('password_hash', { length: 200 }).notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-}, (table) => ({
-  emailIdx: index('admin_users_email_idx').on(table.email),
-}));
-
 // User table (for customers)
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
@@ -151,9 +141,6 @@ export type NewVehicle = typeof vehicles.$inferInsert;
 
 export type Booking = typeof bookings.$inferSelect;
 export type NewBooking = typeof bookings.$inferInsert;
-
-export type AdminUser = typeof adminUsers.$inferSelect;
-export type NewAdminUser = typeof adminUsers.$inferInsert;
 
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;

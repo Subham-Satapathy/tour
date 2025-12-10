@@ -115,8 +115,8 @@ export default function MyBookingsPage() {
     return (
       <>
         <Navbar />
-        <div className="min-h-screen bg-white flex items-center justify-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-black border-t-transparent"></div>
+        <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-black dark:border-white border-t-transparent"></div>
         </div>
       </>
     );
@@ -125,12 +125,12 @@ export default function MyBookingsPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white py-6 sm:py-12 pt-20 sm:pt-28">
+      <main className="min-h-screen bg-white dark:bg-black py-6 sm:py-12 pt-20 sm:pt-28">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
           {/* Header */}
           <div className="mb-6 sm:mb-8">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 mb-1 sm:mb-2">My Bookings</h1>
-            <p className="text-sm sm:text-base text-gray-600">View and manage all your vehicle bookings</p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-1 sm:mb-2">My Bookings</h1>
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">View and manage all your vehicle bookings</p>
           </div>
 
           {/* Filters */}
@@ -139,8 +139,8 @@ export default function MyBookingsPage() {
               onClick={() => setFilter('all')}
               className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'all'
-                  ? 'bg-black text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-black dark:bg-white text-white dark:text-black'
+                  : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
               }`}
             >
               <span className="hidden sm:inline">All ({bookings.length})</span>
@@ -150,8 +150,8 @@ export default function MyBookingsPage() {
               onClick={() => setFilter('upcoming')}
               className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'upcoming'
-                  ? 'bg-black text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-black dark:bg-white text-white dark:text-black'
+                  : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
               }`}
             >
               <span className="hidden sm:inline">Upcoming ({bookings.filter(b => isUpcoming(b.startDateTime) && b.status === 'PAID').length})</span>
@@ -161,8 +161,8 @@ export default function MyBookingsPage() {
               onClick={() => setFilter('completed')}
               className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'completed'
-                  ? 'bg-black text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-black dark:bg-white text-white dark:text-black'
+                  : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
               }`}
             >
               <span className="hidden sm:inline">Completed ({bookings.filter(b => isCompleted(b.endDateTime) && b.status === 'PAID').length})</span>
@@ -172,8 +172,8 @@ export default function MyBookingsPage() {
               onClick={() => setFilter('cancelled')}
               className={`px-3 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm sm:text-base font-semibold transition-all cursor-pointer ${
                 filter === 'cancelled'
-                  ? 'bg-black text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-black dark:bg-white text-white dark:text-black'
+                  : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
               }`}
             >
               <span className="hidden sm:inline">Cancelled ({bookings.filter(b => b.status === 'CANCELLED').length})</span>
@@ -184,16 +184,16 @@ export default function MyBookingsPage() {
           {/* Bookings List */}
           {filteredBookings.length === 0 ? (
             <div className="text-center py-16">
-              <Car className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-gray-900 mb-2">No Bookings Found</h3>
-              <p className="text-gray-600 mb-6">
+              <Car className="w-16 h-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">No Bookings Found</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">
                 {filter === 'all' 
                   ? "You haven't made any bookings yet."
                   : `You don't have any ${filter} bookings.`}
               </p>
               <Link
                 href="/vehicles"
-                className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
+                className="inline-block bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200"
               >
                 Browse Vehicles
               </Link>
@@ -203,7 +203,7 @@ export default function MyBookingsPage() {
               {filteredBookings.map((booking) => (
                 <div
                   key={booking.id}
-                  className="bg-white border-2 border-gray-200 rounded-xl p-4 sm:p-6 hover:border-gray-300 transition-all"
+                  className="bg-white dark:bg-black border-2 border-gray-200 dark:border-white rounded-xl p-4 sm:p-6 hover:border-gray-300 dark:hover:border-gray-400 transition-all"
                 >
                   <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
                     {/* Vehicle Image */}
@@ -222,49 +222,49 @@ export default function MyBookingsPage() {
                       <div className="flex flex-col sm:flex-row items-start justify-between mb-3 sm:mb-4 gap-2">
                         <div className="flex-1">
                           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                            <h3 className="text-lg sm:text-xl font-black text-gray-900">
+                            <h3 className="text-lg sm:text-xl font-black text-gray-900 dark:text-white">
                               {booking.vehicle?.name || 'Vehicle'}
                             </h3>
                             <span className={getStatusBadge(booking.status)}>
                               {booking.status}
                             </span>
                           </div>
-                          <p className="text-xs sm:text-sm text-gray-600">Booking ID: #{booking.id}</p>
+                          <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Booking ID: #{booking.id}</p>
                         </div>
                         <div className="text-left sm:text-right">
-                          <p className="text-xl sm:text-2xl font-black text-gray-900">
+                          <p className="text-xl sm:text-2xl font-black text-gray-900 dark:text-white">
                             ₹{booking.totalAmount?.toLocaleString()}
                           </p>
-                          <p className="text-xs sm:text-sm text-gray-500">Total Amount</p>
+                          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Total Amount</p>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-3 sm:mb-4">
                         <div className="flex items-start gap-2">
-                          <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
+                          <MapPin className="w-4 h-4 text-gray-600 dark:text-gray-400 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-sm text-gray-600">From</p>
-                            <p className="text-base font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">From</p>
+                            <p className="text-base font-semibold text-gray-900 dark:text-white">
                               {booking.fromCity?.name || 'N/A'}
                             </p>
                           </div>
                         </div>
 
                         <div className="flex items-start gap-2">
-                          <MapPin className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
+                          <MapPin className="w-4 h-4 text-gray-600 dark:text-gray-400 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-sm text-gray-600">To</p>
-                            <p className="text-base font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">To</p>
+                            <p className="text-base font-semibold text-gray-900 dark:text-white">
                               {booking.toCity?.name || 'N/A'}
                             </p>
                           </div>
                         </div>
 
                         <div className="flex items-start gap-2">
-                          <Calendar className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
+                          <Calendar className="w-4 h-4 text-gray-600 dark:text-gray-400 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-sm text-gray-600">Start Date</p>
-                            <p className="text-base font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Start Date</p>
+                            <p className="text-base font-semibold text-gray-900 dark:text-white">
                               {new Date(booking.startDateTime).toLocaleDateString('en-IN', {
                                 day: 'numeric',
                                 month: 'short',
@@ -275,10 +275,10 @@ export default function MyBookingsPage() {
                         </div>
 
                         <div className="flex items-start gap-2">
-                          <Clock className="w-4 h-4 text-gray-600 flex-shrink-0 mt-0.5" />
+                          <Clock className="w-4 h-4 text-gray-600 dark:text-gray-400 flex-shrink-0 mt-0.5" />
                           <div>
-                            <p className="text-sm text-gray-600">Duration</p>
-                            <p className="text-base font-semibold text-gray-900">
+                            <p className="text-sm text-gray-600 dark:text-gray-400">Duration</p>
+                            <p className="text-base font-semibold text-gray-900 dark:text-white">
                               {booking.tripDurationHours}h ({Math.ceil(booking.tripDurationHours / 24)}d)
                             </p>
                           </div>
@@ -288,7 +288,7 @@ export default function MyBookingsPage() {
                       <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                         <Link
                           href={`/booking/success/${booking.id}`}
-                          className="px-4 sm:px-6 py-2 bg-black text-white rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 text-center cursor-pointer"
+                          className="px-4 sm:px-6 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg text-sm sm:text-base font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 text-center cursor-pointer"
                         >
                           View Details
                         </Link>
@@ -300,7 +300,7 @@ export default function MyBookingsPage() {
                                 alert('Cancellation feature coming soon!');
                               }
                             }}
-                            className="px-4 sm:px-6 py-2 border-2 border-red-600 text-red-600 rounded-lg text-sm sm:text-base font-semibold hover:bg-red-50 transition-all cursor-pointer"
+                            className="px-4 sm:px-6 py-2 border-2 border-red-600 dark:border-red-500 text-red-600 dark:text-red-500 rounded-lg text-sm sm:text-base font-semibold hover:bg-red-50 dark:hover:bg-red-900/20 transition-all cursor-pointer"
                           >
                             <span className="hidden sm:inline">Cancel Booking</span>
                             <span className="sm:hidden">Cancel</span>

@@ -28,17 +28,17 @@ export default async function BookingPage({ params, searchParams }: BookingPageP
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white dark:bg-black">
           <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-            <h1 className="text-3xl font-black text-gray-900 mb-4">
+            <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-4">
               Invalid Vehicle
             </h1>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
               The vehicle you're looking for doesn't exist.
             </p>
             <Link
               href="/vehicles"
-              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
+              className="inline-block bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200"
             >
               Browse Vehicles
             </Link>
@@ -59,17 +59,17 @@ export default async function BookingPage({ params, searchParams }: BookingPageP
     return (
       <>
         <Navbar />
-        <main className="min-h-screen bg-white">
+        <main className="min-h-screen bg-white dark:bg-black">
           <div className="max-w-2xl mx-auto px-4 py-16 text-center">
-            <h1 className="text-3xl font-black text-gray-900 mb-4">
+            <h1 className="text-3xl font-black text-gray-900 dark:text-white mb-4">
               Vehicle Not Found
             </h1>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
               This vehicle is no longer available.
             </p>
             <Link
               href="/vehicles"
-              className="inline-block bg-black text-white px-8 py-3 rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200"
+              className="inline-block bg-black dark:bg-white text-white dark:text-black px-8 py-3 rounded-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200"
             >
               Browse Other Vehicles
             </Link>
@@ -93,7 +93,7 @@ export default async function BookingPage({ params, searchParams }: BookingPageP
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-white dark:bg-black">
         <BookingFormComponent 
           vehicle={vehicle} 
           cities={allCities}

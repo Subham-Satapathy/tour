@@ -6,28 +6,28 @@ export function Newsletter() {
   const [email, setEmail] = useState('');
 
   return (
-    <section className="py-16 sm:py-20 lg:py-24 bg-white relative overflow-hidden">
+    <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black relative overflow-hidden">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Heading */}
           <div className="text-center mb-8 sm:mb-10 lg:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 mb-3 sm:mb-4 px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-gray-900 dark:text-white mb-3 sm:mb-4 px-4">
               Stay updated with Triveni Tours
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 font-medium px-6 sm:px-8">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 dark:text-gray-400 font-medium px-6 sm:px-8">
               Subscribe to get exclusive deals and travel tips from Triveni Tours & Travels
             </p>
           </div>
 
           {/* Subscribe Form */}
           <form className="w-full px-2 sm:px-4 md:px-6 md:max-w-4xl md:mx-auto">
-            <div className="relative flex items-center bg-white p-1.5 sm:p-2 md:p-3 rounded-full border-2 sm:border-[3px] border-gray-900 shadow-xl">
+            <div className="relative flex items-center bg-white dark:bg-black p-1.5 sm:p-2 md:p-3 rounded-full border-2 sm:border-[3px] border-gray-900 dark:border-white shadow-xl">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className="flex-1 px-3 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-4 rounded-full text-gray-900 bg-transparent border-none focus:outline-none text-xs sm:text-sm md:text-base lg:text-lg font-medium placeholder:text-gray-400"
+                className="flex-1 px-3 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-4 rounded-full text-gray-900 dark:text-white bg-transparent border-none focus:outline-none text-xs sm:text-sm md:text-base lg:text-lg font-medium placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
               <button
                 type="submit"
@@ -50,7 +50,7 @@ export function Newsletter() {
             </div>
           </form>
 
-          <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 text-center font-medium px-4">
+          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-4 sm:mt-6 text-center font-medium px-4">
             We respect your privacy. Unsubscribe at any time.
           </p>
         </div>

@@ -12,7 +12,7 @@ export default async function VehiclesPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-white py-12 pt-24 sm:pt-28">
+      <main className="min-h-screen bg-white dark:bg-black py-12 pt-24 sm:pt-28">
         <VehicleFleet cities={cities} />
       </main>
       <Footer />

@@ -2,19 +2,19 @@
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-white scroll-mt-20">
+    <section id="how-it-works" className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black scroll-mt-20">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
             How It's Works
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-4">
-            <div className="hidden sm:block h-0.5 w-12 bg-gray-300"></div>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 text-center">
+            <div className="hidden sm:block h-0.5 w-12 bg-gray-300 dark:bg-gray-600"></div>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 text-center">
               Self-drive cars, bikes and family trips with vehicle & driver
             </p>
-            <div className="hidden sm:block h-0.5 w-12 bg-gray-300"></div>
+            <div className="hidden sm:block h-0.5 w-12 bg-gray-300 dark:bg-gray-600"></div>
           </div>
         </div>
 

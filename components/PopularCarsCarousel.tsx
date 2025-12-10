@@ -104,14 +104,14 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className="w-14 h-14 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-black shadow-md relative z-20 cursor-pointer"
+          className="w-14 h-14 rounded-full bg-white dark:bg-black border-2 border-gray-200 dark:border-white flex items-center justify-center hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-black dark:hover:border-white transition-all disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white dark:disabled:hover:bg-black disabled:hover:text-black dark:disabled:hover:text-white shadow-md relative z-20 cursor-pointer"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={handleNext}
           disabled={currentIndex >= maxIndex}
-          className="w-14 h-14 rounded-full bg-black text-white border-2 border-black flex items-center justify-center hover:bg-gray-800 active:scale-95 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-black shadow-md relative z-20 cursor-pointer"
+          className="w-14 h-14 rounded-full bg-black dark:bg-white text-white dark:text-black border-2 border-black dark:border-white flex items-center justify-center hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-black dark:disabled:hover:bg-white shadow-md relative z-20 cursor-pointer"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -135,8 +135,8 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
               }}
               className={`h-1.5 rounded-full transition-all cursor-pointer ${
                 index === currentIndex
-                  ? 'w-10 bg-black'
-                  : 'w-4 bg-gray-300'
+                  ? 'w-10 bg-black dark:bg-white'
+                  : 'w-4 bg-gray-300 dark:bg-gray-700'
               }`}
             />
           );
@@ -166,9 +166,9 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
               href={`/booking/${vehicle.id}`}
               className="flex-shrink-0 w-[85vw] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-[340px] sm:max-w-none snap-center block cursor-pointer h-full"
             >
-              <div className="bg-white rounded-2xl overflow-hidden border-2 border-gray-100 hover:border-black transition-all duration-300 hover:shadow-2xl group h-full flex flex-col">
+              <div className="bg-white dark:bg-black rounded-2xl overflow-hidden border-2 border-gray-100 dark:border-white hover:border-black dark:hover:border-gray-300 transition-all duration-300 hover:shadow-2xl group h-full flex flex-col">
                 {/* Vehicle Image */}
-                <div className="relative h-36 sm:h-48 md:h-56 lg:h-64 bg-gray-50 overflow-hidden flex-shrink-0">
+                <div className="relative h-36 sm:h-48 md:h-56 lg:h-64 bg-gray-50 dark:bg-gray-900 overflow-hidden flex-shrink-0">
                   <img
                     src={vehicle.imageUrl || '/placeholder-vehicle.jpg'}
                     alt={vehicle.name}
@@ -178,8 +178,8 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                   <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
                     <span className={`px-2 py-1 sm:px-4 sm:py-2 rounded-full text-[9px] sm:text-xs font-bold uppercase tracking-wide ${
                       vehicle.type === 'CAR' 
-                        ? 'bg-black text-white' 
-                        : 'bg-white text-black border-2 border-black'
+                        ? 'bg-black dark:bg-white text-white dark:text-black' 
+                        : 'bg-white dark:bg-black text-black dark:text-white border-2 border-black dark:border-white'
                     }`}>
                       {vehicle.type}
                     </span>
@@ -188,11 +188,11 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
 
                 {/* Vehicle Details */}
                 <div className="p-3 sm:p-4 md:p-6 flex flex-col flex-1">
-                  <h3 className="text-base sm:text-xl md:text-2xl font-black text-black mb-0.5 sm:mb-1 tracking-tight leading-tight">
+                  <h3 className="text-base sm:text-xl md:text-2xl font-black text-black dark:text-white mb-0.5 sm:mb-1 tracking-tight leading-tight">
                     {vehicle.name}
                   </h3>
                   {(vehicle.brand || vehicle.model) && (
-                    <p className="text-[10px] sm:text-sm text-gray-600 mb-2 sm:mb-4 font-medium">
+                    <p className="text-[10px] sm:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-4 font-medium">
                       {[vehicle.brand, vehicle.model, vehicle.year].filter(Boolean).join(' ')}
                     </p>
                   )}
@@ -200,7 +200,7 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                   {/* Description - Hidden on mobile, fixed height to maintain uniformity */}
                   <div className="hidden md:block h-10 mb-3 sm:mb-4">
                     {vehicle.description && (
-                      <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
                         {vehicle.description}
                       </p>
                     )}
@@ -210,38 +210,38 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                   <div className="flex-1"></div>
 
                   {/* Specs */}
-                  <div className="flex justify-between mb-3 sm:mb-6 bg-gray-50 rounded-lg sm:rounded-xl p-1.5 sm:p-4 border border-gray-100">
+                  <div className="flex justify-between mb-3 sm:mb-6 bg-gray-50 dark:bg-gray-900 rounded-lg sm:rounded-xl p-1.5 sm:p-4 border border-gray-100 dark:border-white">
                     {vehicle.mileage && (
                       <div className="flex flex-col items-center gap-0.5">
-                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                         </svg>
-                        <span className="text-xs sm:text-sm text-gray-700 font-semibold text-center leading-tight">{vehicle.mileage}</span>
+                        <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-semibold text-center leading-tight">{vehicle.mileage}</span>
                       </div>
                     )}
                     {vehicle.fuelType && (
                       <div className="flex flex-col items-center gap-0.5">
-                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 2v20M2 12h20" />
                         </svg>
-                        <span className="text-xs sm:text-sm text-gray-700 font-semibold">{vehicle.fuelType}</span>
+                        <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-semibold">{vehicle.fuelType}</span>
                       </div>
                     )}
                     {vehicle.transmissionType && (
                       <div className="flex flex-col items-center gap-0.5">
-                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <circle cx="12" cy="12" r="10" strokeWidth={2.5} />
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6v6l4 2" />
                         </svg>
-                        <span className="text-xs sm:text-sm text-gray-700 font-semibold">{vehicle.transmissionType}</span>
+                        <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-semibold">{vehicle.transmissionType}</span>
                       </div>
                     )}
                     {vehicle.seatingCapacity && (
                       <div className="flex flex-col items-center gap-0.5">
-                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <svg className="w-3.5 h-3.5 sm:w-5 sm:h-5 text-black dark:text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span className="text-xs sm:text-sm text-gray-700 font-semibold">{vehicle.seatingCapacity} seats</span>
+                        <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 font-semibold">{vehicle.seatingCapacity} seats</span>
                       </div>
                     )}
                   </div>
@@ -249,14 +249,14 @@ export function PopularCarsCarousel({ vehicles }: PopularCarsCarouselProps) {
                   {/* Price and CTA */}
                   <div className="flex items-center justify-between gap-2">
                     <div>
-                      <p className="text-lg sm:text-2xl md:text-3xl font-black text-black tracking-tight leading-none">₹{vehicle.ratePerDay}</p>
-                      <p className="text-xs sm:text-sm text-gray-600 font-medium">per day</p>
+                      <p className="text-lg sm:text-2xl md:text-3xl font-black text-black dark:text-white tracking-tight leading-none">₹{vehicle.ratePerDay}</p>
+                      <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium">per day</p>
                     </div>
                     <span
                       className={`px-3 py-1.5 sm:px-6 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-all shadow-md whitespace-nowrap inline-block ${
                         vehicle.isActive
-                          ? 'bg-black text-white'
-                          : 'bg-gray-200 text-gray-400 cursor-not-allowed border-2 border-gray-300'
+                          ? 'bg-black dark:bg-white text-white dark:text-black'
+                          : 'bg-gray-200 dark:bg-gray-800 text-gray-400 dark:text-gray-600 cursor-not-allowed border-2 border-gray-300 dark:border-gray-700'
                       }`}
                     >
                       {vehicle.isActive ? 'Book Now' : 'Unavailable'}

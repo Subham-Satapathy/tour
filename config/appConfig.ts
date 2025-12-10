@@ -20,12 +20,6 @@ export const appConfig = {
     enableCarBooking: true,
   },
   
-  // Admin settings
-  admin: {
-    defaultEmail: process.env.ADMIN_DEFAULT_EMAIL || 'support@trivenitravels.com',
-    defaultPassword: process.env.ADMIN_DEFAULT_PASSWORD || 'admin123',
-  },
-  
   // SMTP settings
   smtp: {
     host: process.env.SMTP_HOST || 'mail.spacemail.com',

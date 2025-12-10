@@ -100,7 +100,7 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
     const addWatermark = () => {
       if (logoDataUrl) {
         doc.saveGraphicsState();
-        doc.setGState({ opacity: 0.08 }); // 8% opacity for subtle watermark
+        doc.setGState(new doc.GState({ opacity: 0.08 })); // 8% opacity for subtle watermark
         
         const logoSize = Math.min(pageWidth, pageHeight) * 0.65;
         const logoX = (pageWidth - logoSize) / 2;

@@ -229,12 +229,12 @@ function SignUpForm() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center px-4 py-12 pt-24">
+    <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center px-4 py-12 pt-24">
       <div className="max-w-md w-full">
         {/* Back to Home */}
         <Link 
           href="/" 
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-black transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors mb-8 group"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Home
@@ -247,17 +247,17 @@ function SignUpForm() {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-black text-black mb-2">
+          <h1 className="text-4xl font-black text-black dark:text-white mb-2">
             {step === 'form' ? 'Create Account' : 'Verify Email'}
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-400">
             {step === 'form' ? 'Join us to start your journey' : 'Enter the OTP sent to your email'}
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+          <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
             {error}
           </div>
         )}
@@ -266,7 +266,7 @@ function SignUpForm() {
           /* Sign Up Form */
           <form onSubmit={handleFormSubmit} className="space-y-5">
             <div>
-              <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="name" className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Full Name
               </label>
               <input
@@ -275,13 +275,13 @@ function SignUpForm() {
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
                 placeholder="John Doe"
               />
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="email" className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Email Address
               </label>
               <input
@@ -290,13 +290,13 @@ function SignUpForm() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
                 placeholder="you@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="phone" className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Phone Number
               </label>
               <div className="relative">
@@ -311,8 +311,8 @@ function SignUpForm() {
                       setFormData({ ...formData, phone: value });
                     }
                   }}
-                  className={`w-full px-4 py-3 border-2 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 ${
-                    phoneError ? 'border-red-300' : 'border-gray-200'
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black ${
+                    phoneError ? 'border-red-300 dark:border-red-800' : 'border-gray-200 dark:border-white'
                   }`}
                   placeholder="9876543210"
                   maxLength={10}
@@ -320,19 +320,19 @@ function SignUpForm() {
                 />
                 {checkingPhone && (
                   <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                    <div className="w-5 h-5 border-2 border-gray-300 border-t-black rounded-full animate-spin"></div>
+                    <div className="w-5 h-5 border-2 border-gray-300 dark:border-gray-600 border-t-black dark:border-t-white rounded-full animate-spin"></div>
                   </div>
                 )}
               </div>
               {phoneError ? (
-                <p className="text-sm text-red-600 mt-1">{phoneError}</p>
+                <p className="text-sm text-red-600 dark:text-red-400 mt-1">{phoneError}</p>
               ) : (
-                <p className="text-sm text-gray-500 mt-1">Enter 10-digit mobile number</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Enter 10-digit mobile number</p>
               )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="password" className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Password
               </label>
               <div className="relative">
@@ -342,13 +342,13 @@ function SignUpForm() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors pr-12 text-gray-900"
+                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors pr-12 text-gray-900 dark:text-white dark:bg-black"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 cursor-pointer"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -356,7 +356,7 @@ function SignUpForm() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Confirm Password
               </label>
               <div className="relative">
@@ -366,13 +366,13 @@ function SignUpForm() {
                   required
                   value={formData.confirmPassword}
                   onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors pr-12 text-gray-900"
+                  className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors pr-12 text-gray-900 dark:text-white dark:bg-black"
                   placeholder="••••••••"
                 />
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 cursor-pointer"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 cursor-pointer"
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
@@ -383,15 +383,15 @@ function SignUpForm() {
               <input 
                 type="checkbox" 
                 required 
-                className="w-4 h-4 border-2 border-gray-300 rounded mt-1 cursor-pointer" 
+                className="w-4 h-4 border-2 border-gray-300 dark:border-white rounded mt-1 cursor-pointer" 
               />
-              <span className="ml-2 text-sm text-gray-600">
+              <span className="ml-2 text-sm text-gray-600 dark:text-gray-400">
                 I agree to the{' '}
-                <Link href="/terms" className="font-semibold text-black hover:underline">
+                <Link href="/terms" className="font-semibold text-black dark:text-white hover:underline">
                   Terms of Service
                 </Link>
                 {' '}and{' '}
-                <Link href="/privacy" className="font-semibold text-black hover:underline">
+                <Link href="/privacy" className="font-semibold text-black dark:text-white hover:underline">
                   Privacy Policy
                 </Link>
               </span>
@@ -400,7 +400,7 @@ function SignUpForm() {
             <button
               type="submit"
               disabled={loading || !!phoneError || checkingPhone}
-              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black cursor-pointer"
+              className="w-full bg-black dark:bg-white text-white dark:text-black py-3 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black dark:disabled:hover:bg-white cursor-pointer"
             >
               {loading ? 'Sending OTP...' : 'Continue with Email Verification'}
             </button>
@@ -409,9 +409,9 @@ function SignUpForm() {
           /* OTP Verification Form */
           <div className="space-y-6">
             {/* Info Box */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex gap-3">
-              <Mail className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
-              <div className="text-sm text-blue-800">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 flex gap-3">
+              <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+              <div className="text-sm text-blue-800 dark:text-blue-300">
                 <p className="font-semibold mb-1">OTP sent to {formData.email}</p>
                 <p>Please check your inbox and enter the 6-digit code below.</p>
               </div>
@@ -419,7 +419,7 @@ function SignUpForm() {
 
             {/* OTP Input */}
             <div>
-              <label htmlFor="otp" className="block text-sm font-semibold text-gray-900 mb-2">
+              <label htmlFor="otp" className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Enter OTP
               </label>
               <input
@@ -433,11 +433,11 @@ function SignUpForm() {
                     setOtp(value);
                   }
                 }}
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900 text-center text-2xl tracking-widest font-bold"
+                className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black text-center text-2xl tracking-widest font-bold"
                 placeholder="000000"
                 maxLength={6}
               />
-              <p className="text-sm text-gray-500 mt-2 text-center">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center">
                 OTP expires in 10 minutes
               </p>
             </div>
@@ -446,7 +446,7 @@ function SignUpForm() {
             <button
               onClick={handleVerifyOTP}
               disabled={loading || otp.length !== 6}
-              className="w-full bg-black text-white py-3 rounded-lg font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black cursor-pointer"
+              className="w-full bg-black dark:bg-white text-white dark:text-black py-3 rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black dark:disabled:hover:bg-white cursor-pointer"
             >
               {loading ? 'Verifying...' : 'Verify & Create Account'}
             </button>
@@ -456,7 +456,7 @@ function SignUpForm() {
               <button
                 onClick={handleSendOTP}
                 disabled={resendCooldown > 0}
-                className="text-sm text-gray-600 hover:text-black font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {resendCooldown > 0 
                   ? `Resend OTP in ${resendCooldown}s` 
@@ -473,7 +473,7 @@ function SignUpForm() {
                   setOtp('');
                   setError('');
                 }}
-                className="text-sm text-gray-600 hover:text-black font-semibold cursor-pointer"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white font-semibold cursor-pointer"
               >
                 ← Change Email Address
               </button>
@@ -483,15 +483,15 @@ function SignUpForm() {
 
         {/* Divider */}
         <div className="my-8 flex items-center gap-4">
-          <div className="flex-1 border-t border-gray-200"></div>
-          <span className="text-sm text-gray-500">or</span>
-          <div className="flex-1 border-t border-gray-200"></div>
+          <div className="flex-1 border-t border-gray-200 dark:border-white"></div>
+          <span className="text-sm text-gray-500 dark:text-gray-400">or</span>
+          <div className="flex-1 border-t border-gray-200 dark:border-white"></div>
         </div>
 
         {/* Login Link */}
-        <p className="text-center text-gray-600">
+        <p className="text-center text-gray-600 dark:text-gray-400">
           Already have an account?{' '}
-          <Link href="/login" className="font-semibold text-black hover:underline">
+          <Link href="/login" className="font-semibold text-black dark:text-white hover:underline">
             Sign In
           </Link>
         </p>
@@ -503,10 +503,10 @@ function SignUpForm() {
 export default function SignUpPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-white dark:bg-black flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-black border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+          <div className="w-12 h-12 border-4 border-black dark:border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
         </div>
       </div>
     }>

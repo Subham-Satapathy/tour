@@ -107,13 +107,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
       {/* Header */}
       <div className="mb-8 sm:mb-12">
         <div className="inline-block mb-3 sm:mb-4">
-          <div className="border-t-2 border-black w-16 sm:w-20 mb-2"></div>
-          <p className="text-base sm:text-lg font-medium tracking-wide text-gray-600">Explore Our Fleet</p>
+          <div className="border-t-2 border-black dark:border-white w-16 sm:w-20 mb-2"></div>
+          <p className="text-base sm:text-lg font-medium tracking-wide text-gray-600 dark:text-gray-400">Explore Our Fleet</p>
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-black mb-3 sm:mb-4">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-black dark:text-white mb-3 sm:mb-4">
           Available Vehicles
         </h1>
-        <p className="text-base sm:text-lg text-gray-600 max-w-2xl">
+        <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
           Choose from our wide range of well-maintained cars and bikes for your next adventure in Odisha
         </p>
       </div>
@@ -123,20 +123,20 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
         <div className="flex flex-col sm:flex-row gap-3">
           {/* Search Input */}
           <div className="flex-1 relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
             <input
               type="text"
               placeholder="Search by vehicle name or brand..."
               value={filters.searchQuery}
               onChange={(e) => setFilters({ ...filters, searchQuery: e.target.value })}
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
             />
           </div>
 
           {/* Filter Button */}
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
+            className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 w-full sm:w-auto cursor-pointer"
           >
             <Filter className="w-5 h-5" />
             Filters {hasActiveFilters && `(${Object.values(filters).filter(v => v && v !== 'ALL').length})`}
@@ -149,8 +149,8 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
             onClick={() => setFilters({ ...filters, type: 'ALL' })}
             className={`px-5 py-2 rounded-full font-semibold transition-all whitespace-nowrap flex-shrink-0 cursor-pointer ${
               filters.type === 'ALL'
-                ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-black dark:bg-white text-white dark:text-black'
+                : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
             }`}
           >
             All Vehicles
@@ -159,8 +159,8 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
             onClick={() => setFilters({ ...filters, type: 'CAR' })}
             className={`px-5 py-2 rounded-full font-semibold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-2 cursor-pointer ${
               filters.type === 'CAR'
-                ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-black dark:bg-white text-white dark:text-black'
+                : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
             }`}
           >
             <Car className="w-4 h-4" />
@@ -170,8 +170,8 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
             onClick={() => setFilters({ ...filters, type: 'BIKE' })}
             className={`px-5 py-2 rounded-full font-semibold transition-all whitespace-nowrap flex-shrink-0 flex items-center gap-2 cursor-pointer ${
               filters.type === 'BIKE'
-                ? 'bg-black text-white'
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                ? 'bg-black dark:bg-white text-white dark:text-black'
+                : 'bg-gray-100 dark:bg-white/10 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-white/20'
             }`}
           >
             <Bike className="w-4 h-4" />
@@ -182,13 +182,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
 
       {/* Advanced Filters Panel */}
       {showFilters && (
-        <div className="mb-8 p-4 sm:p-6 bg-gray-50 rounded-lg border-2 border-gray-200">
+        <div className="mb-8 p-4 sm:p-6 bg-gray-50 dark:bg-white/5 rounded-lg border-2 border-gray-200 dark:border-white">
           <div className="flex items-center justify-between mb-4 sm:mb-6">
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900">Advanced Filters</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Advanced Filters</h3>
             {hasActiveFilters && (
               <button
                 onClick={clearFilters}
-                className="text-sm text-gray-600 hover:text-black font-semibold flex items-center gap-1 cursor-pointer"
+                className="text-sm text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white font-semibold flex items-center gap-1 cursor-pointer"
               >
                 <X className="w-4 h-4" />
                 <span className="hidden sm:inline">Clear All</span>
@@ -199,13 +199,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* From City */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Pickup City
               </label>
               <select
                 value={filters.fromCityId}
                 onChange={(e) => setFilters({ ...filters, fromCityId: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
               >
                 <option value="">All Cities</option>
                 {cities.map((city) => (
@@ -218,13 +218,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
 
             {/* To City */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Drop-off City
               </label>
               <select
                 value={filters.toCityId}
                 onChange={(e) => setFilters({ ...filters, toCityId: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
               >
                 <option value="">All Cities</option>
                 {cities.map((city) => (
@@ -237,13 +237,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
 
             {/* Fuel Type */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Fuel Type
               </label>
               <select
                 value={filters.fuelType}
                 onChange={(e) => setFilters({ ...filters, fuelType: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
               >
                 <option value="">All Fuel Types</option>
                 <option value="PETROL">Petrol</option>
@@ -256,13 +256,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
 
             {/* Transmission */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Transmission
               </label>
               <select
                 value={filters.transmissionType}
                 onChange={(e) => setFilters({ ...filters, transmissionType: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
               >
                 <option value="">All Types</option>
                 <option value="MANUAL">Manual</option>
@@ -272,7 +272,7 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
 
             {/* Min Price */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Min Price (per day)
               </label>
               <input
@@ -280,13 +280,13 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
                 placeholder="₹0"
                 value={filters.minPrice}
                 onChange={(e) => setFilters({ ...filters, minPrice: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
               />
             </div>
 
             {/* Max Price */}
             <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2">
+              <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                 Max Price (per day)
               </label>
               <input
@@ -294,7 +294,7 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
                 placeholder="₹10000"
                 value={filters.maxPrice}
                 onChange={(e) => setFilters({ ...filters, maxPrice: e.target.value })}
-                className="w-full px-4 py-2 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                className="w-full px-4 py-2 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white dark:bg-black"
               />
             </div>
           </div>
@@ -303,7 +303,7 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
 
       {/* Results Count */}
       <div className="mb-6">
-        <p className="text-gray-600">
+        <p className="text-gray-600 dark:text-gray-400">
           {loading ? 'Loading...' : `${vehicles.length} vehicle${vehicles.length !== 1 ? 's' : ''} found`}
         </p>
       </div>
@@ -311,16 +311,16 @@ export function VehicleFleet({ cities }: VehicleFleetProps) {
       {/* Vehicle Grid */}
       {loading ? (
         <div className="flex justify-center items-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white"></div>
         </div>
       ) : vehicles.length === 0 ? (
         <div className="text-center py-20">
-          <p className="text-2xl font-bold text-gray-900 mb-2">No vehicles found</p>
-          <p className="text-gray-600 mb-6">Try adjusting your filters to see more results</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No vehicles found</p>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">Try adjusting your filters to see more results</p>
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer"
+              className="px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-semibold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               Clear All Filters
             </button>

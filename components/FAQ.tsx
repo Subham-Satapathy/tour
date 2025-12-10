@@ -29,18 +29,18 @@ export function FAQ() {
   ];
 
   return (
-    <section id="faq" className="py-16 sm:py-20 lg:py-24 bg-white scroll-mt-20">
+    <section id="faq" className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-black scroll-mt-20">
       <div className="container mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-3 sm:mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white mb-3 sm:mb-4">
             FAQ
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 px-4">
-            <div className="hidden sm:block h-0.5 w-12 bg-gray-300"></div>
-            <p className="text-sm sm:text-base lg:text-lg text-gray-600 text-center">
+            <div className="hidden sm:block h-0.5 w-12 bg-gray-300 dark:bg-gray-600"></div>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 text-center">
               Frequently asked questions answered
             </p>
-            <div className="hidden sm:block h-0.5 w-12 bg-gray-300"></div>
+            <div className="hidden sm:block h-0.5 w-12 bg-gray-300 dark:bg-gray-600"></div>
           </div>
         </div>
 
@@ -48,23 +48,23 @@ export function FAQ() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border-2 sm:border-[3px] border-gray-900 rounded-xl sm:rounded-2xl overflow-hidden bg-white shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+              className="border-2 sm:border-[3px] border-gray-900 dark:border-white rounded-xl sm:rounded-2xl overflow-hidden bg-white dark:bg-black shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 flex items-center justify-between text-left hover:bg-gray-50 transition-colors cursor-pointer"
+                className="w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 flex items-center justify-between text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer"
               >
-                <span className="font-bold text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 pr-3 sm:pr-4">
+                <span className="font-bold text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 dark:text-white pr-3 sm:pr-4">
                   {faq.question}
                 </span>
-                <span className="text-2xl sm:text-3xl font-black flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black text-white flex items-center justify-center transition-transform duration-300" style={{ transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0deg)' }}>
+                <span className="text-2xl sm:text-3xl font-black flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black dark:bg-white text-white dark:text-black flex items-center justify-center transition-transform duration-300" style={{ transform: openIndex === index ? 'rotate(45deg)' : 'rotate(0deg)' }}>
                   +
                 </span>
               </button>
               
               {openIndex === index && (
-                <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 bg-gray-50 border-t-2 sm:border-t-[3px] border-gray-900">
-                  <p className="text-gray-700 leading-relaxed font-medium text-xs sm:text-sm lg:text-base">
+                <div className="px-4 sm:px-6 lg:px-8 py-4 sm:py-5 lg:py-6 bg-gray-50 dark:bg-black border-t-2 sm:border-t-[3px] border-gray-900 dark:border-white">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-medium text-xs sm:text-sm lg:text-base">
                     {faq.answer}
                   </p>
                 </div>
@@ -74,10 +74,10 @@ export function FAQ() {
         </div>
 
         <div className="text-center mt-12 sm:mt-16 lg:mt-20">
-          <p className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-4 sm:mb-6">
+          <p className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">
             Still have questions?
           </p>
-          <button className="px-8 py-3 sm:px-10 sm:py-4 lg:py-5 bg-black text-white rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-gray-800 active:scale-95 shadow-xl transition-all duration-200 cursor-pointer">
+          <button className="px-8 py-3 sm:px-10 sm:py-4 lg:py-5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-sm sm:text-base lg:text-lg hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 shadow-xl transition-all duration-200 cursor-pointer">
             Contact Support
           </button>
         </div>

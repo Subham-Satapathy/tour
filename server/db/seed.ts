@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
 import { db } from './index';
-import { cities, vehicles, adminUsers } from './schema';
+import { cities, vehicles } from './schema';
 import bcrypt from 'bcryptjs';
 import { appConfig } from '@/config/appConfig';
 import { sql } from 'drizzle-orm';
@@ -15,7 +15,6 @@ async function seed() {
     console.log('🗑️  Clearing existing data...');
     await db.delete(vehicles);
     await db.delete(cities);
-    await db.delete(adminUsers);
     console.log('✅ Cleared existing data\n');
 
     // Seed cities
@@ -266,24 +265,10 @@ async function seed() {
     const insertedVehicles = await db.insert(vehicles).values(vehicleData).returning();
     console.log(`✅ Created ${insertedVehicles.length} vehicles\n`);
 
-    // Seed admin user
-    console.log('👤 Seeding admin user...');
-    const passwordHash = await bcrypt.hash(appConfig.admin.defaultPassword, 10);
-
-    const adminData = {
-      email: appConfig.admin.defaultEmail,
-      passwordHash,
-    };
-
-    const insertedAdmin = await db.insert(adminUsers).values(adminData).returning();
-    console.log(`✅ Created admin user: ${insertedAdmin[0].email}`);
-    console.log(`   Password: ${appConfig.admin.defaultPassword}\n`);
-
     console.log('✨ Database seeding completed successfully!\n');
     console.log('📝 Summary:');
     console.log(`   - Cities: ${insertedCities.length}`);
-    console.log(`   - Vehicles: ${insertedVehicles.length}`);
-    console.log(`   - Admin users: ${insertedAdmin.length}\n`);
+    console.log(`   - Vehicles: ${insertedVehicles.length}\n`);
     
     process.exit(0);
   } catch (error) {

@@ -259,29 +259,29 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
           {[1, 2, 3].map((s) => (
             <div key={s} className="flex items-center">
               <div className={`flex items-center justify-center w-10 h-10 rounded-full font-bold transition-all ${
-                step >= s ? 'bg-black text-white' : 'bg-gray-200 text-gray-500'
+                step >= s ? 'bg-black dark:bg-white text-white dark:text-black' : 'bg-gray-200 dark:bg-white/10 text-gray-500 dark:text-gray-400'
               }`}>
                 {step > s ? <Check className="w-5 h-5" /> : s}
               </div>
               {s < 3 && (
-                <div className={`w-16 sm:w-24 h-1 mx-2 ${step > s ? 'bg-black' : 'bg-gray-200'}`} />
+                <div className={`w-16 sm:w-24 h-1 mx-2 ${step > s ? 'bg-black dark:bg-white' : 'bg-gray-200 dark:bg-white/10'}`} />
               )}
             </div>
           ))}
         </div>
-        <div className="flex justify-between mt-4 text-xs sm:text-sm font-semibold text-gray-600 max-w-md mx-auto">
-          <span className={step >= 1 ? 'text-black' : ''}>Trip Details</span>
-          <span className={step >= 2 ? 'text-black' : ''}>Your Info</span>
-          <span className={step >= 3 ? 'text-black' : ''}>Review</span>
+        <div className="flex justify-between mt-4 text-xs sm:text-sm font-semibold text-gray-600 dark:text-gray-400 max-w-md mx-auto">
+          <span className={step >= 1 ? 'text-black dark:text-white' : ''}>Trip Details</span>
+          <span className={step >= 2 ? 'text-black dark:text-white' : ''}>Your Info</span>
+          <span className={step >= 3 ? 'text-black dark:text-white' : ''}>Review</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Side - Form */}
         <div className="lg:col-span-2">
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-6 sm:p-8">
+          <div className="bg-white dark:bg-black border-2 border-gray-200 dark:border-white rounded-xl p-6 sm:p-8">
             {error && (
-              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm">
+              <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg text-red-600 dark:text-red-400 text-sm">
                 {error}
               </div>
             )}
@@ -289,18 +289,18 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
             {/* Step 1: Trip Details */}
             {step === 1 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-black text-gray-900 mb-6">Trip Details</h2>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-6">Trip Details</h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                       <MapPin className="w-4 h-4 inline mr-1" />
                       Pickup City
                     </label>
                     <select
                       value={formData.fromCityId}
                       onChange={(e) => setFormData({ ...formData, fromCityId: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                      className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white bg-white dark:bg-black"
                       required
                     >
                       <option value="">Select City</option>
@@ -311,14 +311,14 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-2">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                       <MapPin className="w-4 h-4 inline mr-1" />
                       Drop-off City
                     </label>
                     <select
                       value={formData.toCityId}
                       onChange={(e) => setFormData({ ...formData, toCityId: e.target.value })}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                      className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white bg-white dark:bg-black"
                       required
                     >
                       <option value="">Select City</option>
@@ -331,13 +331,13 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
 
                 <div className="space-y-5">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-3">
                       <Calendar className="w-4 h-4 inline mr-1" />
                       Start Date & Time
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="relative">
-                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Date</label>
+                        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1.5 ml-1">Date</label>
                         <input
                           type="date"
                           value={formData.startDateTime.split('T')[0] || ''}
@@ -345,12 +345,12 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                             const time = formData.startDateTime.split('T')[1] || '00:00';
                             setFormData({ ...formData, startDateTime: `${e.target.value}T${time}` });
                           }}
-                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 dark:border-white rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-gray-900 dark:text-white bg-white dark:bg-black text-base font-medium hover:border-gray-400 dark:hover:border-white"
                           required
                         />
                       </div>
                       <div className="relative">
-                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Time</label>
+                        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1.5 ml-1">Time</label>
                         <input
                           type="time"
                           value={formData.startDateTime.split('T')[1] || ''}
@@ -358,7 +358,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                             const date = formData.startDateTime.split('T')[0] || '';
                             setFormData({ ...formData, startDateTime: `${date}T${e.target.value}` });
                           }}
-                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 dark:border-white rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-gray-900 dark:text-white bg-white dark:bg-black text-base font-medium hover:border-gray-400 dark:hover:border-white"
                           required
                         />
                       </div>
@@ -366,13 +366,13 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-900 mb-3">
+                    <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-3">
                       <Calendar className="w-4 h-4 inline mr-1" />
                       End Date & Time
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       <div className="relative">
-                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Date</label>
+                        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1.5 ml-1">Date</label>
                         <input
                           type="date"
                           value={formData.endDateTime.split('T')[0] || ''}
@@ -380,12 +380,12 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                             const time = formData.endDateTime.split('T')[1] || '00:00';
                             setFormData({ ...formData, endDateTime: `${e.target.value}T${time}` });
                           }}
-                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 dark:border-white rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-gray-900 dark:text-white bg-white dark:bg-black text-base font-medium hover:border-gray-400 dark:hover:border-white"
                           required
                         />
                       </div>
                       <div className="relative">
-                        <label className="block text-xs text-gray-600 mb-1.5 ml-1">Time</label>
+                        <label className="block text-xs text-gray-600 dark:text-gray-400 mb-1.5 ml-1">Time</label>
                         <input
                           type="time"
                           value={formData.endDateTime.split('T')[1] || ''}
@@ -393,7 +393,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                             const date = formData.endDateTime.split('T')[0] || '';
                             setFormData({ ...formData, endDateTime: `${date}T${e.target.value}` });
                           }}
-                          className="w-full px-4 py-3.5 border-2 border-gray-300 rounded-xl focus:border-black focus:outline-none transition-all text-gray-900 bg-white text-base font-medium hover:border-gray-400"
+                          className="w-full px-4 py-3.5 border-2 border-gray-300 dark:border-white rounded-xl focus:border-black dark:focus:border-white focus:outline-none transition-all text-gray-900 dark:text-white bg-white dark:bg-black text-base font-medium hover:border-gray-400 dark:hover:border-white"
                           required
                         />
                       </div>
@@ -402,8 +402,8 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                 </div>
 
                 {pricing.duration > 0 && (
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                    <p className="text-sm font-semibold text-gray-900">
+                  <div className="bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white rounded-lg p-4">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-white">
                       <Clock className="w-4 h-4 inline mr-1" />
                       Trip Duration: {pricing.duration} hours ({Math.ceil(pricing.duration / 24)} days)
                     </p>
@@ -415,10 +415,10 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
             {/* Step 2: Customer Info */}
             {step === 2 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-black text-gray-900 mb-6">Your Information</h2>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-6">Your Information</h2>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                     <User className="w-4 h-4 inline mr-1" />
                     Full Name
                   </label>
@@ -426,14 +426,14 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                     type="text"
                     value={formData.customerName}
                     onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white bg-white dark:bg-black"
                     placeholder="John Doe"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                     <Mail className="w-4 h-4 inline mr-1" />
                     Email Address
                   </label>
@@ -441,7 +441,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                     type="email"
                     value={formData.customerEmail}
                     onChange={(e) => setFormData({ ...formData, customerEmail: e.target.value })}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white bg-white dark:bg-black"
                     placeholder="john@example.com"
                     required
                     disabled={!!session?.user?.email}
@@ -449,7 +449,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  <label className="block text-sm font-semibold text-gray-900 dark:text-white mb-2">
                     <Phone className="w-4 h-4 inline mr-1" />
                     Phone Number
                   </label>
@@ -462,12 +462,12 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                         setFormData({ ...formData, customerPhone: value });
                       }
                     }}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-black focus:outline-none transition-colors text-gray-900"
+                    className="w-full px-4 py-3 border-2 border-gray-200 dark:border-white rounded-lg focus:border-black dark:focus:border-white focus:outline-none transition-colors text-gray-900 dark:text-white bg-white dark:bg-black"
                     placeholder="9876543210"
                     maxLength={10}
                     required
                   />
-                  <p className="text-sm text-gray-500 mt-1">Enter 10-digit mobile number</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Enter 10-digit mobile number</p>
                 </div>
               </div>
             )}
@@ -475,24 +475,24 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
             {/* Step 3: Review */}
             {step === 3 && (
               <div className="space-y-6">
-                <h2 className="text-2xl font-black text-gray-900 mb-6">Review Booking</h2>
+                <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-6">Review Booking</h2>
 
                 <div className="space-y-6">
                   {/* Trip Details */}
                   <div>
-                    <h3 className="text-sm font-bold text-gray-900 mb-3">Trip Details</h3>
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Trip Details</h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">From:</span>
-                        <span className="font-semibold text-gray-900">{cities.find(c => c.id === parseInt(formData.fromCityId))?.name}</span>
+                        <span className="text-gray-600 dark:text-gray-400">From:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{cities.find(c => c.id === parseInt(formData.fromCityId))?.name}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">To:</span>
-                        <span className="font-semibold text-gray-900">{cities.find(c => c.id === parseInt(formData.toCityId))?.name}</span>
+                        <span className="text-gray-600 dark:text-gray-400">To:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{cities.find(c => c.id === parseInt(formData.toCityId))?.name}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Start:</span>
-                        <span className="font-semibold text-gray-900">
+                        <span className="text-gray-600 dark:text-gray-400">Start:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">
                           {new Date(formData.startDateTime).toLocaleDateString('en-IN', {
                             day: 'numeric',
                             month: 'numeric',
@@ -505,8 +505,8 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">End:</span>
-                        <span className="font-semibold text-gray-900">
+                        <span className="text-gray-600 dark:text-gray-400">End:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">
                           {new Date(formData.endDateTime).toLocaleDateString('en-IN', {
                             day: 'numeric',
                             month: 'numeric',
@@ -519,35 +519,35 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Duration:</span>
-                        <span className="font-semibold text-gray-900">{pricing.duration} hours</span>
+                        <span className="text-gray-600 dark:text-gray-400">Duration:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{pricing.duration} hours</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Contact Information */}
-                  <div className="pt-4 border-t border-gray-200">
-                    <h3 className="text-sm font-bold text-gray-900 mb-3">Contact Information</h3>
+                  <div className="pt-4 border-t border-gray-200 dark:border-white">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Contact Information</h3>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Name:</span>
-                        <span className="font-semibold text-gray-900">{formData.customerName}</span>
+                        <span className="text-gray-600 dark:text-gray-400">Name:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{formData.customerName}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Email:</span>
-                        <span className="font-semibold text-gray-900">{formData.customerEmail}</span>
+                        <span className="text-gray-600 dark:text-gray-400">Email:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">{formData.customerEmail}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Phone:</span>
-                        <span className="font-semibold text-gray-900">+91 {formData.customerPhone}</span>
+                        <span className="text-gray-600 dark:text-gray-400">Phone:</span>
+                        <span className="font-semibold text-gray-900 dark:text-white">+91 {formData.customerPhone}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Important Information */}
-                  <div className="pt-4 border-t border-gray-200">
-                    <h3 className="text-sm font-bold text-gray-900 mb-3">Important Information</h3>
-                    <ul className="space-y-2 text-sm text-gray-600">
+                  <div className="pt-4 border-t border-gray-200 dark:border-white">
+                    <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-3">Important Information</h3>
+                    <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                       <li className="flex items-start">
                         <span className="mr-2">•</span>
                         <span>Valid driving license required at pickup</span>
@@ -587,7 +587,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
               {step > 1 && (
                 <button
                   onClick={() => setStep(step - 1)}
-                  className="px-6 py-3 border-2 border-black text-black rounded-lg font-bold hover:bg-gray-50 active:scale-95 transition-all duration-200 cursor-pointer"
+                  className="px-6 py-3 border-2 border-black dark:border-white text-black dark:text-white rounded-lg font-bold hover:bg-gray-50 dark:hover:bg-white/5 active:scale-95 transition-all duration-200 cursor-pointer"
                 >
                   Back
                 </button>
@@ -596,7 +596,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                 <button
                   onClick={handleNext}
                   disabled={loading}
-                  className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black"
+                  className="flex-1 px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black dark:disabled:hover:bg-white"
                 >
                   {loading ? 'Loading...' : 'Continue'}
                 </button>
@@ -604,7 +604,7 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                 <button
                   onClick={handleSubmit}
                   disabled={loading}
-                  className="flex-1 px-6 py-3 bg-black text-white rounded-lg font-bold hover:bg-gray-800 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black cursor-pointer"
+                  className="flex-1 px-6 py-3 bg-black dark:bg-white text-white dark:text-black rounded-lg font-bold hover:bg-gray-800 dark:hover:bg-gray-200 active:scale-95 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-black dark:disabled:hover:bg-white cursor-pointer"
                 >
                   {loading ? 'Processing...' : 'Proceed to Payment'}
                 </button>
@@ -615,8 +615,8 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
 
         {/* Right Side - Summary */}
         <div className="lg:col-span-1">
-          <div className="bg-white border-2 border-gray-200 rounded-xl p-6 sticky top-24">
-            <h3 className="text-xl font-black text-gray-900 mb-4">Booking Summary</h3>
+          <div className="bg-white dark:bg-black border-2 border-gray-200 dark:border-white rounded-xl p-6 sticky top-24">
+            <h3 className="text-xl font-black text-gray-900 dark:text-white mb-4">Booking Summary</h3>
             
             {/* Vehicle Info */}
             <div className="mb-6">
@@ -627,40 +627,40 @@ export function BookingFormComponent({ vehicle, cities, initialData }: BookingCo
                   className="w-full h-40 object-cover rounded-lg mb-4"
                 />
               )}
-              <h4 className="font-bold text-lg text-gray-900">{vehicle.name}</h4>
+              <h4 className="font-bold text-lg text-gray-900 dark:text-white">{vehicle.name}</h4>
               {vehicle.brand && vehicle.model && (
-                <p className="text-sm text-gray-600">{vehicle.brand} {vehicle.model}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{vehicle.brand} {vehicle.model}</p>
               )}
               <div className="flex flex-wrap gap-2 mt-2">
                 {vehicle.seatingCapacity && (
-                  <span className="text-sm bg-gray-100 px-2 py-1 rounded">{vehicle.seatingCapacity} Seats</span>
+                  <span className="text-sm bg-gray-100 dark:bg-white/10 px-2 py-1 rounded">{vehicle.seatingCapacity} Seats</span>
                 )}
                 {vehicle.fuelType && (
-                  <span className="text-sm bg-gray-100 px-2 py-1 rounded capitalize">{vehicle.fuelType.toLowerCase()}</span>
+                  <span className="text-sm bg-gray-100 dark:bg-white/10 px-2 py-1 rounded capitalize">{vehicle.fuelType.toLowerCase()}</span>
                 )}
                 {vehicle.transmissionType && (
-                  <span className="text-sm bg-gray-100 px-2 py-1 rounded capitalize">{vehicle.transmissionType.toLowerCase()}</span>
+                  <span className="text-sm bg-gray-100 dark:bg-white/10 px-2 py-1 rounded capitalize">{vehicle.transmissionType.toLowerCase()}</span>
                 )}
               </div>
             </div>
 
             {/* Pricing */}
-            <div className="border-t border-gray-200 pt-4 space-y-3">
+            <div className="border-t border-gray-200 dark:border-white pt-4 space-y-3">
               <div className="flex justify-between text-sm md:text-base">
-                <span className="text-gray-600">Base Fare</span>
+                <span className="text-gray-600 dark:text-gray-400">Base Fare</span>
                 <span className="font-semibold">₹{pricing.baseAmount.toLocaleString()}</span>
               </div>
               {vehicle.securityDeposit ? (
                 <div className="flex justify-between text-sm md:text-base">
-                  <span className="text-gray-600">Security Deposit</span>
+                  <span className="text-gray-600 dark:text-gray-400">Security Deposit</span>
                   <span className="font-semibold">₹{pricing.securityDeposit.toLocaleString()}</span>
                 </div>
               ) : null}
-              <div className="border-t border-gray-200 pt-3 flex justify-between">
-                <span className="font-bold text-gray-900 text-base md:text-lg">Total Amount</span>
+              <div className="border-t border-gray-200 dark:border-white pt-3 flex justify-between">
+                <span className="font-bold text-gray-900 dark:text-white text-base md:text-lg">Total Amount</span>
                 <span className="font-black text-xl md:text-2xl">₹{pricing.totalAmount.toLocaleString()}</span>
               </div>
-              <p className="text-sm text-gray-500 mt-2">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
                 {vehicle.securityDeposit ? '* Security deposit is refundable' : ''}
               </p>
             </div>
