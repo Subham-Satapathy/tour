@@ -102,6 +102,13 @@ export function Navbar() {
               Vehicles
             </a>
             <a 
+              href="#tours"
+              onClick={(e) => handleNavClick(e, 'tours')}
+              className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors relative group cursor-pointer"
+            >
+              Tours
+            </a>
+            <a 
               href="#how-it-works"
               onClick={(e) => handleNavClick(e, 'how-it-works')}
               className="text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-medium transition-colors relative group cursor-pointer"
@@ -240,6 +247,17 @@ export function Navbar() {
                 className="px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-semibold transition-all cursor-pointer"
               >
                 Vehicles
+              </a>
+              <a 
+                href="#tours" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsMobileMenuOpen(false);
+                  handleNavClick(e, 'tours');
+                }}
+                className="px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white font-semibold transition-all cursor-pointer"
+              >
+                Tours
               </a>
               <a 
                 href="#how-it-works" 

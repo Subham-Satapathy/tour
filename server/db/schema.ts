@@ -132,6 +132,35 @@ export const invoices = pgTable('invoices', {
   invoiceNumberIdx: index('invoices_invoice_number_idx').on(table.invoiceNumber),
 }));
 
+// Tours table
+export const tours = pgTable('tours', {
+  id: serial('id').primaryKey(),
+  name: varchar('name', { length: 200 }).notNull(),
+  slug: varchar('slug', { length: 200 }).notNull().unique(),
+  description: text('description'),
+  fromCityId: integer('from_city_id').notNull().references(() => cities.id),
+  toCityId: integer('to_city_id').notNull().references(() => cities.id),
+  distanceKm: integer('distance_km').notNull(), // Total distance in kilometers
+  durationDays: integer('duration_days').notNull().default(1), // Tour duration in days
+  basePrice: integer('base_price').notNull(), // Base price for the tour
+  pricePerKm: integer('price_per_km').notNull(), // Additional rate per km
+  highlights: text('highlights'), // JSON array of tour highlights
+  imageUrl: varchar('image_url', { length: 500 }),
+  galleryImages: text('gallery_images'), // JSON array of additional image URLs
+  isActive: boolean('is_active').notNull().default(true),
+  isFeatured: boolean('is_featured').notNull().default(false),
+  totalBookings: integer('total_bookings').notNull().default(0),
+  averageRating: decimal('average_rating', { precision: 3, scale: 2 }),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+}, (table) => ({
+  slugIdx: index('tours_slug_idx').on(table.slug),
+  isActiveIdx: index('tours_is_active_idx').on(table.isActive),
+  isFeaturedIdx: index('tours_is_featured_idx').on(table.isFeatured),
+  fromCityIdx: index('tours_from_city_idx').on(table.fromCityId),
+  toCityIdx: index('tours_to_city_idx').on(table.toCityId),
+}));
+
 // Types
 export type City = typeof cities.$inferSelect;
 export type NewCity = typeof cities.$inferInsert;
@@ -150,3 +179,6 @@ export type NewOtpVerification = typeof otpVerifications.$inferInsert;
 
 export type Invoice = typeof invoices.$inferSelect;
 export type NewInvoice = typeof invoices.$inferInsert;
+
+export type Tour = typeof tours.$inferSelect;
+export type NewTour = typeof tours.$inferInsert;

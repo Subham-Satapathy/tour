@@ -2,7 +2,7 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
 import { db } from './index';
-import { cities, vehicles } from './schema';
+import { cities, vehicles, tours, bookings, invoices } from './schema';
 import bcrypt from 'bcryptjs';
 import { appConfig } from '@/config/appConfig';
 import { sql } from 'drizzle-orm';
@@ -13,7 +13,10 @@ async function seed() {
   try {
     // Clear existing data
     console.log('🗑️  Clearing existing data...');
+    await db.delete(invoices);
+    await db.delete(bookings);
     await db.delete(vehicles);
+    await db.delete(tours);
     await db.delete(cities);
     console.log('✅ Cleared existing data\n');
 
@@ -265,10 +268,127 @@ async function seed() {
     const insertedVehicles = await db.insert(vehicles).values(vehicleData).returning();
     console.log(`✅ Created ${insertedVehicles.length} vehicles\n`);
 
+    // Seed tours
+    console.log('🗺️  Seeding tours...');
+    const tourData = [
+      {
+        name: 'Bhubaneswar to Puri Temple Tour',
+        slug: 'bhubaneswar-puri-temple-tour',
+        description: 'Visit the famous Jagannath Temple and experience the spiritual essence of Puri',
+        fromCityId: cityMap.get('bhubaneswar')!,
+        toCityId: cityMap.get('puri')!,
+        distanceKm: 60,
+        durationDays: 1,
+        basePrice: 2500,
+        pricePerKm: 15,
+        highlights: JSON.stringify(['Jagannath Temple', 'Beach Visit', 'Local Cuisine', 'Shopping']),
+        imageUrl: 'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800',
+        galleryImages: JSON.stringify(['https://images.unsplash.com/photo-1587474260584-136574528ed5?w=800']),
+        isActive: true,
+        isFeatured: true,
+        totalBookings: 145,
+        averageRating: '4.8',
+      },
+      {
+        name: 'Konark Sun Temple Heritage Tour',
+        slug: 'konark-sun-temple-tour',
+        description: 'Explore the architectural marvel of Konark Sun Temple, a UNESCO World Heritage Site',
+        fromCityId: cityMap.get('bhubaneswar')!,
+        toCityId: cityMap.get('konark')!,
+        distanceKm: 65,
+        durationDays: 1,
+        basePrice: 2800,
+        pricePerKm: 18,
+        highlights: JSON.stringify(['Sun Temple', 'Chandrabhaga Beach', 'Archaeological Museum', 'Ramchandi Temple']),
+        imageUrl: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800',
+        galleryImages: JSON.stringify(['https://images.unsplash.com/photo-1599661046289-e31897846e41?w=800']),
+        isActive: true,
+        isFeatured: true,
+        totalBookings: 128,
+        averageRating: '4.7',
+      },
+      {
+        name: 'Golden Triangle: Bhubaneswar-Puri-Konark',
+        slug: 'golden-triangle-odisha',
+        description: 'Complete Odisha temple circuit covering the three most famous destinations',
+        fromCityId: cityMap.get('bhubaneswar')!,
+        toCityId: cityMap.get('konark')!,
+        distanceKm: 125,
+        durationDays: 2,
+        basePrice: 5500,
+        pricePerKm: 20,
+        highlights: JSON.stringify(['Lingaraj Temple', 'Jagannath Temple', 'Sun Temple', 'Beaches', 'Local Markets']),
+        imageUrl: 'https://images.unsplash.com/photo-1548013146-72479768bada?w=800',
+        galleryImages: JSON.stringify(['https://images.unsplash.com/photo-1548013146-72479768bada?w=800']),
+        isActive: true,
+        isFeatured: true,
+        totalBookings: 98,
+        averageRating: '4.9',
+      },
+      {
+        name: 'Cuttack to Puri Day Trip',
+        slug: 'cuttack-puri-day-trip',
+        description: 'A comfortable day trip from Cuttack to the sacred city of Puri',
+        fromCityId: cityMap.get('cuttack')!,
+        toCityId: cityMap.get('puri')!,
+        distanceKm: 80,
+        durationDays: 1,
+        basePrice: 3200,
+        pricePerKm: 16,
+        highlights: JSON.stringify(['Temple Darshan', 'Sea Beach', 'Prasad Shopping', 'Local Sightseeing']),
+        imageUrl: 'https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800',
+        galleryImages: JSON.stringify(['https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=800']),
+        isActive: true,
+        isFeatured: true,
+        totalBookings: 87,
+        averageRating: '4.6',
+      },
+      {
+        name: 'Rourkela to Bhubaneswar Express Tour',
+        slug: 'rourkela-bhubaneswar-tour',
+        description: 'Long-distance comfortable journey from Rourkela to Bhubaneswar with AC vehicles',
+        fromCityId: cityMap.get('rourkela')!,
+        toCityId: cityMap.get('bhubaneswar')!,
+        distanceKm: 320,
+        durationDays: 1,
+        basePrice: 8000,
+        pricePerKm: 25,
+        highlights: JSON.stringify(['Highway Travel', 'Refreshment Stops', 'Scenic Routes', 'Professional Drivers']),
+        imageUrl: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800',
+        galleryImages: JSON.stringify(['https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800']),
+        isActive: true,
+        isFeatured: true,
+        totalBookings: 62,
+        averageRating: '4.5',
+      },
+      {
+        name: 'Coastal Paradise: Puri to Konark Beach Tour',
+        slug: 'puri-konark-beach-tour',
+        description: 'Explore the stunning coastline from Puri to Konark with beach stops',
+        fromCityId: cityMap.get('puri')!,
+        toCityId: cityMap.get('konark')!,
+        distanceKm: 35,
+        durationDays: 1,
+        basePrice: 1800,
+        pricePerKm: 12,
+        highlights: JSON.stringify(['Puri Beach', 'Marine Drive', 'Chandrabhaga Beach', 'Sunset Views']),
+        imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800',
+        galleryImages: JSON.stringify(['https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800']),
+        isActive: true,
+        isFeatured: false,
+        totalBookings: 54,
+        averageRating: '4.7',
+      },
+    ];
+
+    const insertedTours = await db.insert(tours).values(tourData).returning();
+    console.log(`✅ Created ${insertedTours.length} tours\n`);
+
     console.log('✨ Database seeding completed successfully!\n');
     console.log('📝 Summary:');
     console.log(`   - Cities: ${insertedCities.length}`);
-    console.log(`   - Vehicles: ${insertedVehicles.length}\n`);
+    console.log(`   - Vehicles: ${insertedVehicles.length}`);
+    console.log(`   - Tours: ${insertedTours.length}\n`);
     
     process.exit(0);
   } catch (error) {

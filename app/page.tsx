@@ -3,6 +3,7 @@ import { SearchForm } from '@/components/SearchForm';
 import { HeroSection } from '@/components/HeroSection';
 import { FeaturesSection } from '@/components/FeaturesSection';
 import { PopularCars } from '@/components/PopularCars';
+import { PopularTours } from '@/components/PopularTours';
 import { HowItWorks } from '@/components/HowItWorks';
 import { FAQ } from '@/components/FAQ';
 import { Newsletter } from '@/components/Newsletter';
@@ -22,6 +23,7 @@ export default async function HomePage() {
       <HeroSection cities={cities} />
       <FeaturesSection />
       <PopularCars />
+      <PopularTours />
       <HowItWorks />
       <FAQ />
       <Newsletter />
