@@ -72,75 +72,68 @@ export async function POST(
       .where(eq(cities.id, updatedBooking.toCityId))
       .limit(1);
 
-    // Return success immediately to user, then send email asynchronously
-    const response = NextResponse.json({
+    // IMPORTANT: On Vercel, send email BEFORE returning response
+    // Fire-and-forget doesn't work on Vercel because the function terminates after response
+    try {
+      console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+      console.log(`Starting invoice and email process for booking #${bookingId}`);
+      console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
+      
+      // Step 1: Generate invoice number and save to database
+      console.log(`[1/3] Generating invoice number...`);
+      const invoiceNumber = await generateInvoice(bookingId);
+      if (invoiceNumber) {
+        console.log(`✅ Invoice number generated: ${invoiceNumber}`);
+      } else {
+        console.warn(`⚠️ Invoice number generation returned null`);
+      }
+      
+      // Step 2: Skip PDF generation to avoid timeout on Vercel free tier (10s limit)
+      console.log(`[2/3] Skipping PDF generation (Vercel timeout prevention)...`);
+      const invoicePDF = null; // Skip PDF to avoid timeout
+      
+      // Step 3: Send email without PDF attachment
+      console.log(`[3/3] Sending booking confirmation email...`);
+      await sendBookingConfirmationEmail(
+        {
+          bookingId: bookingId,
+          customerName: updatedBooking.customerName,
+          customerEmail: updatedBooking.customerEmail,
+          vehicleName: vehicle.name,
+          vehicleBrand: vehicle.brand || undefined,
+          vehicleModel: vehicle.model || undefined,
+          seatingCapacity: vehicle.seatingCapacity || undefined,
+          fuelType: vehicle.fuelType || undefined,
+          transmissionType: vehicle.transmissionType || undefined,
+          fromCity: fromCity.name,
+          toCity: toCity.name,
+          startDateTime: new Date(updatedBooking.startDateTime),
+          endDateTime: new Date(updatedBooking.endDateTime),
+          totalAmount: updatedBooking.totalAmount,
+          securityDeposit: updatedBooking.securityDeposit || undefined,
+          tripDurationHours: updatedBooking.tripDurationHours,
+          pricePerHour: updatedBooking.pricePerHour || undefined,
+          pricePerDay: updatedBooking.pricePerDay || undefined,
+          invoiceNumber: invoiceNumber || undefined,
+        },
+          invoicePDF || undefined
+        invoicePDF || undefined
+      );
+      
+      console.log(`\n✅ Booking confirmation email sent for booking #${bookingId}`);
+      console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
+    } catch (emailError) {
+      // Log error but don't fail the booking
+      console.error(`\n❌ Error sending email for booking #${bookingId}:`, emailError);
+      console.error('Stack trace:', emailError instanceof Error ? emailError.stack : 'No stack trace');
+      console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
+    }
+
+    // Return success response after email is sent
+    return NextResponse.json({
       success: true,
       booking: updatedBooking,
     });
-
-    // Send email asynchronously (fire-and-forget) - don't await
-    // This prevents blocking the response to the user
-    Promise.resolve().then(async () => {
-      try {
-        console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
-        console.log(`Starting invoice and email process for booking #${bookingId}`);
-        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
-        
-        // Step 1: Generate invoice number and save to database
-        console.log(`[1/3] Generating invoice number...`);
-        const invoiceNumber = await generateInvoice(bookingId);
-        if (invoiceNumber) {
-          console.log(`✅ Invoice number generated: ${invoiceNumber}`);
-        } else {
-          console.warn(`⚠️ Invoice number generation returned null`);
-        }
-        
-        // Step 2: Generate PDF
-        console.log(`[2/3] Generating invoice PDF...`);
-        const invoicePDF = await generateInvoicePDFBuffer(bookingId);
-        if (invoicePDF) {
-          console.log(`✅ Invoice PDF generated: ${invoicePDF.length} bytes`);
-        } else {
-          console.warn(`⚠️ Invoice PDF generation returned null`);
-        }
-        
-        // Step 3: Send email
-        console.log(`[3/3] Sending booking confirmation email...`);
-        await sendBookingConfirmationEmail(
-          {
-            bookingId: bookingId,
-            customerName: updatedBooking.customerName,
-            customerEmail: updatedBooking.customerEmail,
-            vehicleName: vehicle.name,
-            vehicleBrand: vehicle.brand || undefined,
-            vehicleModel: vehicle.model || undefined,
-            seatingCapacity: vehicle.seatingCapacity || undefined,
-            fuelType: vehicle.fuelType || undefined,
-            transmissionType: vehicle.transmissionType || undefined,
-            fromCity: fromCity.name,
-            toCity: toCity.name,
-            startDateTime: new Date(updatedBooking.startDateTime),
-            endDateTime: new Date(updatedBooking.endDateTime),
-            totalAmount: updatedBooking.totalAmount,
-            securityDeposit: updatedBooking.securityDeposit || undefined,
-            tripDurationHours: updatedBooking.tripDurationHours,
-            pricePerHour: updatedBooking.pricePerHour || undefined,
-            pricePerDay: updatedBooking.pricePerDay || undefined,
-            invoiceNumber: invoiceNumber || undefined,
-          },
-          invoicePDF || undefined
-        );
-        
-        console.log(`\n✅ Booking confirmation email sent with invoice for booking #${bookingId}`);
-        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
-      } catch (emailError) {
-        console.error(`\n❌ Error in invoice/email process for booking #${bookingId}:`, emailError);
-        console.error('Stack trace:', emailError instanceof Error ? emailError.stack : 'No stack trace');
-        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
-      }
-    });
-
-    return response;
   } catch (error) {
     console.error('Booking confirmation error:', error);
     return NextResponse.json(
