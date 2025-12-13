@@ -116,7 +116,6 @@ export async function POST(
           pricePerDay: updatedBooking.pricePerDay || undefined,
           invoiceNumber: invoiceNumber || undefined,
         },
-          invoicePDF || undefined
         invoicePDF || undefined
       );
       
