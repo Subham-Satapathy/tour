@@ -109,36 +109,29 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
 
     console.log(`PDF document initialized, loading logo...`);
     
-    // Load watermark logo (webp format, 44KB)
+    // Load watermark logo (transparent PNG, 51KB)
     let logoDataUrl: string | null = null;
-    let logoFormat = 'PNG';
     
     try {
-      // Try webp first (smaller), then fallback to png
-      let logoPath = path.join(process.cwd(), 'public', 'logo.webp');
-      if (fs.existsSync(logoPath)) {
-        logoFormat = 'PNG'; // jsPDF requires PNG/JPEG, so we'll convert webp reference to PNG
-      } else {
-        logoPath = path.join(process.cwd(), 'public', 'logo.png');
-      }
+      // Use logo-transparent.png for watermark (small size with transparency)
+      const logoPath = path.join(process.cwd(), 'public', 'logo-transparent.png');
       
       if (fs.existsSync(logoPath)) {
         const stats = fs.statSync(logoPath);
         console.log(`Loading logo from ${logoPath}, size: ${stats.size} bytes`);
         
-        // Skip logo if larger than 150KB
         if (stats.size > 150000) {
           console.warn(`Logo file too large (${stats.size} bytes), skipping watermark`);
         } else {
           const logoBase64 = fs.readFileSync(logoPath).toString('base64');
           logoDataUrl = `data:image/png;base64,${logoBase64}`;
-          console.log(`✅ Logo loaded successfully (${stats.size} bytes)`);
+          console.log(`✅ Logo loaded successfully (${stats.size} bytes, transparent PNG)`);
         }
       } else {
-        console.log(`Logo file not found, continuing without watermark`);
+        console.log(`Transparent logo not found, skipping watermark`);
       }
     } catch (error) {
-      console.error('Error loading watermark (continuing without it):', error);
+      console.error('Error loading watermark:', error);
     }
 
     console.log(`Building PDF content...`);
