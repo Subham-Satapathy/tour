@@ -384,11 +384,103 @@ async function seed() {
     const insertedTours = await db.insert(tours).values(tourData).returning();
     console.log(`✅ Created ${insertedTours.length} tours\n`);
 
+    // Seed bookings
+    console.log('📅 Seeding bookings...');
+    const bookingData = [
+      {
+        vehicleId: insertedVehicles[0].id,
+        fromCityId: cityMap.get('bhubaneswar')!,
+        toCityId: cityMap.get('puri')!,
+        startDateTime: new Date('2024-12-15T09:00:00'),
+        endDateTime: new Date('2024-12-15T18:00:00'),
+        tripDurationHours: 9,
+        pricePerHour: 500,
+        pricePerDay: 5000,
+        totalAmount: 4500,
+        securityDeposit: 5000,
+        customerName: 'Rajesh Kumar',
+        customerEmail: 'rajesh.kumar@example.com',
+        customerPhone: '+91-9876543210',
+        status: 'PAID' as const,
+        paymentReference: 'PAY-2024-001',
+      },
+      {
+        vehicleId: insertedVehicles[1].id,
+        fromCityId: cityMap.get('bhubaneswar')!,
+        toCityId: cityMap.get('cuttack')!,
+        startDateTime: new Date('2024-12-20T10:00:00'),
+        endDateTime: new Date('2024-12-21T10:00:00'),
+        tripDurationHours: 24,
+        pricePerHour: 300,
+        pricePerDay: 3000,
+        totalAmount: 3000,
+        securityDeposit: 3000,
+        customerName: 'Priya Sharma',
+        customerEmail: 'priya.sharma@example.com',
+        customerPhone: '+91-9876543211',
+        status: 'PAID' as const,
+        paymentReference: 'PAY-2024-002',
+      },
+      {
+        vehicleId: insertedVehicles[2].id,
+        fromCityId: cityMap.get('bhubaneswar')!,
+        toCityId: cityMap.get('konark')!,
+        startDateTime: new Date('2024-12-18T08:00:00'),
+        endDateTime: new Date('2024-12-18T20:00:00'),
+        tripDurationHours: 12,
+        pricePerHour: 250,
+        pricePerDay: 2500,
+        totalAmount: 3000,
+        securityDeposit: 2000,
+        customerName: 'Amit Patel',
+        customerEmail: 'amit.patel@example.com',
+        customerPhone: '+91-9876543212',
+        status: 'PENDING' as const,
+      },
+      {
+        vehicleId: insertedVehicles[0].id,
+        fromCityId: cityMap.get('puri')!,
+        toCityId: cityMap.get('bhubaneswar')!,
+        startDateTime: new Date('2024-12-22T14:00:00'),
+        endDateTime: new Date('2024-12-23T14:00:00'),
+        tripDurationHours: 24,
+        pricePerHour: 500,
+        pricePerDay: 5000,
+        totalAmount: 5000,
+        securityDeposit: 5000,
+        customerName: 'Sunita Das',
+        customerEmail: 'sunita.das@example.com',
+        customerPhone: '+91-9876543213',
+        status: 'PAID' as const,
+        paymentReference: 'PAY-2024-003',
+      },
+      {
+        vehicleId: insertedVehicles[4].id,
+        fromCityId: cityMap.get('cuttack')!,
+        toCityId: cityMap.get('rourkela')!,
+        startDateTime: new Date('2024-12-25T06:00:00'),
+        endDateTime: new Date('2024-12-27T18:00:00'),
+        tripDurationHours: 60,
+        pricePerHour: 600,
+        pricePerDay: 6000,
+        totalAmount: 15000,
+        securityDeposit: 8000,
+        customerName: 'Vikram Singh',
+        customerEmail: 'vikram.singh@example.com',
+        customerPhone: '+91-9876543214',
+        status: 'PENDING' as const,
+      },
+    ];
+
+    const insertedBookings = await db.insert(bookings).values(bookingData).returning();
+    console.log(`✅ Created ${insertedBookings.length} bookings\n`);
+
     console.log('✨ Database seeding completed successfully!\n');
     console.log('📝 Summary:');
     console.log(`   - Cities: ${insertedCities.length}`);
     console.log(`   - Vehicles: ${insertedVehicles.length}`);
-    console.log(`   - Tours: ${insertedTours.length}\n`);
+    console.log(`   - Tours: ${insertedTours.length}`);
+    console.log(`   - Bookings: ${insertedBookings.length}\n`);
     
     process.exit(0);
   } catch (error) {

@@ -16,6 +16,17 @@ export function Navbar() {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Don't show admin users in the client navbar
+  const isAdminUser = session?.user?.role === 'admin';
+  const showSession = session && !isAdminUser;
+
+  // Close user menu when session changes or admin is detected
+  useEffect(() => {
+    if (isAdminUser || !session) {
+      setShowUserMenu(false);
+    }
+  }, [isAdminUser, session]);
+
   useEffect(() => {
     // Initialize dark mode from localStorage
     const savedTheme = localStorage.getItem('theme');
@@ -144,7 +155,7 @@ export function Navbar() {
                 <Moon className="w-5 h-5 text-gray-700" />
               )}
             </button>
-            {status === 'authenticated' && session?.user ? (
+            {status === 'authenticated' && showSession ? (
               <>
                 <div className="relative">
                   <button
@@ -293,7 +304,7 @@ export function Navbar() {
                 Contact
               </a>
               <div className="pt-4 px-4 space-y-3 border-t border-gray-200 dark:border-gray-700 mt-2">
-                {status === 'authenticated' && session?.user ? (
+                {status === 'authenticated' && showSession ? (
                   <>
                     <div className="px-4 py-3 bg-gray-100 dark:bg-gray-800 rounded-lg">
                       <div className="flex items-center gap-2 text-gray-900 dark:text-gray-100 font-semibold mb-2">

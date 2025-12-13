@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token, trigger }) {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.email = token.email as string;
@@ -67,6 +67,21 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role as string;
       }
       return session;
+    },
+    async signIn({ user }) {
+      // Allow sign in - role checking will be done at route level
+      return true;
+    },
+  },
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: 'lax',
+        path: '/',
+        secure: process.env.NODE_ENV === 'production',
+      },
     },
   },
 };
