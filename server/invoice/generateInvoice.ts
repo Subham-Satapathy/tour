@@ -234,13 +234,14 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
         fontStyle: 'bold',
       },
       columnStyles: {
-        0: { fontStyle: 'bold', cellWidth: 60 },
+        0: { fontStyle: 'bold', cellWidth: 50 },
         1: { cellWidth: 'auto' },
       },
       theme: 'striped',
       styles: {
-        fontSize: 10,
-        cellPadding: 5,
+        fontSize: 9,
+        cellPadding: 4,
+        overflow: 'linebreak',
       },
       didDrawPage: addWatermark,
     });
@@ -270,22 +271,23 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
       body: paymentRows,
       foot: [['GRAND TOTAL', `Rs.${grandTotal.toLocaleString('en-IN')}`]],
       columnStyles: {
-        0: { cellWidth: 135, fontSize: 10 },
-        1: { cellWidth: 45, halign: 'right', fontSize: 11, fontStyle: 'bold' },
+        0: { cellWidth: 'auto', fontSize: 9 },
+        1: { cellWidth: 40, halign: 'right', fontSize: 10, fontStyle: 'bold' },
       },
       footStyles: {
         fillColor: [0, 0, 0],
         textColor: [255, 255, 255],
-        fontSize: 12,
+        fontSize: 11,
         fontStyle: 'bold',
         halign: 'right',
       },
       theme: 'grid',
       styles: {
-        fontSize: 10,
-        cellPadding: 5,
+        fontSize: 9,
+        cellPadding: 4,
         lineColor: [220, 220, 220],
         lineWidth: 0.5,
+        overflow: 'linebreak',
       },
       didParseCell: function(data) {
         // Security deposit styling (orange text)
