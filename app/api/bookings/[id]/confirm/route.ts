@@ -8,6 +8,7 @@ import { generateInvoice, generateInvoicePDFBuffer } from '@/server/invoice/gene
 import { sendBookingConfirmationEmail } from '@/server/email/sendBookingConfirmation';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30; // Maximum execution time in seconds for Vercel
 
 export async function POST(
   request: NextRequest,

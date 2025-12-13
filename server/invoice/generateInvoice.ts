@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import { Booking, Vehicle, City } from '@/server/db/schema';
+import { Booking, Vehicle, City, bookings } from '@/server/db/schema';
 import { db } from '@/server/db';
 import { vehicles, cities, invoices } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
@@ -36,12 +36,16 @@ export async function generateInvoicePDFBuffer(bookingId: number): Promise<Buffe
  */
 async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
   try {
-    // Fetch booking details
+    // Fetch booking details with better error handling
     const booking = await db
       .select()
-      .from(require('@/server/db/schema').bookings)
-      .where(eq(require('@/server/db/schema').bookings.id, bookingId))
-      .limit(1);
+      .from(bookings)
+      .where(eq(bookings.id, bookingId))
+      .limit(1)
+      .catch((error) => {
+        console.error('Database error fetching booking:', error);
+        throw new Error(`Failed to fetch booking: ${error.message}`);
+      });
 
     if (booking.length === 0) {
       console.error('Booking not found');
@@ -55,7 +59,11 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
       .select()
       .from(vehicles)
       .where(eq(vehicles.id, bookingData.vehicleId))
-      .limit(1);
+      .limit(1)
+      .catch((error) => {
+        console.error('Database error fetching vehicle:', error);
+        throw new Error(`Failed to fetch vehicle: ${error.message}`);
+      });
 
     if (vehicle.length === 0) {
       console.error('Vehicle not found');
@@ -67,13 +75,21 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
       .select()
       .from(cities)
       .where(eq(cities.id, bookingData.fromCityId))
-      .limit(1);
+      .limit(1)
+      .catch((error) => {
+        console.error('Database error fetching fromCity:', error);
+        throw new Error(`Failed to fetch fromCity: ${error.message}`);
+      });
 
     const [toCity] = await db
       .select()
       .from(cities)
       .where(eq(cities.id, bookingData.toCityId))
-      .limit(1);
+      .limit(1)
+      .catch((error) => {
+        console.error('Database error fetching toCity:', error);
+        throw new Error(`Failed to fetch toCity: ${error.message}`);
+      });
 
     // Generate invoice number
     const invoiceNumber = `INV-${new Date().getFullYear()}-${String(bookingId).padStart(6, '0')}`;

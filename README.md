@@ -240,10 +240,86 @@ test('calculates trip duration correctly', () => {
 
 ### Vercel (Recommended)
 
-1. Push code to GitHub
-2. Import project to Vercel
-3. Add environment variables
-4. Deploy
+#### Prerequisites
+- Neon Postgres database (same as local)
+- SMTP credentials for email functionality
+
+#### Steps
+
+1. **Push code to GitHub**
+   ```bash
+   git add .
+   git commit -m "Deploy to Vercel"
+   git push
+   ```
+
+2. **Import project to Vercel**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "New Project"
+   - Import your GitHub repository
+
+3. **Configure Environment Variables**
+   
+   Go to Project Settings → Environment Variables and add:
+
+   ```bash
+   # Database (CRITICAL - Same as local)
+   DATABASE_URL=postgresql://neondb_owner:npg_7khxqDgIvM0G@ep-dry-king-ah14r5oq.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+
+   # NextAuth (CRITICAL)
+   NEXTAUTH_URL=https://dev.trivenitravels.com
+   NEXTAUTH_SECRET=<generate-new-secret-here>
+
+   # Admin Credentials
+   ADMIN_DEFAULT_EMAIL=admin@example.com
+   ADMIN_DEFAULT_PASSWORD=admin123
+
+   # Email/SMTP
+   SMTP_HOST=mail.spacemail.com
+   SMTP_PORT=465
+   SMTP_USER=support@trivenitravels.com
+   SMTP_PASS=nO423soP2cW@obLp
+   EMAIL_FROM=support@trivenitravels.com
+   EMAIL_FROM_NAME=Triveni Tours & Travels
+   NEXT_PUBLIC_BASE_URL=https://dev.trivenitravels.com
+   NEXT_PUBLIC_ADMIN_URL=https://dev.trivenitravels.com/admin
+   ```
+
+   **Generate NEXTAUTH_SECRET:**
+   ```bash
+   # On Mac/Linux
+   openssl rand -base64 32
+   
+   # On Windows (PowerShell)
+   [Convert]::ToBase64String((1..32 | ForEach-Object { Get-Random -Maximum 256 }))
+   ```
+
+4. **Deploy**
+   - Click "Deploy"
+   - Wait for build to complete
+
+5. **Verify Deployment**
+   - Visit your production URL
+   - Test login functionality
+   - Create a test booking
+   - Check "My Bookings" page
+
+#### Troubleshooting Vercel Deployment
+
+**Issue: "Bookings not showing in production"**
+- ✅ Fixed: Added `authOptions` to all `getServerSession()` calls
+- Verify `NEXTAUTH_URL` matches your production domain exactly
+- Verify `NEXTAUTH_SECRET` is set and different from local
+
+**Issue: "Invoice generation fails with database errors"**
+- ✅ Fixed: Added `fetchConnectionCache: true` to Neon connection
+- ✅ Fixed: Added better error handling in invoice generation
+- ✅ Fixed: Added `maxDuration: 30` to prevent timeouts
+- Verify `DATABASE_URL` is correctly set in Vercel
+
+**Issue: "Function timeout errors"**
+- Routes with `maxDuration: 30` support up to 30s execution
+- Upgrade to Vercel Pro if you need longer execution times
 
 ### Docker
 

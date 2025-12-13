@@ -6,6 +6,8 @@ import { db } from '@/server/db';
 import { bookings } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 
+export const maxDuration = 30; // Maximum execution time in seconds for Vercel
+
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
