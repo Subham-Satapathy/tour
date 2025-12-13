@@ -88,11 +88,16 @@ export async function POST(
         console.warn(`⚠️ Invoice number generation returned null`);
       }
       
-      // Step 2: Skip PDF generation to avoid timeout on Vercel free tier (10s limit)
-      console.log(`[2/3] Skipping PDF generation (Vercel timeout prevention)...`);
-      const invoicePDF = null; // Skip PDF to avoid timeout
+      // Step 2: Generate invoice PDF
+      console.log(`[2/3] Generating invoice PDF...`);
+      const invoicePDF = await generateInvoicePDFBuffer(bookingId);
+      if (invoicePDF) {
+        console.log(`✅ Invoice PDF generated: ${invoicePDF.length} bytes`);
+      } else {
+        console.warn(`⚠️ Invoice PDF generation failed, sending email without attachment`);
+      }
       
-      // Step 3: Send email without PDF attachment
+      // Step 3: Send email with PDF attachment
       console.log(`[3/3] Sending booking confirmation email...`);
       await sendBookingConfirmationEmail(
         {
