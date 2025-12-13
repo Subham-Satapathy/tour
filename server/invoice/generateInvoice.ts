@@ -19,14 +19,19 @@ interface InvoiceData {
  */
 export async function generateInvoicePDFBuffer(bookingId: number): Promise<Buffer | null> {
   try {
+    console.log(`Generating invoice PDF buffer for booking #${bookingId}`);
     const doc = await createInvoicePDF(bookingId);
-    if (!doc) return null;
+    if (!doc) {
+      console.error(`Failed to create PDF document for booking #${bookingId}`);
+      return null;
+    }
     
     // Convert PDF to buffer
     const pdfBuffer = Buffer.from(doc.output('arraybuffer'));
+    console.log(`✅ Invoice PDF buffer generated successfully for booking #${bookingId}, size: ${pdfBuffer.length} bytes`);
     return pdfBuffer;
   } catch (error) {
-    console.error('Error generating invoice PDF buffer:', error);
+    console.error(`❌ Error generating invoice PDF buffer for booking #${bookingId}:`, error);
     return null;
   }
 }
@@ -316,6 +321,8 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
  */
 export async function generateInvoice(bookingId: number): Promise<string | null> {
   try {
+    console.log(`Generating invoice for booking #${bookingId}`);
+    
     // Check if invoice already exists
     const existingInvoice = await db
       .select()
@@ -324,21 +331,24 @@ export async function generateInvoice(bookingId: number): Promise<string | null>
       .limit(1);
 
     if (existingInvoice.length > 0) {
+      console.log(`Invoice already exists for booking #${bookingId}: ${existingInvoice[0].invoiceNumber}`);
       return existingInvoice[0].invoiceNumber;
     }
 
     // Fetch booking to get total amount
     const booking = await db
       .select()
-      .from(require('@/server/db/schema').bookings)
-      .where(eq(require('@/server/db/schema').bookings.id, bookingId))
+      .from(bookings)
+      .where(eq(bookings.id, bookingId))
       .limit(1);
 
     if (booking.length === 0) {
+      console.error(`Booking #${bookingId} not found for invoice generation`);
       return null;
     }
 
     const invoiceNumber = `INV-${new Date().getFullYear()}-${String(bookingId).padStart(6, '0')}`;
+    console.log(`Creating invoice ${invoiceNumber} for booking #${bookingId}`);
 
     // Save invoice to database
     await db.insert(invoices).values({
@@ -348,9 +358,10 @@ export async function generateInvoice(bookingId: number): Promise<string | null>
       pdfUrl: null,
     });
 
+    console.log(`✅ Invoice ${invoiceNumber} saved to database`);
     return invoiceNumber;
   } catch (error) {
-    console.error('Error generating invoice:', error);
+    console.error(`❌ Error generating invoice for booking #${bookingId}:`, error);
     return null;
   }
 }

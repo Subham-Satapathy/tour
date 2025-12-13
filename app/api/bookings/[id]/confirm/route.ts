@@ -82,9 +82,30 @@ export async function POST(
     // This prevents blocking the response to the user
     Promise.resolve().then(async () => {
       try {
-        const invoiceNumber = await generateInvoice(bookingId);
-        const invoicePDF = await generateInvoicePDFBuffer(bookingId);
+        console.log(`\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+        console.log(`Starting invoice and email process for booking #${bookingId}`);
+        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
         
+        // Step 1: Generate invoice number and save to database
+        console.log(`[1/3] Generating invoice number...`);
+        const invoiceNumber = await generateInvoice(bookingId);
+        if (invoiceNumber) {
+          console.log(`✅ Invoice number generated: ${invoiceNumber}`);
+        } else {
+          console.warn(`⚠️ Invoice number generation returned null`);
+        }
+        
+        // Step 2: Generate PDF
+        console.log(`[2/3] Generating invoice PDF...`);
+        const invoicePDF = await generateInvoicePDFBuffer(bookingId);
+        if (invoicePDF) {
+          console.log(`✅ Invoice PDF generated: ${invoicePDF.length} bytes`);
+        } else {
+          console.warn(`⚠️ Invoice PDF generation returned null`);
+        }
+        
+        // Step 3: Send email
+        console.log(`[3/3] Sending booking confirmation email...`);
         await sendBookingConfirmationEmail(
           {
             bookingId: bookingId,
@@ -110,9 +131,12 @@ export async function POST(
           invoicePDF || undefined
         );
         
-        console.log(`Booking confirmation email sent with invoice for booking #${bookingId}`);
+        console.log(`\n✅ Booking confirmation email sent with invoice for booking #${bookingId}`);
+        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
       } catch (emailError) {
-        console.error('Error sending booking confirmation email:', emailError);
+        console.error(`\n❌ Error in invoice/email process for booking #${bookingId}:`, emailError);
+        console.error('Stack trace:', emailError instanceof Error ? emailError.stack : 'No stack trace');
+        console.log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n`);
       }
     });
 
