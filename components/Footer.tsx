@@ -34,7 +34,7 @@ export function Footer() {
             {/* Brand Column */}
             <div className="sm:col-span-2 lg:col-span-1">
               <Link href="/" className="mb-5 sm:mb-6 block flex items-center">
-                <img src="/logo.png" alt="Triveni Tours Logo" className="h-10 sm:h-12 w-auto" />
+                <img src="/logo.webp" alt="Triveni Tours Logo" className="h-10 sm:h-12 w-auto" />
               </Link>
               <p className="text-xs sm:text-sm leading-relaxed text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 max-w-xs">
                 Triveni Tours empowers you to explore Odisha with self-drive cars, bikes and family trips — making travel easier to plan, enjoy, and remember.

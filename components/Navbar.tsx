@@ -93,7 +93,7 @@ export function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <img src="/logo.png" alt="Triveni Tours Logo" className="h-12 w-auto" />
+            <img src="/logo.webp" alt="Triveni Tours Logo" className="h-12 w-auto" />
           </Link>
 
           {/* Desktop Navigation */}

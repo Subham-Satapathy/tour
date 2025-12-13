@@ -63,7 +63,7 @@ function LoginForm() {
 
         {/* Logo */}
         <div className="mb-8 flex justify-center">
-          <img src="/logo.png" alt="Triveni Tours Logo" className="h-16 w-auto" />
+          <img src="/logo.webp" alt="Triveni Tours Logo" className="h-16 w-auto" />
         </div>
 
         {/* Header */}

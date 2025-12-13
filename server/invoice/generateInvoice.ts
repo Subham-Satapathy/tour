@@ -99,36 +99,55 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
     // Generate invoice number
     const invoiceNumber = `INV-${new Date().getFullYear()}-${String(bookingId).padStart(6, '0')}`;
 
+    console.log(`Creating PDF document for booking #${bookingId}...`);
+    
     // Create PDF
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
     const pageHeight = doc.internal.pageSize.getHeight();
     let currentY = 20;
 
-    // Load watermark logo for all pages
+    console.log(`PDF document initialized, loading logo...`);
+    
+    // Load watermark logo for all pages (skip if file is too large or missing)
     let logoDataUrl: string | null = null;
     try {
-      const logoPath = path.join(process.cwd(), 'public', 'logo.png');
+      const logoPath = path.join(process.cwd(), 'public', 'logo.webp');
       if (fs.existsSync(logoPath)) {
-        const logoBase64 = fs.readFileSync(logoPath).toString('base64');
-        logoDataUrl = `data:image/png;base64,${logoBase64}`;
+        const stats = fs.statSync(logoPath);
+        // Skip logo if larger than 200KB to avoid PDF bloat
+        if (stats.size > 200000) {
+          console.warn(`Logo file too large (${stats.size} bytes), skipping watermark`);
+        } else {
+          const logoBase64 = fs.readFileSync(logoPath).toString('base64');
+          logoDataUrl = `data:image/png;base64,${logoBase64}`;
+          console.log(`Logo loaded successfully`);
+        }
+      } else {
+        console.log(`Logo file not found at ${logoPath}, continuing without watermark`);
       }
     } catch (error) {
-      console.error('Error loading watermark:', error);
+      console.error('Error loading watermark (continuing without it):', error);
     }
 
+    console.log(`Building PDF content...`);
+    
     // Function to add watermark to current page
     const addWatermark = () => {
       if (logoDataUrl) {
-        doc.saveGraphicsState();
-        doc.setGState(new (doc as any).GState({ opacity: 0.08 })); // 8% opacity for subtle watermark
-        
-        const logoSize = Math.min(pageWidth, pageHeight) * 0.65;
-        const logoX = (pageWidth - logoSize) / 2;
-        const logoY = (pageHeight - logoSize) / 2;
-        
-        doc.addImage(logoDataUrl, 'PNG', logoX, logoY, logoSize, logoSize);
-        doc.restoreGraphicsState();
+        try {
+          doc.saveGraphicsState();
+          doc.setGState(new (doc as any).GState({ opacity: 0.08 })); // 8% opacity for subtle watermark
+          
+          const logoSize = Math.min(pageWidth, pageHeight) * 0.65;
+          const logoX = (pageWidth - logoSize) / 2;
+          const logoY = (pageHeight - logoSize) / 2;
+          
+          doc.addImage(logoDataUrl, 'PNG', logoX, logoY, logoSize, logoSize);
+          doc.restoreGraphicsState();
+        } catch (error) {
+          console.error('Error adding watermark to page:', error);
+        }
       }
     };
 
@@ -309,9 +328,11 @@ async function createInvoicePDF(bookingId: number): Promise<jsPDF | null> {
     doc.text('Thank you for choosing Triveni Tours & Travels!', pageWidth / 2, footerY, { align: 'center' });
     doc.text('For support: support@trivenitravels.com | +91 9337478478', pageWidth / 2, footerY + 5, { align: 'center' });
 
+    console.log(`✅ PDF document created successfully for booking #${bookingId}`);
     return doc;
   } catch (error) {
-    console.error('Error creating invoice PDF:', error);
+    console.error(`❌ Error creating invoice PDF for booking #${bookingId}:`, error);
+    console.error('Stack trace:', error instanceof Error ? error.stack : 'No stack trace');
     return null;
   }
 }
