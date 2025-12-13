@@ -2,6 +2,8 @@ import { createTransporter } from './sendBookingConfirmation';
 import { appConfig } from '@/config/appConfig';
 
 export async function sendOTP(email: string, code: string, name?: string) {
+  console.log(`Attempting to send OTP to ${email}`);
+  
   try {
     const transporter = createTransporter();
     
@@ -79,9 +81,12 @@ export async function sendOTP(email: string, code: string, name?: string) {
     };
 
     const info = await transporter.sendMail(mailOptions);
+    console.log(`✅ OTP email sent successfully to ${email}`, info.messageId);
+    console.log('Email accepted:', info.accepted);
+    console.log('Email rejected:', info.rejected);
     return { success: true, data: info };
   } catch (error) {
-    console.error('Error sending OTP email:', error);
+    console.error(`❌ Failed to send OTP email to ${email}:`, error);
     return { success: false, error };
   }
 }

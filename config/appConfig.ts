@@ -1,6 +1,11 @@
 // Application configuration module
 // This centralizes app settings and feature flags for easy changes
 
+// Load environment variables for standalone scripts
+if (typeof window === 'undefined' && !process.env.NEXT_RUNTIME) {
+  require('dotenv').config({ path: '.env.local' });
+}
+
 export const appConfig = {
   // Pricing strategy: 'per-hour' | 'per-day' | 'min-of-both'
   pricingStrategy: 'min-of-both' as const,

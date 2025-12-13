@@ -3,12 +3,23 @@ import { appConfig } from '@/config/appConfig';
 
 // Create reusable transporter
 export const createTransporter = () => {
+  console.log('Creating email transporter with config:', {
+    host: appConfig.smtp.host,
+    port: appConfig.smtp.port,
+    user: appConfig.smtp.user,
+    hasPassword: !!appConfig.smtp.pass,
+  });
+  
   return nodemailer.createTransport({
     host: appConfig.smtp.host,
     port: appConfig.smtp.port,
+    secure: appConfig.smtp.port === 465, // true for 465, false for other ports
     auth: {
       user: appConfig.smtp.user,
       pass: appConfig.smtp.pass,
+    },
+    tls: {
+      rejectUnauthorized: false, // Allow self-signed certificates
     },
   });
 };
@@ -351,6 +362,8 @@ export async function sendBookingConfirmationEmail(
   data: BookingEmailData,
   pdfBuffer?: Buffer
 ): Promise<void> {
+  console.log(`Attempting to send booking confirmation email to ${data.customerEmail} for booking #${data.bookingId}`);
+  
   const transporter = createTransporter();
 
   const grandTotal = data.totalAmount + (data.securityDeposit || 0);
@@ -427,5 +440,13 @@ Self Drive Cars, Bikes & Family Trips
     attachments,
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log(`✅ Booking confirmation email sent successfully to ${data.customerEmail}`, info.messageId);
+    console.log('Email accepted:', info.accepted);
+    console.log('Email rejected:', info.rejected);
+  } catch (error) {
+    console.error(`❌ Failed to send booking confirmation email to ${data.customerEmail}:`, error);
+    throw error;
+  }
 }
