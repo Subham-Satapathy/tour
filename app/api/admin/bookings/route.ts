@@ -4,6 +4,7 @@ import { bookings } from '@/server/db/schema';
 import { eq, desc } from 'drizzle-orm';
 import { requireAdmin, AuthError } from '@/lib/auth';
 import { corsResponse, handleOptions } from '@/lib/cors';
+import { getAllBookingsWithDetails } from '@/server/db/queries/bookings';
 
 export async function OPTIONS(request: NextRequest) {
   return handleOptions(request.headers.get('origin'));
@@ -16,18 +17,14 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get('status');
 
-    const bookingsList = status && status !== 'all'
-      ? await db
-          .select()
-          .from(bookings)
-          .where(eq(bookings.status, status as any))
-          .orderBy(desc(bookings.createdAt))
-      : await db
-          .select()
-          .from(bookings)
-          .orderBy(desc(bookings.createdAt));
+    const bookingsList = await getAllBookingsWithDetails(db);
+    
+    // Filter by status if provided
+    const filteredBookings = status && status !== 'all'
+      ? bookingsList.filter(booking => booking.status === status)
+      : bookingsList;
 
-    return corsResponse(bookingsList, 200, request.headers.get('origin'));
+    return corsResponse(filteredBookings, 200, request.headers.get('origin'));
   } catch (error: any) {
     const statusCode = error instanceof AuthError ? error.statusCode : 500;
     return corsResponse(

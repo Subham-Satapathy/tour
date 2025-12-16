@@ -4,6 +4,7 @@ import { bookings } from '@/server/db/schema';
 import { eq } from 'drizzle-orm';
 import { requireAdmin, AuthError } from '@/lib/auth';
 import { corsResponse, handleOptions } from '@/lib/cors';
+import { getBookingWithDetails } from '@/server/db/queries/bookings';
 
 export async function OPTIONS(request: NextRequest) {
   return handleOptions(request.headers.get('origin'));
@@ -17,10 +18,7 @@ export async function GET(
     await requireAdmin();
     const { id } = await params;
 
-    const [booking] = await db
-      .select()
-      .from(bookings)
-      .where(eq(bookings.id, parseInt(id)));
+    const booking = await getBookingWithDetails(db, parseInt(id));
 
     if (!booking) {
       return corsResponse({ error: 'Booking not found' }, 404, request.headers.get('origin'));
