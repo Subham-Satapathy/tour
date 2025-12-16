@@ -14,8 +14,8 @@ class AuthError extends Error {
 
 export async function requireAdmin() {
   const headersList = await headers();
-  const adminEmail = headersList.get('X-Admin-Email');
-  const adminRole = headersList.get('X-Admin-Role');
+  const adminEmail = headersList.get('x-admin-email');
+  const adminRole = headersList.get('x-admin-role');
 
   if (!adminEmail || !adminRole) {
     throw new AuthError('Unauthorized: No admin credentials found', 401);
