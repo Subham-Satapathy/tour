@@ -1,6 +1,9 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { NextResponse } from 'next/server';
+import { headers } from 'next/headers';
+import { db } from '@/server/db';
+import { getAdminByEmail } from '@/server/db/queries/users';
 
 class AuthError extends Error {
   constructor(message: string, public statusCode: number) {
@@ -10,17 +13,29 @@ class AuthError extends Error {
 }
 
 export async function requireAdmin() {
-  const session = await getServerSession(authOptions);
+  const headersList = await headers();
+  const adminEmail = headersList.get('X-Admin-Email');
+  const adminRole = headersList.get('X-Admin-Role');
 
-  if (!session || !session.user) {
-    throw new AuthError('Unauthorized: No session found', 401);
+  if (!adminEmail || !adminRole) {
+    throw new AuthError('Unauthorized: No admin credentials found', 401);
   }
 
-  if (session.user.role !== 'admin') {
+  // Verify the user exists in the database and has admin role
+  const user = await getAdminByEmail(db, adminEmail);
+
+  if (!user) {
     throw new AuthError('Forbidden: Admin access required', 403);
   }
 
-  return session;
+  return {
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+    },
+  };
 }
 
 export async function getSession() {
